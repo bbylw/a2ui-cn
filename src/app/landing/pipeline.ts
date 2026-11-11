@@ -1,0 +1,113 @@
+import {Component} from '@angular/core';
+import {RouterLink} from '@angular/router';
+import {RevealDirective} from '../shared/reveal.directive';
+
+@Component({
+  selector: 'app-pipeline',
+  imports: [RevealDirective, RouterLink],
+  template: `
+    <section class="relative overflow-hidden bg-mist py-20 lg:py-28" id="how">
+      <div class="blueprint absolute inset-0 opacity-60" aria-hidden="true"></div>
+      <div class="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <div class="max-w-2xl" appReveal>
+          <h2 class="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">一次请求的旅程</h2>
+          <p class="mt-4 text-base leading-relaxed text-ink-soft">
+            从用户的一句话到可点击的界面,A2UI 把生成式 UI 拆成三段清晰的管线。
+            以「柏林飞旧金山,今天出发,返程两张票」为例:
+          </p>
+        </div>
+
+        <div class="mt-14 grid gap-6 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-stretch">
+          <article class="relative rounded-2xl border border-line-cool bg-white p-6 shadow-lift transition-transform hover:-translate-y-1" appReveal>
+            <div class="flex items-center gap-3">
+              <span class="flex size-10 items-center justify-center rounded-xl bg-red-tint text-red">
+                <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z"/></svg>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-wider text-ink-faint">Inference</p>
+                <h3 class="font-display text-lg font-bold text-ink">推理</h3>
+              </div>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed text-ink-soft">
+              智能体调用业务工具(航班查询),判断「此刻一个表单比一段文字更有用」,
+              再让模型按目录生成的技能输出 Express DSL 或 JSON。
+            </p>
+            <div class="mt-4 rounded-lg bg-ink-950 p-3 font-mono text-[11px] leading-relaxed text-[#d7e2f4]">
+              <span class="tok-com">&lt;a2ui&gt;</span><br />
+              root = Card(Column([<br />
+              &nbsp;&nbsp;FlightCard(price=$/out/price),<br />
+              &nbsp;&nbsp;Button(<span class="tok-str">"确认预订"</span>)<br />
+              ]))<br />
+              <span class="tok-com">&lt;/a2ui&gt;</span>
+            </div>
+          </article>
+
+          <div class="hidden items-center lg:flex" aria-hidden="true">
+            <svg width="44" height="24" viewBox="0 0 44 24"><path d="M2 12h34" stroke="#1a73e8" stroke-width="2" stroke-dasharray="6 6" class="animate-flow"/><path d="M36 6l8 6-8 6z" fill="#1a73e8"/></svg>
+          </div>
+
+          <article class="relative rounded-2xl border border-line-cool bg-white p-6 shadow-lift transition-transform hover:-translate-y-1" appReveal="120">
+            <div class="flex items-center gap-3">
+              <span class="flex size-10 items-center justify-center rounded-xl bg-blue-tint text-blue">
+                <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h6l2-7 4 14 2-7h2"/><circle cx="4" cy="12" r="1.6" fill="currentColor"/><circle cx="20" cy="12" r="1.6" fill="currentColor"/></svg>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-wider text-ink-faint">Transport</p>
+                <h3 class="font-display text-lg font-bold text-ink">传输</h3>
+              </div>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed text-ink-soft">
+              Agent SDK 边解析边校验:组件必须在目录里、属性必须符合 Schema。
+              编译成 wire 消息后,经你选择的传输层送达客户端。
+            </p>
+            <div class="mt-4 flex flex-wrap gap-1.5">
+              @for (t of transports; track t) {
+                <span class="rounded-md border border-blue/20 bg-blue-tint px-2 py-1 font-mono text-[11px] font-medium text-blue-deep">{{ t }}</span>
+              }
+            </div>
+            <p class="mt-3 font-mono text-[11px] text-ink-faint">createSurface → updateComponents → updateDataModel</p>
+          </article>
+
+          <div class="hidden items-center lg:flex" aria-hidden="true">
+            <svg width="44" height="24" viewBox="0 0 44 24"><path d="M2 12h34" stroke="#34a853" stroke-width="2" stroke-dasharray="6 6" class="animate-flow"/><path d="M36 6l8 6-8 6z" fill="#34a853"/></svg>
+          </div>
+
+          <article class="relative rounded-2xl border border-line-cool bg-white p-6 shadow-lift transition-transform hover:-translate-y-1" appReveal="240">
+            <div class="flex items-center gap-3">
+              <span class="flex size-10 items-center justify-center rounded-xl bg-green-tint text-green">
+                <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg>
+              </span>
+              <div>
+                <p class="font-mono text-[10px] uppercase tracking-wider text-ink-faint">Rendering</p>
+                <h3 class="font-display text-lg font-bold text-ink">渲染</h3>
+              </div>
+            </div>
+            <p class="mt-4 text-sm leading-relaxed text-ink-soft">
+              渲染器在 surface 中解析组件树、绑定数据模型,用原生控件绘制。
+              用户改动本地即时生效;点击按钮才把 action 发回智能体。
+            </p>
+            <div class="mt-4 grid gap-1.5 font-mono text-[11px]">
+              <p class="rounded-md bg-green-tint px-2.5 py-1.5 text-[#1e6b34]">滑块 +1 → 本地更新 /outbound/pax</p>
+              <p class="rounded-md bg-amber-tint px-2.5 py-1.5 text-[#8a6400]">确认预订 → action: confirm_booking</p>
+            </div>
+          </article>
+        </div>
+
+        <div class="mt-8 flex items-center justify-center gap-3" appReveal="300">
+          <svg width="120" height="28" viewBox="0 0 120 28" aria-hidden="true" class="text-amber">
+            <path d="M118 4 H 14" stroke="currentColor" stroke-width="2" stroke-dasharray="6 6" class="animate-flow"/>
+            <path d="M14 0 L 4 4 L 14 8 z" fill="currentColor" transform="translate(0,0)"/>
+          </svg>
+          <p class="text-sm font-medium text-ink-soft">action 沿原传输层回传,智能体继续下一轮生成</p>
+        </div>
+
+        <p class="mt-10 text-center" appReveal="360">
+          <a routerLink="/docs/concepts" class="text-sm font-semibold text-blue underline decoration-blue/30 underline-offset-4 transition-colors hover:decoration-blue">深入了解核心概念</a>
+        </p>
+      </div>
+    </section>
+  `,
+})
+export class Pipeline {
+  protected readonly transports = ['A2A', 'AG-UI', 'MCP', 'WebSocket', 'REST'];
+}
