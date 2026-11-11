@@ -12,6 +12,8 @@ export class App implements OnDestroy {
   protected readonly scrolled = signal(false);
   protected readonly scrollPct = signal(0);
 
+  private readonly router = inject(Router);
+
   private readonly onScroll = () => {
     const doc = document.documentElement;
     const max = doc.scrollHeight - window.innerHeight;
@@ -19,17 +21,26 @@ export class App implements OnDestroy {
     this.scrolled.set(window.scrollY > 8);
   };
 
-  private readonly routerSub = inject(Router).events.subscribe(e => {
-    if (e instanceof NavigationEnd) setTimeout(this.onScroll);
+  private readonly onKeydown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') this.menuOpen.set(false);
+  };
+
+  private readonly routerSub = this.router.events.subscribe(e => {
+    if (e instanceof NavigationEnd) {
+      this.menuOpen.set(false);
+      setTimeout(this.onScroll);
+    }
   });
 
   constructor() {
     window.addEventListener('scroll', this.onScroll, {passive: true});
+    window.addEventListener('keydown', this.onKeydown);
     this.onScroll();
   }
 
   ngOnDestroy(): void {
     window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('keydown', this.onKeydown);
     this.routerSub.unsubscribe();
   }
 
@@ -39,5 +50,12 @@ export class App implements OnDestroy {
 
   protected closeMenu(): void {
     this.menuOpen.set(false);
+  }
+
+  protected skipToMain(event: Event): void {
+    event.preventDefault();
+    const main = document.getElementById('main');
+    main?.focus();
+    main?.scrollIntoView();
   }
 }

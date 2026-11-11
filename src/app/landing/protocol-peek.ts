@@ -26,9 +26,9 @@ interface MessageTab {
         </div>
 
         <div class="mt-10 grid gap-6 lg:grid-cols-[16rem_1fr]" appReveal="120">
-          <div class="flex gap-2 overflow-x-auto lg:flex-col" role="tablist" aria-label="消息类型">
+          <div class="flex gap-2 overflow-x-auto lg:flex-col" role="tablist" aria-label="消息类型" (keydown)="onTabKeydown($event)">
             @for (tab of tabs; track tab.key) {
-              <button type="button" role="tab" [attr.aria-selected]="active() === tab.key" (click)="active.set(tab.key)"
+              <button type="button" role="tab" [attr.aria-selected]="active() === tab.key" [attr.tabindex]="active() === tab.key ? 0 : -1" (click)="active.set(tab.key)"
                       class="pressable shrink-0 rounded-xl border px-4 py-3 text-left transition-all lg:shrink"
                       [class]="active() === tab.key
                         ? 'border-blue/40 bg-blue-tint shadow-sm'
@@ -140,5 +140,19 @@ export class ProtocolPeek {
 
   protected activeTab(): MessageTab {
     return this.tabs.find(t => t.key === this.active()) ?? this.tabs[0];
+  }
+
+  protected onTabKeydown(event: KeyboardEvent): void {
+    const forward = event.key === 'ArrowRight' || event.key === 'ArrowDown';
+    const backward = event.key === 'ArrowLeft' || event.key === 'ArrowUp';
+    if (!forward && !backward && event.key !== 'Home' && event.key !== 'End') return;
+    event.preventDefault();
+    const current = this.tabs.findIndex(t => t.key === this.active());
+    const next = event.key === 'Home' ? 0
+      : event.key === 'End' ? this.tabs.length - 1
+      : (current + (forward ? 1 : -1) + this.tabs.length) % this.tabs.length;
+    this.active.set(this.tabs[next].key);
+    const buttons = (event.currentTarget as HTMLElement).querySelectorAll<HTMLButtonElement>('[role="tab"]');
+    buttons[next]?.focus();
   }
 }

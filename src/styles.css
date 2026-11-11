@@ -201,9 +201,9 @@ body {
 /* ---------- docs prose ---------- */
 .doc-prose { font-size: 0.9375rem; line-height: 1.85; color: var(--color-ink); }
 .doc-prose > * + * { margin-top: 1.1rem; }
-.doc-prose h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; margin-top: 2.75rem; padding-top: 1.5rem; border-top: 1px solid var(--color-line-warm); scroll-margin-top: 6rem; }
+.doc-prose h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; margin-top: 2.75rem; padding-top: 1.5rem; border-top: 1px solid var(--color-line-warm); }
 .doc-prose h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
-.doc-prose h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; margin-top: 2rem; scroll-margin-top: 6rem; }
+.doc-prose h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; margin-top: 2rem; }
 .doc-prose p { color: #2c3c5c; }
 .doc-prose a { color: var(--color-blue-deep); text-decoration: underline; text-decoration-color: rgb(21 87 176 / 0.35); text-underline-offset: 3px; transition: text-decoration-color 0.15s; }
 .doc-prose a:hover { text-decoration-color: var(--color-blue-deep); }
@@ -220,6 +220,9 @@ body {
 .doc-prose blockquote { border-left: 3px solid var(--color-amber); background: var(--color-amber-tint); padding: 0.8rem 1.1rem; border-radius: 0 10px 10px 0; color: #5c4a12; }
 .doc-prose blockquote p { color: inherit; }
 .doc-prose .not-prose a { color: inherit; text-decoration: none; }
+.doc-prose .doc-anchor { margin-left: 0.45em; font-family: var(--font-mono); font-size: 0.85em; font-weight: 600; color: var(--color-blue-deep); text-decoration: none; opacity: 0; transition: opacity 0.15s; }
+.doc-prose h2:hover > .doc-anchor, .doc-prose h3:hover > .doc-anchor, .doc-prose .doc-anchor:focus-visible { opacity: 0.65; }
+.doc-prose .doc-anchor:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

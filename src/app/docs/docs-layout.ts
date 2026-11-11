@@ -2,6 +2,7 @@ import {Component, computed, inject} from '@angular/core';
 import {toSignal} from '@angular/core/rxjs-interop';
 import {NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {filter, map} from 'rxjs';
+import {DocAnchorsDirective} from '../shared/doc-anchors.directive';
 
 interface DocLink {
   path: string;
@@ -43,7 +44,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
 
 @Component({
   selector: 'app-docs-layout',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, DocAnchorsDirective],
   template: `
     <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
       <nav class="mb-8 lg:hidden" aria-label="文档导航">
@@ -94,12 +95,12 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
           </div>
         </aside>
 
-        <div class="min-w-0">
+        <div class="min-w-0" appDocAnchors>
           <router-outlet />
 
           <nav class="mt-14 grid gap-3 border-t border-line-warm pt-8 sm:grid-cols-2" aria-label="上一节 / 下一节">
             @if (prev(); as p) {
-              <a [routerLink]="p.path" class="group rounded-xl border border-line-cool bg-card p-4 shadow-lift transition-colors hover:border-blue/50">
+              <a [routerLink]="p.path" class="group rounded-xl border border-line-cool bg-card p-4 shadow-lift transition-all hover:-translate-y-0.5 hover:border-blue/50">
                 <span class="font-mono text-[11px] tracking-wide text-ink-mute">上一节</span>
                 <span class="mt-1 block font-display text-[15px] font-bold text-ink group-hover:text-blue-deep">{{ p.label }}</span>
               </a>
@@ -107,7 +108,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
               <span class="hidden sm:block"></span>
             }
             @if (next(); as n) {
-              <a [routerLink]="n.path" class="group rounded-xl border border-line-cool bg-card p-4 text-right shadow-lift transition-colors hover:border-blue/50 sm:col-start-2">
+              <a [routerLink]="n.path" class="group rounded-xl border border-line-cool bg-card p-4 text-right shadow-lift transition-all hover:-translate-y-0.5 hover:border-blue/50 sm:col-start-2">
                 <span class="font-mono text-[11px] tracking-wide text-ink-mute">下一节</span>
                 <span class="mt-1 block font-display text-[15px] font-bold text-ink group-hover:text-blue-deep">{{ n.label }}</span>
               </a>

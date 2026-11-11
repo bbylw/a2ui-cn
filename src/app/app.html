@@ -1,3 +1,4 @@
+<a href="#main" (click)="skipToMain($event)" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white focus:shadow-lift">跳到主要内容</a>
 <header class="fixed inset-x-0 top-0 z-50 border-b border-line-warm bg-paper/90 backdrop-blur-md transition-shadow" [class.shadow-lift]="scrolled()">
   <div class="absolute inset-x-0 bottom-0 h-0.5" aria-hidden="true">
     <div class="h-full bg-gradient-to-r from-blue-bright via-blue to-green transition-[width] duration-150 ease-out" [style.width.%]="scrollPct()"></div>
@@ -33,7 +34,7 @@
     </nav>
 
     <button type="button" class="ml-auto inline-flex h-10 w-10 items-center justify-center rounded-lg border border-line-warm text-ink md:hidden"
-            (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-label="打开菜单">
+            (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" [attr.aria-label]="menuOpen() ? '关闭菜单' : '打开菜单'">
       <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
         @if (menuOpen()) {
           <path d="M6 6l12 12M18 6L6 18"/>
@@ -47,17 +48,17 @@
   @if (menuOpen()) {
     <nav class="border-t border-line-warm bg-paper px-4 py-3 md:hidden" aria-label="移动导航">
       <div class="grid gap-1">
-        <a routerLink="/" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">概览</a>
-        <a routerLink="/docs" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">文档</a>
-        <a routerLink="/docs/messages" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">协议规范</a>
-        <a routerLink="/playground" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">Playground</a>
+        <a routerLink="/" routerLinkActive="!text-blue-deep bg-blue-tint" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">概览</a>
+        <a routerLink="/docs" routerLinkActive="!text-blue-deep bg-blue-tint" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">文档</a>
+        <a routerLink="/docs/messages" routerLinkActive="!text-blue-deep bg-blue-tint" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">协议规范</a>
+        <a routerLink="/playground" routerLinkActive="!text-blue-deep bg-blue-tint" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">Playground</a>
         <a href="https://github.com/a2ui-project/a2ui" target="_blank" rel="noopener" class="rounded-lg px-3 py-2.5 text-sm font-medium text-blue-deep hover:bg-blue-tint">GitHub 仓库</a>
       </div>
     </nav>
   }
 </header>
 
-<main class="pt-16">
+<main id="main" tabindex="-1" class="pt-16 outline-none">
   <router-outlet />
 </main>
 

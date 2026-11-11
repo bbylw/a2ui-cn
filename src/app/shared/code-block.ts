@@ -10,7 +10,7 @@ import {highlight} from '../core/highlight';
         <button
           type="button"
           (click)="copy()"
-          class="shrink-0 rounded-md border border-line-dark px-2.5 py-1 font-mono text-[11px] text-ink-faint transition-colors hover:border-blue-bright hover:text-blue-glow"
+          class="pressable shrink-0 rounded-md border border-line-dark px-2.5 py-1 font-mono text-[11px] text-ink-faint transition-colors hover:border-blue-bright hover:text-blue-glow"
         >
           {{ copied() ? '已复制 ✓' : '复制' }}
         </button>
