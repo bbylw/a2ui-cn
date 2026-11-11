@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   imports: [RouterLink],
   template: `
     <header class="mb-10">
-      <p class="font-mono text-xs text-ink-faint">入门 / 简介</p>
+      <p class="font-mono text-xs text-ink-mute">入门 / 简介</p>
       <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">A2UI 简介</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
         A2UI(Agent-to-UI)是一个开放协议,让 AI 智能体用声明式 JSON 描述界面,

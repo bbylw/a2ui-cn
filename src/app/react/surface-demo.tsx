@@ -61,12 +61,12 @@ export function SurfaceDemo({messages, resetKey = 0, onAction}: SurfaceDemoProps
   return (
     <div className="grid gap-3">
       {error && (
-        <div role="alert" className="rounded-lg border border-red/30 bg-red-tint px-3 py-2 font-mono text-xs text-red">
+        <div role="alert" className="rounded-lg border border-red/30 bg-red-tint px-3 py-2 font-mono text-xs text-red-deep">
           渲染错误:{error}
         </div>
       )}
       {surfaces.length === 0 && !error && (
-        <p className="py-6 text-center text-sm text-ink-faint">等待消息流…</p>
+        <p className="py-6 text-center text-sm text-ink-mute">等待消息流…</p>
       )}
       {surfaces.map(surface => (
         <A2uiSurface key={surface.id} surface={surface} />

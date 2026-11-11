@@ -10,7 +10,7 @@ import {RevealDirective} from '../shared/reveal.directive';
       <div class="blueprint absolute inset-0 opacity-60" aria-hidden="true"></div>
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div class="max-w-2xl" appReveal>
-          <h2 class="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">一次请求的旅程</h2>
+          <h2 class="text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">一次请求的旅程</h2>
           <p class="mt-4 text-base leading-relaxed text-ink-soft">
             从用户的一句话到可点击的界面,A2UI 把生成式 UI 拆成三段清晰的管线。
             以「柏林飞旧金山,今天出发,返程两张票」为例:
@@ -19,12 +19,14 @@ import {RevealDirective} from '../shared/reveal.directive';
 
         <div class="mt-14 grid gap-6 lg:grid-cols-[1fr_auto_1fr_auto_1fr] lg:items-stretch">
           <article class="relative rounded-2xl border border-line-cool bg-white p-6 shadow-lift transition-transform hover:-translate-y-1" appReveal>
+            <span class="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-red/60" aria-hidden="true"></span>
+            <span class="absolute right-5 top-4 font-mono text-xs font-semibold text-ink-mute" aria-hidden="true">1</span>
             <div class="flex items-center gap-3">
               <span class="flex size-10 items-center justify-center rounded-xl bg-red-tint text-red">
                 <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/><path d="M19 15l.9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15z"/></svg>
               </span>
               <div>
-                <p class="font-mono text-[10px] uppercase tracking-wider text-ink-faint">Inference</p>
+                <p class="font-mono text-[10px] uppercase tracking-wider text-ink-mute">Inference</p>
                 <h3 class="font-display text-lg font-bold text-ink">推理</h3>
               </div>
             </div>
@@ -42,17 +44,23 @@ import {RevealDirective} from '../shared/reveal.directive';
             </div>
           </article>
 
+          <div class="flex justify-center lg:hidden" aria-hidden="true">
+            <svg width="24" height="36" viewBox="0 0 24 36"><path d="M12 2v26" stroke="#1a73e8" stroke-width="2" stroke-dasharray="6 6" class="animate-flow"/><path d="M6 28l6 8 6-8z" fill="#1a73e8"/></svg>
+          </div>
+
           <div class="hidden items-center lg:flex" aria-hidden="true">
             <svg width="44" height="24" viewBox="0 0 44 24"><path d="M2 12h34" stroke="#1a73e8" stroke-width="2" stroke-dasharray="6 6" class="animate-flow"/><path d="M36 6l8 6-8 6z" fill="#1a73e8"/></svg>
           </div>
 
           <article class="relative rounded-2xl border border-line-cool bg-white p-6 shadow-lift transition-transform hover:-translate-y-1" appReveal="120">
+            <span class="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-blue/60" aria-hidden="true"></span>
+            <span class="absolute right-5 top-4 font-mono text-xs font-semibold text-ink-mute" aria-hidden="true">2</span>
             <div class="flex items-center gap-3">
               <span class="flex size-10 items-center justify-center rounded-xl bg-blue-tint text-blue">
                 <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12h6l2-7 4 14 2-7h2"/><circle cx="4" cy="12" r="1.6" fill="currentColor"/><circle cx="20" cy="12" r="1.6" fill="currentColor"/></svg>
               </span>
               <div>
-                <p class="font-mono text-[10px] uppercase tracking-wider text-ink-faint">Transport</p>
+                <p class="font-mono text-[10px] uppercase tracking-wider text-ink-mute">Transport</p>
                 <h3 class="font-display text-lg font-bold text-ink">传输</h3>
               </div>
             </div>
@@ -65,20 +73,26 @@ import {RevealDirective} from '../shared/reveal.directive';
                 <span class="rounded-md border border-blue/20 bg-blue-tint px-2 py-1 font-mono text-[11px] font-medium text-blue-deep">{{ t }}</span>
               }
             </div>
-            <p class="mt-3 font-mono text-[11px] text-ink-faint">createSurface → updateComponents → updateDataModel</p>
+            <p class="mt-3 font-mono text-[11px] text-ink-mute">createSurface → updateComponents → updateDataModel</p>
           </article>
+
+          <div class="flex justify-center lg:hidden" aria-hidden="true">
+            <svg width="24" height="36" viewBox="0 0 24 36"><path d="M12 2v26" stroke="#34a853" stroke-width="2" stroke-dasharray="6 6" class="animate-flow"/><path d="M6 28l6 8 6-8z" fill="#34a853"/></svg>
+          </div>
 
           <div class="hidden items-center lg:flex" aria-hidden="true">
             <svg width="44" height="24" viewBox="0 0 44 24"><path d="M2 12h34" stroke="#34a853" stroke-width="2" stroke-dasharray="6 6" class="animate-flow"/><path d="M36 6l8 6-8 6z" fill="#34a853"/></svg>
           </div>
 
           <article class="relative rounded-2xl border border-line-cool bg-white p-6 shadow-lift transition-transform hover:-translate-y-1" appReveal="240">
+            <span class="absolute inset-x-0 top-0 h-0.5 rounded-t-2xl bg-green/60" aria-hidden="true"></span>
+            <span class="absolute right-5 top-4 font-mono text-xs font-semibold text-ink-mute" aria-hidden="true">3</span>
             <div class="flex items-center gap-3">
-              <span class="flex size-10 items-center justify-center rounded-xl bg-green-tint text-green">
+              <span class="flex size-10 items-center justify-center rounded-xl bg-green-tint text-green-deep">
                 <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg>
               </span>
               <div>
-                <p class="font-mono text-[10px] uppercase tracking-wider text-ink-faint">Rendering</p>
+                <p class="font-mono text-[10px] uppercase tracking-wider text-ink-mute">Rendering</p>
                 <h3 class="font-display text-lg font-bold text-ink">渲染</h3>
               </div>
             </div>
@@ -94,7 +108,7 @@ import {RevealDirective} from '../shared/reveal.directive';
         </div>
 
         <div class="mt-8 flex items-center justify-center gap-3" appReveal="300">
-          <svg width="120" height="28" viewBox="0 0 120 28" aria-hidden="true" class="text-amber">
+          <svg width="120" height="28" viewBox="0 0 120 28" aria-hidden="true" class="text-amber-deep">
             <path d="M118 4 H 14" stroke="currentColor" stroke-width="2" stroke-dasharray="6 6" class="animate-flow"/>
             <path d="M14 0 L 4 4 L 14 8 z" fill="currentColor" transform="translate(0,0)"/>
           </svg>
@@ -102,7 +116,7 @@ import {RevealDirective} from '../shared/reveal.directive';
         </div>
 
         <p class="mt-10 text-center" appReveal="360">
-          <a routerLink="/docs/concepts" class="text-sm font-semibold text-blue underline decoration-blue/30 underline-offset-4 transition-colors hover:decoration-blue">深入了解核心概念</a>
+          <a routerLink="/docs/concepts" class="text-sm font-semibold text-blue-deep underline decoration-blue-deep/30 underline-offset-4 transition-colors hover:decoration-blue-deep">深入了解核心概念</a>
         </p>
       </div>
     </section>

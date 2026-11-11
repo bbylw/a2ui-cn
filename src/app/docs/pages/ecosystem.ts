@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   imports: [RouterLink],
   template: `
     <header class="mb-10">
-      <p class="font-mono text-xs text-ink-faint">构建 / 生态与路线图</p>
+      <p class="font-mono text-xs text-ink-mute">构建 / 生态与路线图</p>
       <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">生态与路线图</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
         官方 SDK、社区渲染器、可视化工具,以及从第一个组件到生产环境的五阶段路线图。

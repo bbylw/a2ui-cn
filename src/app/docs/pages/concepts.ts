@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   imports: [RouterLink, CodeBlock],
   template: `
     <header class="mb-10">
-      <p class="font-mono text-xs text-ink-faint">理解 A2UI / 核心概念</p>
+      <p class="font-mono text-xs text-ink-mute">理解 A2UI / 核心概念</p>
       <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">核心概念</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
         五个名词撑起整个协议:Surface、组件树、目录、数据模型、动作。

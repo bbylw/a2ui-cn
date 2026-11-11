@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   imports: [RouterLink, CodeBlock],
   template: `
     <header class="mb-10">
-      <p class="font-mono text-xs text-ink-faint">理解 A2UI / 消息参考</p>
+      <p class="font-mono text-xs text-ink-mute">理解 A2UI / 消息参考</p>
       <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">消息参考</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
         A2UI 的全部通信都是异步 JSON 消息:智能体到渲染器六种,渲染器到智能体三种。

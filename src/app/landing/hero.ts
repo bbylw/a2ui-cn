@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnDestroy, computed, effect, inject, signal, v
 import {RouterLink} from '@angular/router';
 import {A2uiRendererService, SurfaceComponent} from '@a2ui/angular';
 import {SCENARIOS, messageType} from '../core/scenarios';
+import {RevealDirective} from '../shared/reveal.directive';
 
 const TYPE_COLOR: Record<string, string> = {
   createSurface: 'bg-blue-bright/15 text-blue-glow border-blue-bright/30',
@@ -12,7 +13,7 @@ const TYPE_COLOR: Record<string, string> = {
 
 @Component({
   selector: 'app-hero',
-  imports: [RouterLink, SurfaceComponent],
+  imports: [RouterLink, SurfaceComponent, RevealDirective],
   templateUrl: './hero.html',
 })
 export class Hero implements AfterViewInit, OnDestroy {
@@ -46,7 +47,11 @@ export class Hero implements AfterViewInit, OnDestroy {
     {value: '18', label: '基础组件'},
     {value: '14', label: '内置函数'},
   ];
+  protected readonly statValues = signal<number[]>(this.stats.map(() => 0));
 
+  private readonly statsBox = viewChild<ElementRef<HTMLElement>>('statsBox');
+  private statsObserver?: IntersectionObserver;
+  private countRaf = 0;
   private timer?: ReturnType<typeof setTimeout>;
   private destroyed = false;
 
@@ -60,12 +65,46 @@ export class Hero implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.schedule(700);
+    const statsEl = this.statsBox()?.nativeElement;
+    if (!statsEl) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      this.statValues.set(this.stats.map(s => Number(s.value)));
+      return;
+    }
+    this.statsObserver = new IntersectionObserver(
+      entries => {
+        if (entries.some(e => e.isIntersecting)) {
+          this.statsObserver?.disconnect();
+          this.startCount();
+        }
+      },
+      {threshold: 0.4},
+    );
+    this.statsObserver.observe(statsEl);
   }
 
   ngOnDestroy(): void {
     this.destroyed = true;
     clearTimeout(this.timer);
+    cancelAnimationFrame(this.countRaf);
+    this.statsObserver?.disconnect();
     this.renderer.processMessages([{version: '1.0', deleteSurface: {surfaceId: 'flight-demo'}}]);
+  }
+
+  private startCount(): void {
+    const targets = this.stats.map(s => Number(s.value));
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      this.statValues.set(targets);
+      return;
+    }
+    const t0 = performance.now();
+    const frame = (t: number) => {
+      const p = Math.min(1, (t - t0) / 900);
+      const eased = 1 - Math.pow(1 - p, 3);
+      this.statValues.set(targets.map(v => Math.round(v * eased)));
+      if (p < 1) this.countRaf = requestAnimationFrame(frame);
+    };
+    this.countRaf = requestAnimationFrame(frame);
   }
 
   protected togglePlay(): void {

@@ -92,8 +92,13 @@ export function Playground({scenarios, onStream, onAction, onVisibility}: Playgr
   }, [playing, step, total, speed, autoLoop]);
 
   useEffect(() => {
-    const node = listRef.current?.querySelector<HTMLElement>(`[data-step="${step}"]`);
-    node?.scrollIntoView({block: 'nearest'});
+    const list = listRef.current;
+    const node = list?.querySelector<HTMLElement>(`[data-step="${step}"]`);
+    if (!list || !node) return;
+    const listRect = list.getBoundingClientRect();
+    const nodeRect = node.getBoundingClientRect();
+    if (nodeRect.bottom > listRect.bottom) list.scrollTop += nodeRect.bottom - listRect.bottom + 8;
+    else if (nodeRect.top < listRect.top) list.scrollTop -= listRect.top - nodeRect.top + 8;
   }, [step]);
 
   const restart = (messages?: Record<string, unknown>[]) => {
@@ -188,7 +193,7 @@ export function Playground({scenarios, onStream, onAction, onVisibility}: Playgr
           <span className={cn('inline-block size-1.5 rounded-full', playing ? 'bg-green animate-live' : 'bg-ink-faint')} />
           {playing ? '播放中' : step >= total ? '已完成' : '已暂停'}
         </Badge>
-        <span className="ml-auto font-mono text-xs text-ink-faint">
+        <span className="ml-auto font-mono text-xs text-ink-mute">
           {step}/{total} 条 — {progress}%
         </span>
       </div>
@@ -225,7 +230,7 @@ export function Playground({scenarios, onStream, onAction, onVisibility}: Playgr
           <RotateCcw />
         </Button>
         <div className="ml-1 flex min-w-40 flex-1 items-center gap-3">
-          <span className="whitespace-nowrap font-mono text-[11px] text-ink-faint">间隔 {speed}ms</span>
+          <span className="whitespace-nowrap font-mono text-[11px] text-ink-mute">间隔 {speed}ms</span>
           <Slider
             min={150}
             max={1500}
@@ -289,14 +294,14 @@ export function Playground({scenarios, onStream, onAction, onVisibility}: Playgr
                     isNext && 'border-amber bg-amber-tint/60 opacity-100',
                   )}
                 >
-                  <span className="font-mono text-[10px] text-ink-faint">{String(index + 1).padStart(2, '0')}</span>
+                  <span className="font-mono text-[10px] text-ink-mute">{String(index + 1).padStart(2, '0')}</span>
                   <Badge variant={TYPE_VARIANT[type] ?? 'secondary'} className="font-mono text-[10px]">{type}</Badge>
                   <span className="truncate font-mono text-[11px] text-ink-soft">{JSON.stringify(message)}</span>
                 </button>
               );
             })}
           </div>
-          <p className="mt-2 text-[11px] text-ink-faint">点击任意消息可跳转到该步骤;跳转会在两个渲染器中重新放流。</p>
+          <p className="mt-2 text-[11px] text-ink-mute">点击任意消息可跳转到该步骤;跳转会在两个渲染器中重新放流。</p>
         </TabsContent>
 
         <TabsContent value="editor" className="min-h-0 flex-1">
@@ -308,7 +313,7 @@ export function Playground({scenarios, onStream, onAction, onVisibility}: Playgr
             className="dark-scroll h-80 w-full resize-y rounded-lg border border-line-dark bg-ink-950 p-3 font-mono text-xs leading-relaxed text-[#d7e2f4] outline-none focus-visible:ring-2 focus-visible:ring-blue/60"
           />
           {editorError && (
-            <div role="alert" className="mt-2 rounded-lg border border-red/30 bg-red-tint px-3 py-2 text-xs text-red">
+            <div role="alert" className="mt-2 rounded-lg border border-red/30 bg-red-tint px-3 py-2 text-xs text-red-deep">
               {editorError}
             </div>
           )}

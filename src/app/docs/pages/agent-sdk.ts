@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   imports: [RouterLink, CodeBlock],
   template: `
     <header class="mb-10">
-      <p class="font-mono text-xs text-ink-faint">构建 / Agent SDK</p>
+      <p class="font-mono text-xs text-ink-mute">构建 / Agent SDK</p>
       <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">Agent SDK</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
         Agent SDK 把模型接到 A2UI 协议上:从目录生成提示词与技能,把模型输出编译成协议消息,

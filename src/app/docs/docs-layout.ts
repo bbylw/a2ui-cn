@@ -67,7 +67,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
         <aside class="hidden lg:block">
           <div class="sticky top-24 max-h-[calc(100vh-7.5rem)] overflow-y-auto pr-2 pb-4">
             @for (group of nav; track group.title) {
-              <p class="mt-7 mb-2 font-mono text-[11px] font-semibold tracking-[0.14em] text-ink-faint uppercase first:mt-0">{{ group.title }}</p>
+              <p class="mt-7 mb-2 font-mono text-[11px] font-semibold tracking-[0.14em] text-ink-mute uppercase first:mt-0">{{ group.title }}</p>
               <ul class="space-y-0.5 border-l border-line-warm">
                 @for (link of group.links; track link.path) {
                   <li>
@@ -100,7 +100,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
           <nav class="mt-14 grid gap-3 border-t border-line-warm pt-8 sm:grid-cols-2" aria-label="上一节 / 下一节">
             @if (prev(); as p) {
               <a [routerLink]="p.path" class="group rounded-xl border border-line-cool bg-card p-4 shadow-lift transition-colors hover:border-blue/50">
-                <span class="font-mono text-[11px] tracking-wide text-ink-faint">上一节</span>
+                <span class="font-mono text-[11px] tracking-wide text-ink-mute">上一节</span>
                 <span class="mt-1 block font-display text-[15px] font-bold text-ink group-hover:text-blue-deep">{{ p.label }}</span>
               </a>
             } @else {
@@ -108,7 +108,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
             }
             @if (next(); as n) {
               <a [routerLink]="n.path" class="group rounded-xl border border-line-cool bg-card p-4 text-right shadow-lift transition-colors hover:border-blue/50 sm:col-start-2">
-                <span class="font-mono text-[11px] tracking-wide text-ink-faint">下一节</span>
+                <span class="font-mono text-[11px] tracking-wide text-ink-mute">下一节</span>
                 <span class="mt-1 block font-display text-[15px] font-bold text-ink group-hover:text-blue-deep">{{ n.label }}</span>
               </a>
             }

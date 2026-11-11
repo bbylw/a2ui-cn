@@ -1,17 +1,24 @@
 import {AfterViewInit, Directive, ElementRef, OnDestroy, inject, input} from '@angular/core';
 
+const VARIANTS = ['scale', 'fade', 'mask'];
+
 @Directive({
   selector: '[appReveal]',
 })
 export class RevealDirective implements AfterViewInit, OnDestroy {
-  readonly delay = input(0, {alias: 'appReveal', transform: (v: number | string) => Number(v) || 0});
+  readonly config = input('', {alias: 'appReveal', transform: (v: number | string) => String(v ?? '')});
   private readonly el = inject(ElementRef<HTMLElement>);
   private observer?: IntersectionObserver;
 
   ngAfterViewInit(): void {
     const node = this.el.nativeElement;
+    let delay = 0;
+    for (const token of this.config().trim().split(/\s+/)) {
+      if (/^\d+$/.test(token)) delay = Number(token);
+      else if (VARIANTS.includes(token)) node.classList.add(`reveal-${token}`);
+    }
     node.classList.add('reveal');
-    node.style.setProperty('--reveal-delay', `${this.delay()}ms`);
+    node.style.setProperty('--reveal-delay', `${delay}ms`);
     if (typeof IntersectionObserver === 'undefined') {
       node.classList.add('is-visible');
       return;

@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   imports: [RouterLink],
   template: `
     <header class="mb-10">
-      <p class="font-mono text-xs text-ink-faint">理解 A2UI / 安全模型</p>
+      <p class="font-mono text-xs text-ink-mute">理解 A2UI / 安全模型</p>
       <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">安全模型</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
         生成式 UI 把模型输出直接变成用户看到的界面,提示注入因此可能变成界面注入。

@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   imports: [RouterLink, CodeBlock],
   template: `
     <header class="mb-10">
-      <p class="font-mono text-xs text-ink-faint">构建 / 渲染器</p>
+      <p class="font-mono text-xs text-ink-mute">构建 / 渲染器</p>
       <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">渲染器</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
         同一份协议消息,六个官方渲染器在各自平台渲染。

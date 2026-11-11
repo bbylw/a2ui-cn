@@ -9,7 +9,7 @@ import {RevealDirective} from '../shared/reveal.directive';
     <section class="relative bg-mist py-20 lg:py-28" id="ecosystem">
       <div class="mx-auto max-w-7xl px-4 sm:px-6">
         <div class="max-w-2xl" appReveal>
-          <h2 class="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">生态与采用</h2>
+          <h2 class="text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">生态与采用</h2>
           <p class="mt-4 text-base leading-relaxed text-ink-soft">
             渲染器、Agent SDK 与传输扩展全部开源。Google 发起,社区共建,
             已有团队在生产环境中使用 A2UI 构建智能体体验。
@@ -53,10 +53,10 @@ import {RevealDirective} from '../shared/reveal.directive';
               <h3 class="font-display text-base font-bold text-ink">谁在用</h3>
               <ul class="mt-4 flex flex-wrap gap-2">
                 @for (a of adopters; track a) {
-                  <li class="rounded-lg border border-line-cool bg-mist px-3 py-1.5 text-sm font-medium text-ink-soft">{{ a }}</li>
+                  <li class="rounded-lg border border-line-cool bg-mist px-3 py-1.5 text-sm font-medium text-ink-soft transition-colors hover:border-blue/40 hover:text-ink">{{ a }}</li>
                 }
               </ul>
-              <p class="mt-4 text-xs leading-relaxed text-ink-faint">
+              <p class="mt-4 text-xs leading-relaxed text-ink-mute">
                 Gemini 的生成式界面、Atlassian 与 Alation 的智能体产品、字节跳动的跨端实践,以及 AG-UI / CopilotKit 社区集成。
               </p>
             </div>
@@ -70,7 +70,7 @@ import {RevealDirective} from '../shared/reveal.directive';
                   </li>
                 }
               </ul>
-              <a routerLink="/docs/ecosystem" class="mt-4 inline-block text-sm font-semibold text-blue underline decoration-blue/30 underline-offset-4 hover:decoration-blue">社区渲染器与完整路线图</a>
+              <a routerLink="/docs/ecosystem" class="mt-4 inline-block text-sm font-semibold text-blue-deep underline decoration-blue-deep/30 underline-offset-4 hover:decoration-blue-deep">社区渲染器与完整路线图</a>
             </div>
           </div>
         </div>
@@ -80,15 +80,20 @@ import {RevealDirective} from '../shared/reveal.directive';
         <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-deep via-blue to-blue-bright px-6 py-12 text-center shadow-panel sm:px-12">
           <div class="blueprint-dark absolute inset-0 opacity-40" aria-hidden="true"></div>
           <div class="absolute -right-16 -top-16 size-64 rounded-full bg-amber/20 blur-3xl" aria-hidden="true"></div>
+          <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+            <span class="absolute left-[6%] top-6 hidden rounded-md border border-white/20 bg-white/10 px-2 py-1 font-mono text-[10px] text-white/70 animate-drift sm:block">createSurface</span>
+            <span class="absolute right-[7%] top-10 hidden rounded-md border border-white/20 bg-white/10 px-2 py-1 font-mono text-[10px] text-white/70 animate-drift sm:block" style="animation-delay: -6s">updateComponents</span>
+            <span class="absolute bottom-6 left-[12%] hidden rounded-md border border-white/20 bg-white/10 px-2 py-1 font-mono text-[10px] text-white/70 animate-drift sm:block" style="animation-delay: -10s">action</span>
+          </div>
           <div class="relative">
             <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">把生成式 UI 带进你的应用</h2>
             <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-white/80">
               五分钟跑通官方全栈示例,或直接在浏览器里把玩协议消息流。
             </p>
             <div class="mt-7 flex flex-wrap justify-center gap-3">
-              <a routerLink="/docs/quickstart" class="inline-flex h-11 items-center rounded-lg bg-white px-6 text-sm font-bold text-blue-deep transition-all hover:-translate-y-0.5 hover:shadow-lift">阅读文档</a>
+              <a routerLink="/docs/quickstart" class="pressable inline-flex h-11 items-center rounded-lg bg-white px-6 text-sm font-bold text-blue-deep transition-all hover:-translate-y-0.5 hover:shadow-lift">阅读文档</a>
               <a href="https://github.com/a2ui-project/a2ui" target="_blank" rel="noopener"
-                 class="inline-flex h-11 items-center rounded-lg border border-white/40 px-6 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white/10">Star on GitHub</a>
+                 class="pressable inline-flex h-11 items-center rounded-lg border border-white/40 px-6 text-sm font-bold text-white transition-all hover:-translate-y-0.5 hover:bg-white/10">Star on GitHub</a>
             </div>
           </div>
         </div>

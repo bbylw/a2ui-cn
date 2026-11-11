@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   imports: [RouterLink, CodeBlock],
   template: `
     <header class="mb-10">
-      <p class="font-mono text-xs text-ink-faint">入门 / 快速开始</p>
+      <p class="font-mono text-xs text-ink-mute">入门 / 快速开始</p>
       <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">快速开始</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
         两条路径:不装任何东西,用在线工具立刻体验;或者三条命令,在本地跑起官方的

@@ -18,7 +18,7 @@ interface MessageTab {
     <section class="bg-paper py-20 lg:py-28" id="protocol">
       <div class="mx-auto max-w-7xl px-4 sm:px-6">
         <div class="max-w-2xl" appReveal>
-          <h2 class="font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">协议一瞥</h2>
+          <h2 class="text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">协议一瞥</h2>
           <p class="mt-4 text-base leading-relaxed text-ink-soft">
             每条消息都是一个带 <code class="rounded bg-blue-tint px-1.5 py-0.5 font-mono text-[0.85em] text-blue-deep">version</code>
             字段和单一消息键的 JSON 对象。四种核心消息管理界面的整个生命周期,v1.0 新增双向函数调用。
@@ -29,23 +29,27 @@ interface MessageTab {
           <div class="flex gap-2 overflow-x-auto lg:flex-col" role="tablist" aria-label="消息类型">
             @for (tab of tabs; track tab.key) {
               <button type="button" role="tab" [attr.aria-selected]="active() === tab.key" (click)="active.set(tab.key)"
-                      class="shrink-0 rounded-xl border px-4 py-3 text-left transition-all lg:shrink"
+                      class="pressable shrink-0 rounded-xl border px-4 py-3 text-left transition-all lg:shrink"
                       [class]="active() === tab.key
                         ? 'border-blue/40 bg-blue-tint shadow-sm'
                         : 'border-line-warm bg-white hover:border-blue/30 hover:bg-blue-tint/40'">
                 <span class="block font-mono text-sm font-semibold" [class.text-blue-deep]="active() === tab.key" [class.text-ink]="active() !== tab.key">{{ tab.title }}</span>
-                <span class="mt-0.5 block font-mono text-[10px] text-ink-faint">{{ tab.direction }}</span>
+                <span class="mt-0.5 block font-mono text-[10px] text-ink-mute">{{ tab.direction }}</span>
               </button>
             }
           </div>
           <div class="min-w-0">
-            <p class="mb-4 min-h-12 text-sm leading-relaxed text-ink-soft">{{ activeTab().description }}</p>
-            <app-code [code]="activeTab().code" lang="json" [label]="activeTab().title + ' · v1.0'" />
+            @for (tab of [activeTab()]; track tab.key) {
+              <div class="animate-rise">
+                <p class="mb-4 min-h-12 text-sm leading-relaxed text-ink-soft">{{ tab.description }}</p>
+                <app-code [code]="tab.code" lang="json" [label]="tab.title + ' · v1.0'" />
+              </div>
+            }
           </div>
         </div>
 
         <p class="mt-8" appReveal="200">
-          <a routerLink="/docs/messages" class="text-sm font-semibold text-blue underline decoration-blue/30 underline-offset-4 transition-colors hover:decoration-blue">查看完整消息参考(含双向函数调用)</a>
+          <a routerLink="/docs/messages" class="text-sm font-semibold text-blue-deep underline decoration-blue-deep/30 underline-offset-4 transition-colors hover:decoration-blue-deep">查看完整消息参考(含双向函数调用)</a>
         </p>
       </div>
     </section>

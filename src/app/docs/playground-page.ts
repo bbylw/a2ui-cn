@@ -17,7 +17,7 @@ interface StreamState {
   template: `
     <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
       <header class="mb-8 max-w-3xl">
-        <p class="font-mono text-xs text-ink-faint">实践 / Playground</p>
+        <p class="font-mono text-xs text-ink-mute">实践 / Playground</p>
         <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">协议 Playground</h1>
         <p class="mt-4 leading-relaxed text-ink-soft">
           左侧控制台逐条发送真实的 A2UI v1.0 消息,右侧两套渲染器同时渲染:
@@ -41,7 +41,7 @@ interface StreamState {
               </div>
               <div class="a2ui-frame m-4 min-h-64 rounded-xl bg-white p-4 text-ink sm:m-5 sm:p-5">
                 @if (angularError(); as err) {
-                  <div role="alert" class="rounded-lg border border-red/30 bg-red-tint px-3 py-2 font-mono text-xs text-red">渲染错误:{{ err }}</div>
+                  <div role="alert" class="rounded-lg border border-red/30 bg-red-tint px-3 py-2 font-mono text-xs text-red-deep">渲染错误:{{ err }}</div>
                 }
                 @if (surfaceId(); as sid) {
                   <a2ui-v09-surface [surfaceId]="sid" />
@@ -78,10 +78,10 @@ interface StreamState {
           <section class="rounded-2xl border border-line-cool bg-card p-5 shadow-lift">
             <div class="flex flex-wrap items-center gap-3">
               <h2 class="font-mono text-xs font-semibold tracking-widest text-blue-deep uppercase">action 回传日志</h2>
-              <span class="font-mono text-[10px] text-ink-faint">renderer → agent</span>
+              <span class="font-mono text-[10px] text-ink-mute">renderer → agent</span>
               @if (actionLog.entries().length > 0) {
                 <button type="button" (click)="actionLog.clear()"
-                        class="ml-auto rounded-md border border-line-cool px-2.5 py-1 font-mono text-[11px] text-ink-soft transition-colors hover:border-red hover:text-red">
+                        class="ml-auto rounded-md border border-line-cool px-2.5 py-1 font-mono text-[11px] text-ink-soft transition-colors hover:border-red hover:text-red-deep">
                   清空
                 </button>
               }
@@ -92,20 +92,20 @@ interface StreamState {
               <ul class="mt-3 grid gap-2">
                 @for (entry of actionLog.entries().slice(0, 6); track entry.id) {
                   <li class="flex flex-wrap items-center gap-2 rounded-lg border border-line-cool bg-mist/50 px-3 py-2 font-mono text-[11px]">
-                    <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold {{ entry.from === 'angular' ? 'bg-red-tint text-red' : 'bg-blue-tint text-blue-deep' }}">{{ entry.from }}</span>
+                    <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold {{ entry.from === 'angular' ? 'bg-red-tint text-red-deep' : 'bg-blue-tint text-blue-deep' }}">{{ entry.from }}</span>
                     <span class="font-semibold text-ink">{{ entry.name }}</span>
-                    <span class="text-ink-faint">来自 {{ entry.sourceComponentId }}</span>
+                    <span class="text-ink-mute">来自 {{ entry.sourceComponentId }}</span>
                     <span class="min-w-0 flex-1 truncate text-ink-soft">{{ '{' }}{{ contextPreview(entry.context) }}{{ '}' }}</span>
-                    <span class="text-ink-faint">{{ entry.timestamp.slice(11, 19) }}</span>
+                    <span class="text-ink-mute">{{ entry.timestamp.slice(11, 19) }}</span>
                   </li>
                 }
               </ul>
             }
           </section>
 
-          <p class="text-xs leading-relaxed text-ink-faint">
+          <p class="text-xs leading-relaxed text-ink-mute">
             消息与组件 schema 均符合 v1.0 基础目录。想系统了解这些消息,阅读
-            <a routerLink="/docs/messages" class="font-medium text-blue underline decoration-blue/35 underline-offset-3 hover:decoration-blue">消息参考</a>。
+            <a routerLink="/docs/messages" class="font-medium text-blue-deep underline decoration-blue-deep/35 underline-offset-3 hover:decoration-blue-deep">消息参考</a>。
           </p>
         </div>
       </div>

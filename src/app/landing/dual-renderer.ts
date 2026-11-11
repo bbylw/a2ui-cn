@@ -17,7 +17,7 @@ import {RevealDirective} from '../shared/reveal.directive';
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div class="flex flex-wrap items-end justify-between gap-6" appReveal>
           <div class="max-w-2xl">
-            <h2 class="font-display text-3xl font-bold tracking-tight sm:text-4xl">同一份 JSON,两套渲染器</h2>
+            <h2 class="text-balance font-display text-3xl font-bold tracking-tight sm:text-4xl">同一份 JSON,两套渲染器</h2>
             <p class="mt-4 leading-relaxed text-ink-faint">
               下面两个界面由<strong class="font-semibold text-white">同一条消息流</strong>驱动:左侧走
               <code class="rounded bg-ink-800 px-1.5 py-0.5 font-mono text-[0.85em] text-blue-glow">&#64;a2ui/angular</code>
@@ -27,14 +27,14 @@ import {RevealDirective} from '../shared/reveal.directive';
             </p>
           </div>
           <button type="button" (click)="replay()"
-                  class="inline-flex h-10 items-center gap-2 rounded-lg border border-line-dark bg-ink-900 px-4 text-sm font-medium text-white transition-all hover:border-blue-bright hover:shadow-glow-blue">
+                  class="pressable inline-flex h-10 items-center gap-2 rounded-lg border border-line-dark bg-ink-900 px-4 text-sm font-medium text-white transition-all hover:border-blue-bright hover:shadow-glow-blue">
             <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>
             重新放流
           </button>
         </div>
 
         <div class="mt-10 grid gap-6 lg:grid-cols-2">
-          <div class="overflow-hidden rounded-2xl border border-line-dark bg-ink-900 shadow-panel" appReveal>
+          <div class="overflow-hidden rounded-2xl border border-line-dark bg-ink-900 shadow-panel transition-colors hover:border-red/50" appReveal>
             <div class="flex items-center gap-2.5 border-b border-line-dark px-5 py-3">
               <span class="inline-block size-2.5 rounded-full bg-red" aria-hidden="true"></span>
               <h3 class="font-display text-sm font-bold">Angular 渲染器</h3>
@@ -45,7 +45,7 @@ import {RevealDirective} from '../shared/reveal.directive';
             </div>
           </div>
 
-          <div class="overflow-hidden rounded-2xl border border-line-dark bg-ink-900 shadow-panel" appReveal="140">
+          <div class="overflow-hidden rounded-2xl border border-line-dark bg-ink-900 shadow-panel transition-colors hover:border-blue-bright/50" appReveal="140">
             <div class="flex items-center gap-2.5 border-b border-line-dark px-5 py-3">
               <span class="inline-block size-2.5 rounded-full bg-blue-bright" aria-hidden="true"></span>
               <h3 class="font-display text-sm font-bold">React 渲染器</h3>
@@ -73,7 +73,7 @@ import {RevealDirective} from '../shared/reveal.directive';
           } @else {
             <ul class="mt-3 grid gap-2">
               @for (entry of actionLog.entries().slice(0, 4); track entry.id) {
-                <li class="flex flex-wrap items-center gap-2 rounded-lg border border-line-dark bg-ink-950 px-3 py-2 font-mono text-[11px]">
+                <li class="animate-rise flex flex-wrap items-center gap-2 rounded-lg border border-line-dark bg-ink-950 px-3 py-2 font-mono text-[11px]">
                   <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold {{ entry.from === 'angular' ? 'bg-red/15 text-[#ff8a80]' : 'bg-blue-bright/15 text-blue-glow' }}">{{ entry.from }}</span>
                   <span class="font-semibold text-amber">{{ entry.name }}</span>
                   <span class="text-ink-faint">← {{ entry.sourceComponentId }}</span>
