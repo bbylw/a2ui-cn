@@ -131,7 +131,6 @@ import {RevealDirective} from '../shared/reveal.directive';
         <p class="mt-10 text-center" appReveal="360">
           <a routerLink="/docs/concepts" class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-deep underline decoration-blue-deep/30 underline-offset-4 transition-colors duration-300 hover:decoration-blue-deep">
             <span>深入了解核心概念</span>
-            <span aria-hidden="true">→</span>
           </a>
         </p>
       </div>

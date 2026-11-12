@@ -60,15 +60,15 @@ import {RouterLink} from '@angular/router';
       <h2 id="next">下一步</h2>
       <div class="not-prose mt-6 grid gap-3 sm:grid-cols-3">
         <a routerLink="/docs/quickstart" class="group rounded-xl border border-line-cool bg-card p-5 shadow-lift transition-all duration-300 hover:-translate-y-0.5 hover:border-blue/50">
-          <span class="font-display text-base font-bold text-ink transition-colors duration-300 group-hover:text-blue-deep">快速开始 →</span>
+          <span class="font-display text-base font-bold text-ink transition-colors duration-300 group-hover:text-blue-deep">快速开始</span>
           <span class="mt-1.5 block text-xs leading-relaxed text-ink-soft sm:text-sm">三条命令跑起官方 Travel A2UI 示例，或直接用在线工具。</span>
         </a>
         <a routerLink="/docs/concepts" class="group rounded-xl border border-line-cool bg-card p-5 shadow-lift transition-all duration-300 hover:-translate-y-0.5 hover:border-blue/50">
-          <span class="font-display text-base font-bold text-ink transition-colors duration-300 group-hover:text-blue-deep">核心概念 →</span>
+          <span class="font-display text-base font-bold text-ink transition-colors duration-300 group-hover:text-blue-deep">核心概念</span>
           <span class="mt-1.5 block text-xs leading-relaxed text-ink-soft sm:text-sm">Surface、组件树、目录、数据绑定与动作的完整心智模型。</span>
         </a>
         <a routerLink="/playground" class="group rounded-xl border border-ink-900 bg-ink-900 p-5 shadow-panel transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-bright/50">
-          <span class="font-display text-base font-bold text-white">Playground →</span>
+          <span class="font-display text-base font-bold text-white">Playground</span>
           <span class="mt-1.5 block text-xs leading-relaxed text-white/65 sm:text-sm">在本站直接播放、编辑协议消息，观察双渲染器实时响应。</span>
         </a>
       </div>

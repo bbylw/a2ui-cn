@@ -171,7 +171,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
               class="mt-1 flex items-center justify-between rounded-lg bg-ink-900 px-3 py-2.5 text-sm font-semibold text-white"
             >
               <span>Playground</span>
-              <span class="font-mono text-xs font-normal text-white/60">双渲染器 →</span>
+              <span class="font-mono text-xs font-normal text-white/60">双渲染器</span>
             </a>
           </div>
         }
@@ -224,7 +224,6 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
             @if (prev(); as p) {
               <a [routerLink]="p.path" class="doc-pager group">
                 <span class="inline-flex items-center gap-1 font-mono text-xs tracking-wider text-ink-mute">
-                  <span class="transition-transform duration-300 group-hover:-translate-x-0.5" aria-hidden="true">←</span>
                   <span>上一节</span>
                 </span>
                 <span class="mt-1 block font-display text-sm font-bold leading-snug text-ink transition-colors duration-300 group-hover:text-blue-deep">{{ p.label }}</span>
@@ -236,7 +235,6 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
               <a [routerLink]="n.path" class="doc-pager group sm:text-right">
                 <span class="inline-flex items-center gap-1 font-mono text-xs tracking-wider text-ink-mute">
                   <span>下一节</span>
-                  <span class="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true">→</span>
                 </span>
                 <span class="mt-1 block font-display text-sm font-bold leading-snug text-ink transition-colors duration-300 group-hover:text-blue-deep">{{ n.label }}</span>
               </a>
@@ -272,7 +270,6 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
                 class="pressable -ml-1 mt-3 inline-flex items-center gap-1 rounded px-1.5 py-1 font-mono text-xs text-ink-faint transition-colors duration-300 hover:text-blue-deep"
               >
                 <span>回到顶部</span>
-                <span aria-hidden="true">↑</span>
               </button>
             </div>
           }

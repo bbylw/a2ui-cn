@@ -73,7 +73,6 @@ import {RevealDirective} from '../shared/reveal.directive';
               </ul>
               <a routerLink="/docs/ecosystem" class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-blue-deep underline decoration-blue-deep/30 underline-offset-4 transition-colors duration-300 hover:decoration-blue-deep">
                 <span>社区项目完整名单</span>
-                <span aria-hidden="true">→</span>
               </a>
             </div>
           </div>
@@ -95,7 +94,6 @@ import {RevealDirective} from '../shared/reveal.directive';
             <div class="mt-8 flex flex-wrap justify-center gap-3">
               <a routerLink="/docs/quickstart" class="pressable inline-flex h-11 items-center gap-2 rounded-lg bg-blue px-6 text-base font-semibold text-white shadow-glow-blue transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-bright">
                 <span>快速开始</span>
-                <span aria-hidden="true">→</span>
               </a>
               <a routerLink="/playground" class="pressable inline-flex h-11 items-center rounded-lg border border-line-dark bg-ink-800 px-6 text-base font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:border-blue-bright">
                 打开 Playground
@@ -103,7 +101,6 @@ import {RevealDirective} from '../shared/reveal.directive';
               <a href="https://github.com/a2ui-project/a2ui" target="_blank" rel="noopener"
                  class="pressable inline-flex h-11 items-center gap-2 rounded-lg border border-white/15 px-5 text-base font-semibold text-ink-faint transition-all duration-300 hover:-translate-y-0.5 hover:border-white/35 hover:text-white">
                 <span>Star on GitHub</span>
-                <span aria-hidden="true">↗</span>
               </a>
             </div>
           </div>

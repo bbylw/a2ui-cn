@@ -60,7 +60,6 @@ interface MessageTab {
         <p class="mt-8" appReveal="200">
           <a routerLink="/docs/messages" class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-deep underline decoration-blue-deep/30 underline-offset-4 transition-colors duration-300 hover:decoration-blue-deep">
             <span>查看完整消息参考（含双向函数调用）</span>
-            <span aria-hidden="true">→</span>
           </a>
         </p>
       </div>
