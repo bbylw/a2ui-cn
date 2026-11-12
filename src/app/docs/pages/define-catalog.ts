@@ -14,7 +14,7 @@ import {CodeBlock} from '../../shared/code-block';
 
     <div class="doc-prose">
       <h2 id="schema">第一步：写目录 schema</h2>
-      <p>一份最小但完整的目录：一个 StatusBadge 组件，三个必填属性,
+      <p>一份最小但完整的目录：一个 StatusBadge 组件，三个必填属性，
       <code>$defs</code> 里声明 anyComponent/anyFunction 供信封 schema 引用：</p>
       <app-code lang="json" label="status_catalog.json(v1.0)" [code]="catalogJson" />
       <ul>
@@ -25,43 +25,43 @@ import {CodeBlock} from '../../shared/code-block';
       </ul>
 
       <h2 id="agent">第二步：智能体侧加载</h2>
-      <app-code lang="ts" label="TypeScript:基础目录 + 自定义目录" [code]="agentTs" />
-      <p>Python 用 <code>Catalog.from_json</code> + <code>CatalogConfig</code>,Dart 有对应 API;
+      <app-code lang="ts" label="TypeScript：基础目录 + 自定义目录" [code]="agentTs" />
+      <p>Python 用 <code>Catalog.from_json</code> + <code>CatalogConfig</code>，Dart 有对应 API；
       Swift/Kotlin 只做客户端渲染，没有服务端生成器。加载后目录自动进入提示词与校验。</p>
 
       <h2 id="client">第三步：渲染侧注册</h2>
       <app-code lang="tsx" label="React:Zod schema + createComponentImplementation" [code]="reactTs" />
       <p>Angular 用 <code>CatalogComponent</code> 子类 + computed 信号读属性，再
       <code>provideA2UI(&#123;catalogs: [new BasicCatalog(), statusCatalog]&#125;)</code>;
-      Lit 用 <code>A2uiLitElement</code>(见<a routerLink="/docs/universal">通用 Web 组件</a>);
+      Lit 用 <code>A2uiLitElement</code>（见<a routerLink="/docs/universal">通用 Web 组件</a>）；
       Flutter 用 <code>ComponentImplementation</code> + builder。注册后，消息里的自定义组件要带
-      <code>@catalogId</code> 指向这份目录(v0.9.1 则整 surface 绑定单一目录)。</p>
+      <code>@catalogId</code> 指向这份目录（v0.9.1 则整 surface 绑定单一目录）。</p>
 
       <h2 id="functions">声明函数</h2>
-      <p>函数 schema 声明参数、returnType 与调用权限。shareProduct 是典型的敏感操作:
+      <p>函数 schema 声明参数、returnType 与调用权限。shareProduct 是典型的敏感操作：
       只能渲染器调用、且必须用户亲手触发：</p>
       <app-code lang="json" label="shareProduct 函数 schema" [code]="shareJson" />
       <p>校验函数返回 <code>validationResult</code>，客户端实现用
       <code>createFunctionImplementation</code> 注册：</p>
-      <app-code lang="ts" label="TypeScript:validDiscount 校验函数" [code]="fnTs" />
+      <app-code lang="ts" label="TypeScript：validDiscount 校验函数" [code]="fnTs" />
 
       <h2 id="placement">放置规则与子槽</h2>
       <p><code>allowedParents</code>/<code>allowedChildren</code> 约束组件能放在哪、能装什么。
-      例如 ProductCard 只允许放在 Column/List 里、只允许装 Button;
-      子槽属性用 ChildList(多子)或 Child(单子),Action 类型属性接收事件或函数调用。
+      例如 ProductCard 只允许放在 Column/List 里、只允许装 Button；
+      子槽属性用 ChildList（多子）或 Child（单子），Action 类型属性接收事件或函数调用。
       <code>Surface</code> 是保留容器名，可以出现在 allowedParents 里，但不能用作组件名。</p>
 
       <h2 id="instructions">instructions、metadata 与无障碍</h2>
       <ul>
         <li><strong>instructions。</strong>顶层 Markdown，目录激活时附加进系统提示，写清组件的使用场景与禁忌。</li>
         <li><strong>metadata.extensions。</strong>自定义扩展键；<code>a2ui_</code> 前缀为协议保留。</li>
-        <li><strong>@accessibility。</strong>组件实例上的无障碍属性：label、description(可绑定)、live、hidden,
+        <li><strong>@accessibility。</strong>组件实例上的无障碍属性：label、description（可绑定）、live、hidden，
           适配器映射到平台 API。</li>
       </ul>
       <app-code lang="json" label="@accessibility 示例" [code]="a11yJson" />
 
       <h2 id="parity">CI 对齐测试</h2>
-      <p>智能体与渲染器各持一份目录加载结果，测试里比较规范化后的属性而非序列化字符串:
+      <p>智能体与渲染器各持一份目录加载结果，测试里比较规范化后的属性而非序列化字符串：
       catalogId、protocolVersion、组件/函数名集合、allowedParents/allowedChildren、returnType、allowedCallers。
       任何一侧改了 schema 而另一侧没跟上，CI 立刻红。完整步骤与六语言注册示例见
       <a href="https://a2ui.org/guides/defining-a-catalog/" target="_blank" rel="noopener">官方 Define a Catalog 指南</a>。</p>

@@ -40,11 +40,11 @@ import {CodeBlock} from '../../shared/code-block';
             <div class="py-3">
               <p class="text-[13px] font-semibold text-white">SDK 配置</p>
               <p class="mt-1 text-white/60">
-                <code class="whitespace-nowrap rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px]">catalogs/a2ui-travel/catalog.json</code>
+                <code class="whitespace-nowrap rounded bg-white/8 px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px]">catalogs/a2ui-travel/catalog.json</code>
                 组件与函数目录
                 <span class="mx-1 text-white/25">·</span>
-                <code class="whitespace-nowrap rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px]">data/tools.json</code>
-                业务工具(航班查询/预订)
+                <code class="whitespace-nowrap rounded bg-white/8 px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px]">data/tools.json</code>
+                业务工具（航班查询/预订）
               </p>
             </div>
             <div class="py-3">
@@ -52,20 +52,20 @@ import {CodeBlock} from '../../shared/code-block';
               <div class="mt-1 grid gap-1 text-white/60">
                 <p>
                   技能生成器
-                  <code class="whitespace-nowrap rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px]">scripts/build_skills.py → skills/</code>
-                  :目录 → 技能与语法规则
+                  <code class="whitespace-nowrap rounded bg-white/8 px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px]">scripts/build_skills.py → skills/</code>
+                  ：目录 → 技能与语法规则
                 </p>
                 <p>
                   编译器/校验器
-                  <code class="rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px] sm:whitespace-nowrap sm:[overflow-wrap:normal]">apps/<wbr>server/<wbr>src/<wbr>travel_a2ui/<wbr>brain/<wbr>catalog.py</code>
-                  :模型输出 → wire 消息
+                  <code class="rounded bg-white/8 px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px] sm:whitespace-nowrap sm:wrap-normal">apps/<wbr>server/<wbr>src/<wbr>travel_a2ui/<wbr>brain/<wbr>catalog.py</code>
+                  ：模型输出 → wire 消息
                 </p>
               </div>
             </div>
             <div class="py-3">
-              <p class="text-[13px] font-semibold text-white">你的智能体代码 + LLM 运行时(SDK 之外)</p>
+              <p class="text-[13px] font-semibold text-white">你的智能体代码 + LLM 运行时（SDK 之外）</p>
               <p class="mt-1 text-white/60">
-                <code class="rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px] sm:whitespace-nowrap sm:[overflow-wrap:normal]">apps/<wbr>server/<wbr>src/<wbr>travel_a2ui/<wbr>brain/</code>
+                <code class="rounded bg-white/8 px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px] sm:whitespace-nowrap sm:wrap-normal">apps/<wbr>server/<wbr>src/<wbr>travel_a2ui/<wbr>brain/</code>
                 调用工具与模型，把模型的 UI 输出交给编译器
               </p>
             </div>
@@ -120,7 +120,7 @@ import {CodeBlock} from '../../shared/code-block';
       </table>
 
       <h3 id="commands">三条命令</h3>
-      <app-code lang="bash" label="克隆并启动(Web + 移动端)" [code]="runCmd" />
+      <app-code lang="bash" label="克隆并启动（Web + 移动端）" [code]="runCmd" />
       <p>quickstart.sh 的参数决定构建哪些客户端：</p>
       <table>
         <thead><tr><th scope="col">命令</th><th scope="col">构建内容</th></tr></thead>
@@ -133,7 +133,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h3 id="open">打开并体验</h3>
       <ol>
-        <li>浏览器访问 <code>http://127.0.0.1:8080</code>(Flutter 端在 <code>/flutter/</code>)。</li>
+        <li>浏览器访问 <code>http://127.0.0.1:8080</code>（Flutter 端在 <code>/flutter/</code>）。</li>
         <li>按界面提示粘贴你的 Gemini API key，密钥只保存在本地会话。</li>
         <li>试着输入「帮我规划一个周末去东京的旅行」，观察智能体流式搭出卡片、日期选择与确认按钮。</li>
         <li>点击界面里的按钮，看 action 消息如何回到智能体并触发下一轮更新。</li>
@@ -141,17 +141,17 @@ import {CodeBlock} from '../../shared/code-block';
       <p>想部署到公网，仓库里的 <code>./scripts/deploy.sh</code> 会把同一个服务器部署到 Google Cloud Run。</p>
 
       <h2 id="coding-agent">让编码智能体替你完成</h2>
-      <p>官方把快速开始写成了可以直接粘贴给编码智能体的提示词(<a href="https://a2ui.org/quickstart/agent.md" target="_blank" rel="noopener">查看原文</a>),
+      <p>官方把快速开始写成了可以直接粘贴给编码智能体的提示词（<a href="https://a2ui.org/quickstart/agent.md" target="_blank" rel="noopener">查看原文</a>），
       粘进 Antigravity、Claude Code、Codex、Cursor 或任何能读网页的编码智能体即可。它会跑三条命令，然后开着应用给你讲解 A2UI 如何工作。任选其一：</p>
-      <app-code lang="bash" label="Web + 移动端(Python + React + Flutter)" [code]="promptBoth" />
-      <app-code lang="bash" label="仅 Web(Python + React)" [code]="promptWeb" />
-      <app-code lang="bash" label="仅移动端(Python + Flutter)" [code]="promptMobile" />
+      <app-code lang="bash" label="Web + 移动端（Python + React + Flutter）" [code]="promptBoth" />
+      <app-code lang="bash" label="仅 Web（Python + React）" [code]="promptWeb" />
+      <app-code lang="bash" label="仅移动端（Python + Flutter）" [code]="promptMobile" />
 
       <h2 id="learn">跑起来之后，你会学到什么</h2>
       <p>下面五点对应<a routerLink="/docs/walkthrough">分步详解</a>的五个章节，跑起来后对照屏幕阅读：</p>
       <ol>
         <li><strong>屏幕上哪些是 A2UI。</strong>surface、其中的组件、它们展示的数据，与普通应用代码的边界。</li>
-        <li><strong>目录(Catalog)。</strong>智能体可用的组件与客户端函数，以及它为什么是安全护栏。</li>
+        <li><strong>目录（Catalog）。</strong>智能体可用的组件与客户端函数，以及它为什么是安全护栏。</li>
         <li><strong>Agent skills。</strong>模型如何被教会为这个目录编写 A2UI。</li>
         <li><strong>模型写的与客户端收到的。</strong>A2UI Express 推理格式、SDK 编译出的协议消息、应用它们的 MessageProcessor。</li>
         <li><strong>渲染器。</strong>示例里的 React 与 Flutter 两个渲染器，以及 A2UI 的其他官方渲染器。</li>

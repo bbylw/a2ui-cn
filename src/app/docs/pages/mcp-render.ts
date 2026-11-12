@@ -8,7 +8,7 @@ import {CodeBlock} from '../../shared/code-block';
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
     <app-docs-page-header eyebrow="指南" heading="在 MCP App 中渲染 A2UI">
-        外层宿主(Claude Desktop、Cursor、VS Code)支持 MCP Apps 但不原生支持 A2UI 时,
+        外层宿主（Claude Desktop、Cursor、VS Code）支持 MCP Apps 但不原生支持 A2UI 时，
         把 A2UI Web 渲染器打包进 ui:// HTML 资源：宿主无需任何 A2UI 代码，就能显示交互 surface。
         这是<a routerLink="/docs/mcp-apps">嵌入 MCP Apps</a>的反方向。
     </app-docs-page-header>
@@ -16,18 +16,18 @@ import {CodeBlock} from '../../shared/code-block';
     <div class="doc-prose">
       <h2 id="flow">端到端流程</h2>
       <ul>
-        <li>服务器发布自包含 HTML 包(<code>ui://</code>,MIME <code>text/html;profile=mcp-app</code>),
+        <li>服务器发布自包含 HTML 包（<code>ui://</code>，MIME <code>text/html;profile=mcp-app</code>），
           以及入口工具与返回 <code>application/a2ui+json</code> 消息的回调工具。</li>
         <li>宿主调入口工具，按 _meta.ui.resourceUri 读 HTML，经沙箱代理注入内层 srcdoc iframe。</li>
-        <li>内嵌应用自带 MessageProcessor + 目录 + <code>&lt;a2ui-surface&gt;</code>,
-          把工具结果里的 A2UI 消息喂进去渲染；用户动作转成 JSON-RPC tools/call 经宿主回服务器,
+        <li>内嵌应用自带 MessageProcessor + 目录 + <code>&lt;a2ui-surface&gt;</code>，
+          把工具结果里的 A2UI 消息喂进去渲染；用户动作转成 JSON-RPC tools/call 经宿主回服务器，
           服务器返回 updateDataModel 原地刷新。</li>
       </ul>
       <p><code>_meta.ui.visibility</code> 划分工具可见性：入口工具 <code>["model"]</code>
       给模型一个启动器；交互工具 <code>["app"]</code> 只供沙箱视图调用，不挤占模型工具列表。</p>
 
       <h2 id="server">服务器：注册资源与工具</h2>
-      <app-code lang="ts" label="入口工具返回初始 surface，交互工具只返回数据(节选)" [code]="serverTs" />
+      <app-code lang="ts" label="入口工具返回初始 surface，交互工具只返回数据（节选）" [code]="serverTs" />
 
       <h2 id="app">内嵌应用：渲染器 + 动作转发</h2>
       <p>安装 <code>@a2ui/lit @a2ui/markdown-it @a2ui/web_core lit @modelcontextprotocol/ext-apps</code>。
@@ -35,30 +35,30 @@ import {CodeBlock} from '../../shared/code-block';
       <app-code lang="ts" label="src/main.ts(v1.0)" [code]="mainTs" />
       <p>需要全量表单状态时，在回调里读
       <code>processor.getSurface(action.surfaceId)?.dataModel.get('/')</code> 合并进 arguments。
-      不用 ext-apps 也可以直接写 window.parent.postMessage 的 JSON-RPC 协议;
+      不用 ext-apps 也可以直接写 window.parent.postMessage 的 JSON-RPC 协议；
       手写 message 监听时校验 <code>event.source === window.parent</code> 并显式指定 target origin。</p>
 
       <h2 id="bundle">打包成单文件 HTML</h2>
       <p>srcdoc iframe 没有 base URL，外部 script/link 与代码分割 chunk 都解析不了。
-      必须产出一个自包含 HTML:</p>
+      必须产出一个自包含 HTML：</p>
       <ul>
-        <li><strong>Vite(Lit/React)。</strong>vite-plugin-singlefile 一键内联。</li>
-        <li><strong>Angular。</strong>ng build 后用 esbuild 把 main.js 打包成单 ESM 文件,
+        <li><strong>Vite（Lit/React）。</strong>vite-plugin-singlefile 一键内联。</li>
+        <li><strong>Angular。</strong>ng build 后用 esbuild 把 main.js 打包成单 ESM 文件，
           内联 script/style 进 index.html，剥掉 modulepreload 链接
-          (参考官方示例的 inline.js)。</li>
+          （参考官方示例的 inline.js）。</li>
       </ul>
       <app-code lang="ts" label="vite.config.ts" [code]="viteTs" />
 
       <h2 id="constraints">沙箱约束与主题</h2>
       <ul>
-        <li>opaque origin 下 storage/cookie 抛 SecurityError:临时状态放数据模型，持久状态放服务器。</li>
+        <li>opaque origin 下 storage/cookie 抛 SecurityError：临时状态放数据模型，持久状态放服务器。</li>
         <li>外部媒体/字体默认被 CSP 挡：在 resources/read 返回项的 _meta.ui.csp 里声明域名。</li>
         <li>主题同步：启动时与 ui/notifications/host-context-changed 时，按宿主 theme 切换
-          <code>.a2ui-light</code>/<code>.a2ui-dark</code> 根类；基础目录样式用 light-dark() 令牌,
+          <code>.a2ui-light</code>/<code>.a2ui-dark</code> 根类；基础目录样式用 light-dark（） 令牌，
           也可覆盖 --a2ui-color-primary 等变量。</li>
         <li>返回工具结果前用 validatePayload 在服务端校验——坏消息会在沙箱里才失败，排查更贵。</li>
       </ul>
-      <p>官方示例 <code>samples/community/mcp/a2ui-in-mcpapps</code> 含生成式编辑器与计数器两个微应用,
+      <p>官方示例 <code>samples/community/mcp/a2ui-in-mcpapps</code> 含生成式编辑器与计数器两个微应用，
       完整步骤见 <a href="https://a2ui.org/guides/a2ui-in-mcp-apps/" target="_blank" rel="noopener">官方 Render A2UI Inside an MCP App 指南</a>。</p>
     </div>
   `,

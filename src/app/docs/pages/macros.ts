@@ -17,17 +17,17 @@ import {CodeBlock} from '../../shared/code-block';
       <ul>
         <li>模型写一行调用，代替嵌套组件树，省输出 token 与延迟。</li>
         <li>层级由服务端代码构建，跨回合布局一致。</li>
-        <li>宏是普通 Python:可以拿模型给的 id 查数据库、调 API，再填充组件。</li>
+        <li>宏是普通 Python：可以拿模型给的 id 查数据库、调 API，再填充组件。</li>
         <li>渲染器只收到它已实现的组件——加宏不需要发客户端版本。</li>
       </ul>
 
       <h2 id="define">定义宏</h2>
       <p><code>@macro</code> 装饰一个返回单个根 builder 的函数，从类型 hints 与 docstring 的
-      Args 块自动生成 schema:</p>
+      Args 块自动生成 schema：</p>
       <app-code lang="python" label="flight_macros.py" [code]="macroPy" />
       <p>模型于是只需要输出一行调用：</p>
       <app-code lang="text" label="模型的 Express 输出" [code]="modelOut" />
-      <p>展开后，静态参数被烤进组件，而 <code>$/flight/status</code> 绑定保持活的:
+      <p>展开后，静态参数被烤进组件，而 <code>$/flight/status</code> 绑定保持活的：
       渲染器收到 Card/Column/Text 基础组件，数据模型变化时状态行照常刷新。</p>
 
       <h2 id="wire">接入处理器</h2>
@@ -35,7 +35,7 @@ import {CodeBlock} from '../../shared/code-block';
       运行你的函数、发出扁平组件。因此它不放进 CatalogConfig.transformers，而是与处理器并列：</p>
       <app-code lang="python" label="装配 expander 与 processor" [code]="wirePy" />
       <app-code lang="python" label="解析模型输出并展开" [code]="parsePy" />
-      <p>多会话服务器里每个会话建一个 MacroExpander(它跟踪各 surface 的活跃目录),
+      <p>多会话服务器里每个会话建一个 MacroExpander（它跟踪各 surface 的活跃目录），
       或给 transform_to_transport 传 surface_catalogs。</p>
 
       <h2 id="types">参数类型映射</h2>
@@ -53,21 +53,21 @@ import {CodeBlock} from '../../shared/code-block';
       </table>
 
       <h2 id="custom">自定义目录的宏</h2>
-      <p>基础目录的 builder 在 <code>a2ui.builder.v1_0</code>；自定义目录用官方 CLI 生成 builder:</p>
+      <p>基础目录的 builder 在 <code>a2ui.builder.v1_0</code>；自定义目录用官方 CLI 生成 builder：</p>
       <app-code lang="bash" label="生成 Python builders" [code]="codegenCmd" />
-      <p>生成的类可以直接与基础目录组件混用(v1.0 单 surface 多目录),展开时 expander 会移除
+      <p>生成的类可以直接与基础目录组件混用（v1.0 单 surface 多目录），展开时 expander 会移除
       推理用的旁路目录、给每个组件盖上所属 catalogId。目录变更后重跑 codegen，不要手改生成文件。</p>
 
       <h2 id="caveats">注意事项</h2>
       <ul>
         <li>宏参数是不可信的模型输出：拿 id 查库前先校验。</li>
-        <li>默认 <code>on_error="passthrough"</code> 会留下未展开的宏(渲染器画不了);
+        <li>默认 <code>on_error="passthrough"</code> 会留下未展开的宏（渲染器画不了）；
           设 <code>on_error="raise"</code> 抛 A2uiValidationError，喂回模型重试。</li>
         <li>同一个 expander 不要混用 v1_0 与 v0_9 的 builder/目录。</li>
         <li>普通类型参数拒绝数据绑定；需要响应式就用 Dynamic* 注解。</li>
       </ul>
       <p>完整 API 与参数映射见
-      <a href="https://a2ui.org/guides/macros/" target="_blank" rel="noopener">官方 Macros 指南</a>;
+      <a href="https://a2ui.org/guides/macros/" target="_blank" rel="noopener">官方 Macros 指南</a>；
       宏与推理格式的关系见<a routerLink="/docs/inference">推理格式</a>。</p>
     </div>
   `,

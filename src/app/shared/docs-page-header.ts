@@ -14,23 +14,22 @@ import {RouterLink} from '@angular/router';
   imports: [RouterLink],
   template: `
     <header class="mb-8 border-b border-line-warm pb-7">
-      <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+      <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
         <nav class="flex items-center gap-2 font-mono text-xs font-medium tracking-wider text-ink-mute" aria-label="面包屑">
-          <span class="inline-block h-1.5 w-1.5 rounded-xs bg-blue" aria-hidden="true"></span>
           <a routerLink="/docs" class="transition-colors duration-300 hover:text-blue-deep">文档</a>
           <span class="text-line-cool" aria-hidden="true">/</span>
-          <span class="text-ink-soft">{{ eyebrow() }}</span>
+          <span class="rounded-md border border-blue/20 bg-blue-tint px-2 py-0.5 font-semibold text-blue-deep">{{ eyebrow() }}</span>
         </nav>
-        <p class="flex items-center gap-2 font-mono text-xs tabular-nums text-ink-mute">
-          @if (stats(); as s) {
+        @if (stats(); as s) {
+          <p class="inline-flex items-center gap-2 rounded-md border border-line-warm bg-paper/75 px-2.5 py-1 font-mono text-xs tabular-nums text-ink-mute">
             <span>{{ s.sections }} 节</span>
-            <span class="h-3 w-px bg-line-warm" aria-hidden="true"></span>
+            <span class="h-3 w-px bg-line-cool" aria-hidden="true"></span>
             <span>约 {{ s.minutes }} 分钟</span>
-          }
-        </p>
+          </p>
+        }
       </div>
-      <h1 class="mt-3 text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">{{ heading() }}</h1>
-      <p class="mt-4 max-w-[42rem] text-pretty text-base leading-relaxed text-ink-soft"><ng-content /></p>
+      <h1 class="mt-3.5 text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">{{ heading() }}</h1>
+      <p class="mt-3.5 max-w-2xl text-pretty text-base leading-relaxed text-ink-soft"><ng-content /></p>
     </header>
   `,
 })

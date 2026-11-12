@@ -14,21 +14,21 @@ import {CodeBlock} from '../../shared/code-block';
 
     <div class="doc-prose">
       <h2 id="envelope">消息信封</h2>
-      <p>每条线上消息都是一个 JSON 对象，带 <code>version</code> 字段(v1.0 为 <code>"1.0"</code>)和恰好一个消息键：</p>
+      <p>每条线上消息都是一个 JSON 对象，带 <code>version</code> 字段（v1.0 为 <code>"1.0"</code>）和恰好一个消息键：</p>
       <app-code lang="json" label="v1.0 消息信封" [code]="envelope" />
-      <p>消息可以走任何传输：A2A、AG-UI、MCP、WebSocket、SSE、REST。除显式消息外,
-      渲染器还可以在请求的传输元数据里附带能力声明与数据模型同步(见本页末尾)。</p>
+      <p>消息可以走任何传输：A2A、AG-UI、MCP、WebSocket、SSE、REST。除显式消息外，
+      渲染器还可以在请求的传输元数据里附带能力声明与数据模型同步（见本页末尾）。</p>
 
       <h2 id="agent-to-renderer">智能体 → 渲染器</h2>
 
       <h3 id="createsurface">createSurface</h3>
-      <p>开辟一块新界面。<code>surfaceId</code> 在渲染上下文(一个 MessageProcessor，通常是一段会话)内必须全局唯一。
+      <p>开辟一块新界面。<code>surfaceId</code> 在渲染上下文（一个 MessageProcessor，通常是一段会话）内必须全局唯一。
       创建会隐式实例化保留的 Surface 容器，其 child 指向 "root"。</p>
       <table>
         <thead><tr><th scope="col">字段</th><th scope="col">类型</th><th scope="col">必填</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td><code>surfaceId</code></td><td>string</td><td>是</td><td>surface 唯一标识。</td></tr>
-          <tr><td><code>catalogId</code></td><td>string</td><td>v1.0 可选</td><td>默认目录。v1.0 中组件(<code>@catalogId</code>)与函数调用可各自指定目录。</td></tr>
+          <tr><td><code>catalogId</code></td><td>string</td><td>v1.0 可选</td><td>默认目录。v1.0 中组件（<code>@catalogId</code>）与函数调用可各自指定目录。</td></tr>
           <tr><td><code>sendDataModel</code></td><td>boolean</td><td>否</td><td>为 true 时，渲染器在每条发给该智能体的消息元数据里附带完整数据模型。</td></tr>
           <tr><td><code>components</code></td><td>array</td><td>否</td><td>内联初始组件列表，一条消息完成创建。</td></tr>
           <tr><td><code>dataModel</code></td><td>object</td><td>否</td><td>内联初始数据模型。</td></tr>
@@ -59,34 +59,34 @@ import {CodeBlock} from '../../shared/code-block';
           <tr><td><code>value</code></td><td>any</td><td>是</td><td>写入的值；<code>null</code> 表示删除该键。</td></tr>
         </tbody>
       </table>
-      <app-code lang="json" label="updateDataModel:写入与删除" [code]="updateDataModel" />
+      <app-code lang="json" label="updateDataModel：写入与删除" [code]="updateDataModel" />
 
       <h3 id="deletesurface">deleteSurface</h3>
-      <p>卸载 surface，释放其组件树与数据模型。只需要 <code>surfaceId</code>:</p>
+      <p>卸载 surface，释放其组件树与数据模型。只需要 <code>surfaceId</code>：</p>
       <app-code lang="json" label="deleteSurface" [code]="deleteSurface" />
 
       <h3 id="callrendererfunction">callRendererFunction</h3>
-      <p>智能体发起的 RPC:让渲染器执行目录里注册的客户端函数(如读取设备时区)。
+      <p>智能体发起的 RPC：让渲染器执行目录里注册的客户端函数（如读取设备时区）。
       只有 <code>allowedCallers</code> 为 <code>agentOnly</code> 或 <code>rendererOrAgent</code> 的函数可以被这样调用。</p>
       <table>
         <thead><tr><th scope="col">字段</th><th scope="col">类型</th><th scope="col">必填</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td><code>functionCallId</code></td><td>string</td><td>是</td><td>关联 id，原样出现在响应里。</td></tr>
-          <tr><td><code>callFunction</code></td><td>object</td><td>是</td><td>FunctionCall:<code>@call</code> 函数名、<code>catalogId</code>、可选 <code>args</code>。</td></tr>
+          <tr><td><code>callFunction</code></td><td>object</td><td>是</td><td>FunctionCall：<code>@call</code> 函数名、<code>catalogId</code>、可选 <code>args</code>。</td></tr>
           <tr><td><code>surfaceId</code></td><td>string</td><td>否</td><td>提供求值上下文的 surface；省略则在空上下文执行。</td></tr>
         </tbody>
       </table>
       <app-code lang="json" label="callRendererFunction" [code]="callRendererFunction" />
 
       <h3 id="agentfunctionresponse">agentFunctionResponse</h3>
-      <p>智能体对渲染器 <code>callAgentFunction</code> 的应答。<code>functionCallId</code> 对应请求;
-      成功带 <code>value</code>，失败带 <code>error</code>(含 <code>code</code> 与 <code>message</code>),两者互斥：</p>
+      <p>智能体对渲染器 <code>callAgentFunction</code> 的应答。<code>functionCallId</code> 对应请求；
+      成功带 <code>value</code>，失败带 <code>error</code>（含 <code>code</code> 与 <code>message</code>），两者互斥：</p>
       <app-code lang="json" label="agentFunctionResponse" [code]="agentFunctionResponse" />
 
       <h2 id="renderer-to-agent">渲染器 → 智能体</h2>
 
       <h3 id="action">action</h3>
-      <p>用户触发了组件上声明的事件动作(如点击配置了 <code>action.event</code> 的 Button)。
+      <p>用户触发了组件上声明的事件动作（如点击配置了 <code>action.event</code> 的 Button）。
       发送前，渲染器已把 context 与 userMessage 里的绑定解析为本地数据模型中的实际值。</p>
       <table>
         <thead><tr><th scope="col">字段</th><th scope="col">类型</th><th scope="col">必填</th><th scope="col">说明</th></tr></thead>
@@ -102,18 +102,18 @@ import {CodeBlock} from '../../shared/code-block';
       <app-code lang="json" label="action" [code]="actionMsg" />
 
       <h3 id="callagentfunction">callAgentFunction</h3>
-      <p>渲染器请求智能体侧执行目录中声明的函数，携带 <code>functionCallId</code> 与 FunctionCall;
+      <p>渲染器请求智能体侧执行目录中声明的函数，携带 <code>functionCallId</code> 与 FunctionCall；
       智能体以 <code>agentFunctionResponse</code> 应答。适合把「查行李额度」这类服务端能力暴露给界面。</p>
 
       <h3 id="rendererfunctionresponse">rendererFunctionResponse</h3>
-      <p>渲染器对 <code>callRendererFunction</code> 的应答，结构与 agentFunctionResponse 对称:
+      <p>渲染器对 <code>callRendererFunction</code> 的应答，结构与 agentFunctionResponse 对称：
       <code>functionCallId</code> 加 <code>value</code> 或 <code>error</code>。</p>
 
       <h2 id="metadata">传输元数据</h2>
       <p>除显式消息外，渲染器在发往智能体的请求里附带两类元数据：</p>
       <ul>
-        <li><code>a2uiRendererCapabilities</code>:渲染器支持的目录与协议版本，供智能体做目录协商。</li>
-        <li><code>a2uiRendererDataModel</code>:当 surface 声明 <code>sendDataModel: true</code> 时，每条消息都附带该 surface 的完整数据模型，让智能体始终看到最新状态。</li>
+        <li><code>a2uiRendererCapabilities</code>：渲染器支持的目录与协议版本，供智能体做目录协商。</li>
+        <li><code>a2uiRendererDataModel</code>：当 surface 声明 <code>sendDataModel: true</code> 时，每条消息都附带该 surface 的完整数据模型，让智能体始终看到最新状态。</li>
       </ul>
 
       <h2 id="v09">与 v0.9.1 的差异</h2>
@@ -130,7 +130,7 @@ import {CodeBlock} from '../../shared/code-block';
         </tbody>
       </table>
       <p>官方 TypeScript 与 Python Core SDK 同时支持 v0.8、v0.9.1 与 v1.0 信封，迁移可以渐进进行。
-      完整规范见 <a href="https://a2ui.org/specification/v1.0-a2ui/" target="_blank" rel="noopener">a2ui.org 的 v1.0 specification</a>,
+      完整规范见 <a href="https://a2ui.org/specification/v1.0-a2ui/" target="_blank" rel="noopener">a2ui.org 的 v1.0 specification</a>，
       组件字段细节见<a routerLink="/docs/concepts">核心概念</a>。</p>
     </div>
   `,

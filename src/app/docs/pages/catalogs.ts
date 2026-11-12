@@ -24,10 +24,10 @@ import {CodeBlock} from '../../shared/code-block';
         <li><strong>instructions。</strong>Markdown 文本，目录激活时附加进模型的系统提示，告诉模型这些组件该怎么用。</li>
       </ul>
       <p>一个业务组件的 schema 长这样：</p>
-      <app-code lang="json" label="FlightStatusCard 组件 schema (v1.0)" [code]="flightSchema" />
+      <app-code lang="json" label="FlightStatusCard 组件 schema（v1.0）" [code]="flightSchema" />
       <p><code>allowedParents</code> 限制它只能放在 Column、List 里；渲染器在解析时做同样的检查，
       放错位置会回 <code>UNALLOWED_PARENT</code> 错误。函数的 schema 同样声明参数与返回类型：</p>
-      <app-code lang="json" label="formatCurrency 函数 schema (v1.0)" [code]="currencySchema" />
+      <app-code lang="json" label="formatCurrency 函数 schema（v1.0）" [code]="currencySchema" />
 
       <h2 id="basic">官方基础目录</h2>
       <p>基础目录（Basic Catalog）是可选的通用参考目录，提供 18 个组件与 15 个函数，
@@ -63,7 +63,7 @@ import {CodeBlock} from '../../shared/code-block';
       <code>supportedCatalogIds</code>，列出自己实现了哪些目录；智能体只能从这份清单里挑选
       <code>createSurface</code> 的目录。渲染器没注册的组件一律拒绝渲染——这是 A2UI 的核心安全护栏。</p>
       <p>智能体侧用 <code>CatalogConfig</code> 加载目录，交给 <code>A2uiGenerator</code> 生成提示词与做服务端校验：</p>
-      <app-code lang="ts" label="Agent SDK 加载目录 (TypeScript)" [code]="agentLoadTs" />
+      <app-code lang="ts" label="Agent SDK 加载目录（TypeScript）" [code]="agentLoadTs" />
       <p>渲染侧的注册方式因框架而异，见<a routerLink="/docs/renderers">客户端集成</a>与
       <a routerLink="/docs/define-catalog">定义目录</a>指南。完整字段定义见
       <a href="https://a2ui.org/concepts/catalogs/" target="_blank" rel="noopener">官方 Catalogs 文档</a>。</p>

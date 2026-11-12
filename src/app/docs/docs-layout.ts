@@ -89,7 +89,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
   selector: 'app-docs-layout',
   imports: [RouterOutlet, RouterLink, RouterLinkActive, DocEnhanceDirective],
   template: `
-    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-12">
+    <div class="mx-auto max-w-336 px-4 py-8 sm:px-6 lg:px-8 lg:py-10">
       <!-- 窄屏:分组目录抽屉,替代 36 个横向 chip -->
       <nav class="mb-6 lg:hidden" aria-label="文档导航">
         <button
@@ -111,7 +111,26 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
         </button>
 
         @if (menuOpen()) {
-          <div id="doc-menu" class="doc-menu quiet-scroll mt-2 max-h-[64dvh] overflow-y-auto rounded-xl border border-line-cool bg-card p-3.5 shadow-lift">
+          <div id="doc-menu" class="doc-menu quiet-scroll mt-2 max-h-[68dvh] overflow-y-auto rounded-xl border border-line-cool bg-card p-3.5 shadow-lift">
+            <div class="relative mb-3">
+              <svg viewBox="0 0 20 20" class="pointer-events-none absolute top-1/2 left-3 h-3.5 w-3.5 -translate-y-1/2 text-ink-faint" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m13.5 13.5 3.5 3.5"/></svg>
+              <input
+                type="search"
+                [value]="searchQuery()"
+                (input)="onSearch($event)"
+                placeholder="筛选文档标题…"
+                aria-label="筛选文档标题"
+                class="w-full rounded-lg border border-line-warm bg-paper/70 py-1.5 pr-8 pl-8 text-xs text-ink placeholder:text-ink-faint focus:border-blue focus:bg-white focus:outline-none"
+              />
+              @if (searchQuery()) {
+                <button
+                  type="button"
+                  (click)="clearSearch()"
+                  aria-label="清空筛选"
+                  class="absolute top-1/2 right-2 -translate-y-1/2 rounded px-1.5 py-0.5 font-mono text-xs text-ink-mute hover:text-ink"
+                >×</button>
+              }
+            </div>
             @if (toc().length > 1) {
               <div class="mb-3 overflow-hidden rounded-lg border border-line-warm bg-paper/60">
                 <button
@@ -135,6 +154,8 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
                           [href]="tocHref(item.id)"
                           (click)="jumpFromMenu($event, item.id)"
                           class="doc-menu-link"
+                          [class.pl-5]="item.level === 3"
+                          [class.text-xs]="item.level === 3"
                           [class.is-active]="activeId() === item.id"
                         >{{ item.text }}</a>
                       </li>
@@ -143,7 +164,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
                 }
               </div>
             }
-            @for (group of nav; track group.title) {
+            @for (group of filteredNav(); track group.title) {
               <div class="mb-3.5 last:mb-0">
                 <p class="mb-1 flex items-baseline gap-2 px-1 font-mono text-xs font-semibold tracking-wider text-ink-mute">
                   {{ group.title }}
@@ -164,6 +185,8 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
                   }
                 </ul>
               </div>
+            } @empty {
+              <p class="py-4 text-center font-mono text-xs text-ink-mute">未找到匹配的文档章节</p>
             }
             <a
               routerLink="/playground"
@@ -177,17 +200,37 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
         }
       </nav>
 
-      <div class="grid gap-10 lg:grid-cols-[232px_minmax(0,1fr)] xl:grid-cols-[232px_minmax(0,1fr)_196px] xl:gap-10">
+      <div class="grid gap-8 lg:grid-cols-[236px_minmax(0,1fr)] xl:grid-cols-[236px_minmax(0,1fr)_208px] xl:gap-9">
         <aside class="hidden lg:block">
           <div class="sticky top-24">
             <div class="flex items-baseline justify-between border-b border-line-warm pb-2.5">
-              <span class="font-mono text-xs font-semibold tracking-wider text-ink-mute">文档</span>
+              <span class="font-mono text-xs font-semibold tracking-wider text-ink-mute">文档目录</span>
               <span class="font-mono text-xs tabular-nums text-ink-mute">{{ flat.length }} 篇</span>
             </div>
-            <div #sideNav class="quiet-scroll scroll-fade-y -ml-1 mt-3.5 max-h-[calc(100dvh-9.5rem)] overflow-y-auto pt-2 pr-2 pb-4 pl-1">
-              @for (group of nav; track group.title) {
-                <p class="mt-6 mb-1.5 font-mono text-xs font-semibold tracking-wider text-ink-mute first:mt-0">
-                  {{ group.title }}
+            <div class="relative mt-3">
+              <svg viewBox="0 0 20 20" class="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-ink-faint" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m13.5 13.5 3.5 3.5"/></svg>
+              <input
+                type="search"
+                [value]="searchQuery()"
+                (input)="onSearch($event)"
+                placeholder="筛选文档标题…"
+                aria-label="筛选文档标题"
+                class="w-full rounded-lg border border-line-warm bg-card/85 py-1.5 pr-7 pl-8 text-xs text-ink placeholder:text-ink-faint transition-colors focus:border-blue focus:bg-white focus:outline-none"
+              />
+              @if (searchQuery()) {
+                <button
+                  type="button"
+                  (click)="clearSearch()"
+                  aria-label="清空筛选"
+                  class="absolute top-1/2 right-1.5 -translate-y-1/2 rounded px-1.5 py-0.5 font-mono text-xs text-ink-mute hover:text-ink"
+                >×</button>
+              }
+            </div>
+            <div #sideNav class="quiet-scroll scroll-fade-y -ml-1 mt-3 max-h-[calc(100dvh-12.5rem)] overflow-y-auto pt-1 pr-2 pb-4 pl-1">
+              @for (group of filteredNav(); track group.title) {
+                <p class="mt-5 mb-1.5 flex items-center justify-between font-mono text-xs font-semibold tracking-wider text-ink-mute first:mt-0">
+                  <span>{{ group.title }}</span>
+                  <span class="tabular-nums text-[11px] font-normal text-ink-faint">{{ group.links.length }}</span>
                 </p>
                 <ul class="doc-nav-group">
                   @for (link of group.links; track link.path) {
@@ -202,6 +245,8 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
                     </li>
                   }
                 </ul>
+              } @empty {
+                <p class="py-6 text-center font-mono text-xs text-ink-mute">未找到匹配的文档章节</p>
               }
               <a
                 routerLink="/playground"
@@ -217,7 +262,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
           </div>
         </aside>
 
-        <div #contentHost class="min-w-0" appDocEnhance>
+        <article #contentHost class="min-w-0 rounded-2xl border border-line-warm bg-card px-5 py-6 shadow-lift sm:px-8 sm:py-8 lg:px-10 lg:py-10" appDocEnhance>
           <router-outlet />
 
           <nav class="mt-12 grid gap-3 border-t border-line-warm pt-6 sm:grid-cols-2" aria-label="上一节 / 下一节">
@@ -240,7 +285,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
               </a>
             }
           </nav>
-        </div>
+        </article>
 
         <aside class="hidden xl:block">
           @if (toc().length > 1) {
@@ -249,7 +294,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
                 <span class="font-mono text-xs font-semibold tracking-wider text-ink-mute">本页目录</span>
                 <span class="font-mono text-xs tabular-nums text-ink-mute">{{ toc().length }}</span>
               </div>
-              <nav class="quiet-scroll -ml-1 max-h-[calc(100dvh-12rem)] overflow-y-auto pt-3 pl-1" aria-label="本页目录">
+              <nav class="quiet-scroll -ml-1 max-h-[calc(100dvh-12rem)] overflow-y-auto pt-3 pr-1 pl-1" aria-label="本页目录">
                 <ul class="doc-toc-group">
                   @for (item of toc(); track item.id) {
                     <li>
@@ -258,6 +303,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
                         (click)="jump($event, item.id)"
                         [attr.aria-current]="activeId() === item.id ? 'location' : null"
                         class="doc-toc-link"
+                        [class.is-sub]="item.level === 3"
                         [class.is-active]="activeId() === item.id"
                       >{{ item.text }}</a>
                     </li>
@@ -280,17 +326,19 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
   styles: `
     .doc-pager {
       display: block;
-      border: 1px solid var(--color-line-cool);
+      border: 1px solid var(--color-line-warm);
       border-radius: 0.75rem;
-      background: var(--color-card);
-      padding: 0.75rem 1rem 0.85rem;
+      background: var(--color-paper);
+      padding: 0.8rem 1rem 0.9rem;
       transition:
         border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
         box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
         transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .doc-pager:hover {
       border-color: rgb(26 115 232 / 0.45);
+      background: #ffffff;
       box-shadow: var(--shadow-lift);
       transform: translateY(-2px);
     }
@@ -302,15 +350,28 @@ export class DocsLayout implements OnDestroy {
   protected readonly flat = FLAT;
   protected readonly menuOpen = signal(false);
   protected readonly mobileTocOpen = signal(false);
+  protected readonly searchQuery = signal('');
+
+  protected readonly filteredNav = computed(() => {
+    const q = this.searchQuery().trim().toLowerCase();
+    if (!q) return NAV;
+    return NAV.map(group => ({
+      title: group.title,
+      links: group.links.filter(
+        link => link.label.toLowerCase().includes(q) || group.title.toLowerCase().includes(q) || link.path.toLowerCase().includes(q),
+      ),
+    })).filter(group => group.links.length > 0);
+  });
 
   private readonly sideNav = viewChild<ElementRef<HTMLElement>>('sideNav');
   private readonly contentHost = viewChild<ElementRef<HTMLElement>>('contentHost');
 
-  protected readonly toc = signal<{ id: string; text: string }[]>([]);
+  protected readonly toc = signal<{ id: string; text: string; level: 2 | 3 }[]>([]);
   protected readonly activeId = signal('');
 
   private lastPath = '';
   private ticking = false;
+  private contentObserver: MutationObserver | null = null;
   private readonly onScroll = () => {
     if (this.ticking) return;
     this.ticking = true;
@@ -325,12 +386,34 @@ export class DocsLayout implements OnDestroy {
 
   constructor() {
     window.addEventListener('scroll', this.onScroll, { passive: true });
-    setTimeout(() => this.afterNav());
+    setTimeout(() => {
+      this.afterNav();
+      this.observeContent();
+    });
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.contentObserver?.disconnect();
     window.removeEventListener('scroll', this.onScroll);
+  }
+
+  private observeContent(): void {
+    const host = this.contentHost()?.nativeElement;
+    if (!host || typeof MutationObserver === 'undefined') return;
+    this.contentObserver = new MutationObserver(() => {
+      this.collectToc();
+      this.spy();
+    });
+    this.contentObserver.observe(host, { childList: true, subtree: true });
+  }
+
+  protected onSearch(event: Event): void {
+    this.searchQuery.set((event.target as HTMLInputElement).value);
+  }
+
+  protected clearSearch(): void {
+    this.searchQuery.set('');
   }
 
   private readonly url = toSignal(
@@ -401,11 +484,24 @@ export class DocsLayout implements OnDestroy {
   private collectToc(): void {
     const host = this.contentHost()?.nativeElement;
     if (!host) return;
-    const items = [...host.querySelectorAll<HTMLElement>('.doc-prose h2[id]')].map(heading => {
+    const h2Count = host.querySelectorAll('.doc-prose h2[id]').length;
+    const selector = h2Count <= 10 ? '.doc-prose h2[id], .doc-prose h3[id]' : '.doc-prose h2[id]';
+    const items = [...host.querySelectorAll<HTMLElement>(selector)].map(heading => {
       const clone = heading.cloneNode(true) as HTMLElement;
       clone.querySelector('.doc-anchor')?.remove();
-      return { id: heading.id, text: (clone.textContent ?? '').trim() };
+      return {
+        id: heading.id,
+        text: (clone.textContent ?? '').trim(),
+        level: (heading.tagName === 'H3' ? 3 : 2) as 2 | 3,
+      };
     });
+    const prev = this.toc();
+    if (
+      prev.length === items.length &&
+      prev.every((p, i) => p.id === items[i].id && p.text === items[i].text && p.level === items[i].level)
+    ) {
+      return;
+    }
     this.toc.set(items);
   }
 

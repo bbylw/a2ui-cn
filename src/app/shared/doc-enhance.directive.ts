@@ -15,21 +15,41 @@ export class DocEnhanceDirective implements OnDestroy {
     if (e instanceof NavigationEnd) setTimeout(() => this.decorate());
   });
   private readonly onResize = () => this.syncTableFocus();
+  private observer: MutationObserver | null = null;
+  private isDecorating = false;
 
   constructor() {
-    setTimeout(() => this.decorate());
+    setTimeout(() => {
+      this.decorate();
+      this.observeContent();
+    });
     window.addEventListener('resize', this.onResize, {passive: true});
   }
 
   ngOnDestroy(): void {
     this.sub.unsubscribe();
+    this.observer?.disconnect();
     window.removeEventListener('resize', this.onResize);
   }
 
+  private observeContent(): void {
+    if (typeof MutationObserver === 'undefined') return;
+    this.observer = new MutationObserver(() => {
+      if (this.isDecorating) return;
+      this.decorate();
+    });
+    this.observer.observe(this.host.nativeElement, {childList: true, subtree: true});
+  }
+
   private decorate(): void {
-    this.anchorHeadings();
-    this.wrapTables();
-    this.syncTableFocus();
+    this.isDecorating = true;
+    try {
+      this.anchorHeadings();
+      this.wrapTables();
+      this.syncTableFocus();
+    } finally {
+      this.isDecorating = false;
+    }
   }
 
   private anchorHeadings(): void {
