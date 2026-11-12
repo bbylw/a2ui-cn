@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-messages',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">概念 / 消息参考</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">消息参考</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="概念 / 消息参考" heading="消息参考">
         A2UI 的全部通信都是异步 JSON 消息:智能体到渲染器六种,渲染器到智能体三种。
         本页覆盖 v1.0 的每个消息类型、字段与示例。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="envelope">消息信封</h2>
@@ -28,7 +25,7 @@ import {CodeBlock} from '../../shared/code-block';
       <p>开辟一块新界面。<code>surfaceId</code> 在渲染上下文(一个 MessageProcessor,通常是一段会话)内必须全局唯一。
       创建会隐式实例化保留的 Surface 容器,其 child 指向 "root"。</p>
       <table>
-        <thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+        <thead><tr><th scope="col">字段</th><th scope="col">类型</th><th scope="col">必填</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td><code>surfaceId</code></td><td>string</td><td>是</td><td>surface 唯一标识。</td></tr>
           <tr><td><code>catalogId</code></td><td>string</td><td>v1.0 可选</td><td>默认目录。v1.0 中组件(<code>@catalogId</code>)与函数调用可各自指定目录。</td></tr>
@@ -44,7 +41,7 @@ import {CodeBlock} from '../../shared/code-block';
       <p>向已有 surface 添加或替换组件定义。组件是扁平邻接表,用 id 互相引用,必须存在 <code>id: "root"</code>。
       已存在的 id 会被新定义整体替换;未变化的兄弟子树保持焦点与本地状态。</p>
       <table>
-        <thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+        <thead><tr><th scope="col">字段</th><th scope="col">类型</th><th scope="col">必填</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td><code>surfaceId</code></td><td>string</td><td>是</td><td>目标 surface。</td></tr>
           <tr><td><code>components</code></td><td>array</td><td>是</td><td>非空组件数组;每个组件可带 <code>@metadata.extensions</code> 扩展。</td></tr>
@@ -55,7 +52,7 @@ import {CodeBlock} from '../../shared/code-block';
       <h3 id="updatedatamodel">updateDataModel</h3>
       <p>用 RFC 6901 JSON Pointer 定点更新数据模型,绑定到该位置的组件自动刷新,无需重发组件。</p>
       <table>
-        <thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+        <thead><tr><th scope="col">字段</th><th scope="col">类型</th><th scope="col">必填</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td><code>surfaceId</code></td><td>string</td><td>是</td><td>目标 surface。</td></tr>
           <tr><td><code>path</code></td><td>string</td><td>否</td><td>JSON Pointer,如 <code>/selectedFlight</code>;省略或 <code>"/"</code> 表示替换整个数据模型。</td></tr>
@@ -72,7 +69,7 @@ import {CodeBlock} from '../../shared/code-block';
       <p>智能体发起的 RPC:让渲染器执行目录里注册的客户端函数(如读取设备时区)。
       只有 <code>allowedCallers</code> 为 <code>agentOnly</code> 或 <code>rendererOrAgent</code> 的函数可以被这样调用。</p>
       <table>
-        <thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+        <thead><tr><th scope="col">字段</th><th scope="col">类型</th><th scope="col">必填</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td><code>functionCallId</code></td><td>string</td><td>是</td><td>关联 id,原样出现在响应里。</td></tr>
           <tr><td><code>callFunction</code></td><td>object</td><td>是</td><td>FunctionCall:<code>@call</code> 函数名、<code>catalogId</code>、可选 <code>args</code>。</td></tr>
@@ -92,7 +89,7 @@ import {CodeBlock} from '../../shared/code-block';
       <p>用户触发了组件上声明的事件动作(如点击配置了 <code>action.event</code> 的 Button)。
       发送前,渲染器已把 context 与 userMessage 里的绑定解析为本地数据模型中的实际值。</p>
       <table>
-        <thead><tr><th>字段</th><th>类型</th><th>必填</th><th>说明</th></tr></thead>
+        <thead><tr><th scope="col">字段</th><th scope="col">类型</th><th scope="col">必填</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td><code>name</code></td><td>string</td><td>是</td><td>组件上声明的事件名。</td></tr>
           <tr><td><code>surfaceId</code></td><td>string</td><td>是</td><td>交互发生的 surface。</td></tr>
@@ -121,7 +118,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h2 id="v09">与 v0.9.1 的差异</h2>
       <table>
-        <thead><tr><th>项目</th><th>v0.9.1</th><th>v1.0</th></tr></thead>
+        <thead><tr><th scope="col">项目</th><th scope="col">v0.9.1</th><th scope="col">v1.0</th></tr></thead>
         <tbody>
           <tr><td>version 字段</td><td><code>"v0.9"</code></td><td><code>"1.0"</code></td></tr>
           <tr><td>数据绑定</td><td><code>&#123;"path": "/x"&#125;</code></td><td><code>&#123;"@path": "/x"&#125;</code></td></tr>

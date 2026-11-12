@@ -284,9 +284,4 @@ export function scenarioById(id: string): Scenario {
   return SCENARIOS.find(s => s.id === id) ?? SCENARIOS[0];
 }
 
-export function messageType(message: Record<string, unknown>): string {
-  for (const key of ['createSurface', 'updateComponents', 'updateDataModel', 'deleteSurface', 'action', 'callRendererFunction', 'callAgentFunction']) {
-    if (key in message) return key;
-  }
-  return 'unknown';
-}
+export {messageType} from './message-type';

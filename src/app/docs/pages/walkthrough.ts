@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-walkthrough',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">入门 / 分步详解</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">分步详解</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="入门 / 分步详解" heading="分步详解">
         边跑边读。先按<a routerLink="/docs/quickstart">快速开始</a>把 Travel A2UI 跑起来,
         然后对照屏幕上的每一块界面,理解 A2UI 的五层链路:边界、目录、技能、推理格式与渲染器。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <blockquote>

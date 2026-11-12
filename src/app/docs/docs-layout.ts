@@ -95,7 +95,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
           @for (link of flat; track link.path) {
             <a
               [routerLink]="link.path"
-              routerLinkActive="border-blue bg-blue-tint text-blue-deep"
+              routerLinkActive="border-blue bg-blue-tint text-blue-deep" ariaCurrentWhenActive="page"
               [routerLinkActiveOptions]="{exact: link.path === '/docs'}"
               class="shrink-0 rounded-full border border-line-cool bg-card px-3.5 py-1.5 text-[13px] font-medium text-ink-soft transition-colors hover:border-blue/50 hover:text-blue-deep"
             >{{ link.label }}</a>
@@ -117,7 +117,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
                   <li>
                     <a
                       [routerLink]="link.path"
-                      routerLinkActive="border-blue bg-blue-tint/70 font-semibold text-blue-deep"
+                      routerLinkActive="border-blue bg-blue-tint/70 font-semibold text-blue-deep" ariaCurrentWhenActive="page"
                       [routerLinkActiveOptions]="{exact: link.path === '/docs'}"
                       class="-ml-px block border-l-2 border-transparent py-1.5 pl-4 text-[13.5px] text-ink-soft transition-colors hover:border-blue/40 hover:text-ink"
                     >{{ link.label }}</a>
@@ -170,10 +170,7 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
                       [href]="tocHref(item.id)"
                       (click)="jump($event, item.id)"
                       [attr.aria-current]="activeId() === item.id ? 'location' : null"
-                      class="-ml-px block border-l-2 py-1 pl-3.5 text-[12.5px] leading-snug transition-colors"
-                      [class]="activeId() === item.id
-                        ? 'border-blue font-semibold text-blue-deep'
-                        : 'border-transparent text-ink-mute hover:border-blue/40 hover:text-ink'"
+                      [class]="tocClass(item.id)"
                     >{{ item.text }}</a>
                   </li>
                 }
@@ -238,6 +235,13 @@ export class DocsLayout implements OnDestroy {
     this.index() >= 0 && this.index() < FLAT.length - 1 ? FLAT[this.index() + 1] : null,
   );
 
+  protected tocClass(id: string): string {
+    const base = '-ml-px block border-l-2 py-1 pl-3.5 text-[12.5px] leading-snug transition-colors';
+    return this.activeId() === id
+      ? base + ' border-blue font-semibold text-blue-deep'
+      : base + ' border-transparent text-ink-mute hover:border-blue/40 hover:text-ink';
+  }
+
   protected tocHref(id: string): string {
     return this.router.url.split(/[?#]/)[0] + '#' + id;
   }
@@ -293,7 +297,7 @@ export class DocsLayout implements OnDestroy {
   }
 
   private revealActive(): void {
-    const active = 'a[class*="bg-blue-tint"]';
+    const active = 'a[aria-current="page"]';
     this.chipRow()?.nativeElement
       .querySelector(active)
       ?.scrollIntoView({behavior: 'instant', block: 'nearest', inline: 'center'});

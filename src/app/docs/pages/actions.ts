@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-actions',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">概念 / 动作、事件与函数</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">动作、事件与函数</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="概念 / 动作、事件与函数" heading="动作、事件与函数">
         交互组件的 action 属性是一个二选一:event 把用户操作发回智能体、开启新一轮对话;
         functionCall 直接执行目录里的函数,不打扰智能体。函数还能出现在属性绑定、校验规则与远程调用里。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="event">事件:action.event</h2>
@@ -61,7 +58,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h2 id="permissions">谁可以调用函数</h2>
       <table>
-        <thead><tr><th>allowedCallers</th><th>含义</th></tr></thead>
+        <thead><tr><th scope="col">allowedCallers</th><th scope="col">含义</th></tr></thead>
         <tbody>
           <tr><td>rendererOnly(默认)</td><td>只能由渲染器本地调用。</td></tr>
           <tr><td>agentOnly</td><td>只能由智能体经 callRendererFunction 调用。</td></tr>

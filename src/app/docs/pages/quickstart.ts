@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-quickstart',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">入门 / 快速开始</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">快速开始</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="入门 / 快速开始" heading="快速开始">
         两条路径:不装任何东西,用在线工具立刻体验;或者三条命令,在本地跑起官方的
         Travel A2UI 示例:一个 Python 智能体服务器,同时服务 React Web 端与 Flutter 移动端。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="no-install">零安装体验</h2>
@@ -74,7 +71,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h3 id="requirements">环境要求</h3>
       <table>
-        <thead><tr><th>依赖</th><th>版本</th><th>用途</th></tr></thead>
+        <thead><tr><th scope="col">依赖</th><th scope="col">版本</th><th scope="col">用途</th></tr></thead>
         <tbody>
           <tr><td>Python</td><td>3.11+</td><td>智能体服务器</td></tr>
           <tr><td>Node.js</td><td>20+</td><td>构建 React Web 客户端</td></tr>
@@ -87,7 +84,7 @@ import {CodeBlock} from '../../shared/code-block';
       <app-code lang="bash" label="克隆并启动(Web + 移动端)" [code]="runCmd" />
       <p>quickstart.sh 的参数决定构建哪些客户端:</p>
       <table>
-        <thead><tr><th>命令</th><th>构建内容</th></tr></thead>
+        <thead><tr><th scope="col">命令</th><th scope="col">构建内容</th></tr></thead>
         <tbody>
           <tr><td><code>./scripts/quickstart.sh both</code></td><td>React Web + Flutter 移动端</td></tr>
           <tr><td><code>./scripts/quickstart.sh react</code></td><td>仅 React Web</td></tr>
@@ -129,7 +126,7 @@ import {CodeBlock} from '../../shared/code-block';
   `,
 })
 export class QuickstartPage {
-  protected readonly skillsCmd = 'npx skills add a2ui-project/a2ui';
+  protected readonly skillsCmd = 'bunx skills add a2ui-project/a2ui';
   protected readonly runCmd = `git clone https://github.com/a2ui-project/labs.git
 cd labs/samples/travel-a2ui
 ./scripts/quickstart.sh both`;

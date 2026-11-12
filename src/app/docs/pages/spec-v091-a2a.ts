@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-spec-v091-a2a',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">规范 v0.9.1 / A2A 扩展</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">A2A 扩展规范(v0.9.1)</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="规范 v0.9.1 / A2A 扩展" heading="A2A 扩展规范(v0.9.1)">
         把 A2UI v0.9.1 接入 A2A 智能体协议:扩展 URI、Agent Card 声明、DataPart 编码与客户端元数据。
         原文见<a href="https://a2ui.org/specification/v0.9.1-a2ui-extension-specification/" target="_blank" rel="noopener">官方 v0.9.1 A2A Extension Specification</a>。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="uri">扩展 URI 与激活</h2>
@@ -51,7 +48,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h2 id="metadata">客户端元数据</h2>
       <table>
-        <thead><tr><th>字段</th><th>schema</th><th>语义</th></tr></thead>
+        <thead><tr><th scope="col">字段</th><th scope="col">schema</th><th scope="col">语义</th></tr></thead>
         <tbody>
           <tr><td><code>a2uiClientCapabilities</code></td><td><code>client_capabilities.json</code></td><td>附在客户端的<strong>每条</strong> A2A 消息上,按协议版本为键(示例用 <code>"v0.9.1"</code>),声明支持的目录;服务器接受内联目录时可附 inlineCatalogs。</td></tr>
           <tr><td><code>a2uiClientDataModel</code></td><td><code>client_data_model.json</code></td><td>surface 开启数据模型同步(createSurface 的 <code>sendDataModel: true</code>)后,附在<strong>每条</strong>消息上:<code>version</code> + <code>surfaces</code>(surfaceId → 数据对象),让智能体拿到最新 UI 状态。</td></tr>

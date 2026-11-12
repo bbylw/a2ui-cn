@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-mcp-layouts',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">指南 / 提供 A2UI 布局</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">从 MCP 服务器提供 A2UI 布局</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="指南 / 提供 A2UI 布局" heading="从 MCP 服务器提供 A2UI 布局">
         布局只发一次,数据每次发:服务器把静态组件树发布为 a2ui:// 资源,
         tools/call 只返回 updateDataModel。客户端按 URI 缓存模板,工具运行时刷新 surface 状态。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="architecture">模板与数据分离</h2>

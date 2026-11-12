@@ -1,27 +1,24 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-spec-v091-protocol',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">规范 v0.9.1 / 协议规范</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">协议规范(v0.9.1)</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="规范 v0.9.1 / 协议规范" heading="协议规范(v0.9.1)">
         v0.9.1 是上一代版本(状态 Closed),取代 v0.9 并只做小幅 schema 修订;新项目应面向 v1.0。
         本页记录 v0.9.1 的信封、绑定语法与消息字段,并标出与 v1.0 的差异。原文见
         <a href="https://a2ui.org/specification/v0.9.1-a2ui/" target="_blank" rel="noopener">官方 v0.9.1 Protocol Specification</a>。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="envelope">信封与消息</h2>
       <p>信封带顶层 <code>version</code>(示例为 <code>"v0.9.1"</code>;为兼容,wire 示例与 <code>$id</code> URI 保留 <code>v0.9</code> / <code>v0_9</code>)。
       每条消息恰好一个键,共四种:</p>
       <table>
-        <thead><tr><th>消息</th><th>字段与语义</th></tr></thead>
+        <thead><tr><th scope="col">消息</th><th scope="col">字段与语义</th></tr></thead>
         <tbody>
           <tr><td><code>createSurface</code></td><td><code>surfaceId</code> 与 <code>catalogId</code> <strong>都必填</strong>;可选 <code>theme</code>、<code>sendDataModel</code>(默认 false)。创建后两者固定,改配置需删除重建。</td></tr>
           <tr><td><code>updateComponents</code></td><td><code>surfaceId</code> + <code>components</code>(扁平邻接表);恰好一个组件 <code>id: "root"</code>。</td></tr>
@@ -60,7 +57,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h2 id="diff">与 v1.0 的关键差异</h2>
       <table>
-        <thead><tr><th>主题</th><th>v0.9.1</th><th>v1.0</th></tr></thead>
+        <thead><tr><th scope="col">主题</th><th scope="col">v0.9.1</th><th scope="col">v1.0</th></tr></thead>
         <tbody>
           <tr><td>术语</td><td>client / server</td><td>renderer / agent</td></tr>
           <tr><td>绑定 / 调用 / 校验</td><td><code>path</code> / <code>call</code> / <code>checks</code></td><td><code>@path</code> / <code>@call</code> / <code>@checks</code></td></tr>

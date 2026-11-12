@@ -15,7 +15,7 @@ export class ActionLogService {
   readonly entries = signal<ActionEntry[]>([]);
   private nextId = 1;
 
-  add(action: Record<string, any>, from: 'angular' | 'react'): void {
+  add(action: Record<string, unknown>, from: 'angular' | 'react'): void {
     const entry: ActionEntry = {
       id: this.nextId++,
       name: String(action?.['name'] ?? 'unknown'),

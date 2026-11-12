@@ -2,6 +2,7 @@ import {AfterViewInit, Component, OnDestroy, computed, inject, signal} from '@an
 import {A2uiRendererService, SurfaceComponent} from '@a2ui/angular';
 import {ActionLogService} from '../core/action-log.service';
 import {SCENARIOS} from '../core/scenarios';
+import {formatContext} from '../core/format';
 import {ReactIsland} from '../shared/react-island';
 import {RevealDirective} from '../shared/reveal.directive';
 
@@ -41,7 +42,9 @@ import {RevealDirective} from '../shared/reveal.directive';
               <span class="ml-auto font-mono text-[10px] text-ink-faint">&#64;a2ui/angular · Surface 宿主</span>
             </div>
             <div class="a2ui-frame m-4 min-h-72 rounded-xl bg-white p-4 text-ink sm:m-5 sm:p-5">
-              <a2ui-v09-surface surfaceId="restaurant-demo" />
+              @if (ready()) {
+                <a2ui-v09-surface surfaceId="restaurant-demo" />
+              }
             </div>
           </div>
 
@@ -77,7 +80,7 @@ import {RevealDirective} from '../shared/reveal.directive';
                   <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold {{ entry.from === 'angular' ? 'bg-red/15 text-[#ff8a80]' : 'bg-blue-bright/15 text-blue-glow' }}">{{ entry.from }}</span>
                   <span class="font-semibold text-amber">{{ entry.name }}</span>
                   <span class="text-ink-faint">← {{ entry.sourceComponentId }}</span>
-                  <span class="min-w-0 flex-1 truncate text-white/50">{{ '{' }}{{ contextPreview(entry.context) }}{{ '}' }}</span>
+                  <span class="min-w-0 flex-1 truncate text-white/50">{{ '{' }}{{ formatContext(entry.context) }}{{ '}' }}</span>
                   <span class="text-ink-faint">{{ entry.timestamp.slice(11, 19) }}</span>
                 </li>
               }
@@ -93,6 +96,8 @@ export class DualRenderer implements AfterViewInit, OnDestroy {
   protected readonly actionLog = inject(ActionLogService);
   private readonly scenario = SCENARIOS[1];
   private readonly resetToken = signal(0);
+  // The Angular surface host must not mount before processMessages() creates it.
+  protected readonly ready = signal(false);
 
   protected readonly reactProps = computed(() => ({
     messages: structuredClone(this.scenario.messages),
@@ -102,6 +107,7 @@ export class DualRenderer implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.renderer.processMessages(structuredClone(this.scenario.messages));
+    this.ready.set(true);
   }
 
   ngOnDestroy(): void {
@@ -114,9 +120,5 @@ export class DualRenderer implements AfterViewInit, OnDestroy {
     this.resetToken.update(t => t + 1);
   }
 
-  protected contextPreview(context: Record<string, unknown>): string {
-    return Object.entries(context)
-      .map(([k, v]) => `${k}: ${JSON.stringify(v)}`)
-      .join(', ');
-  }
+  protected readonly formatContext = formatContext;
 }

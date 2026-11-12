@@ -1,18 +1,15 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-docs-security',
-  imports: [RouterLink],
+  imports: [DocsPageHeader, RouterLink],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">概念 / 安全模型</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">安全模型</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="概念 / 安全模型" heading="安全模型">
         生成式 UI 把模型输出直接变成用户看到的界面,提示注入因此可能变成界面注入。
         A2UI 的回答是:模型永远不写代码,只写白名单内的声明式描述。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="threat">威胁模型</h2>
@@ -36,7 +33,7 @@ import {RouterLink} from '@angular/router';
       <h3 id="boundaries">函数执行边界</h3>
       <p>v1.0 为每个函数声明两道运行时闸门,渲染器必须强制执行:</p>
       <table>
-        <thead><tr><th>声明</th><th>取值</th><th>含义</th></tr></thead>
+        <thead><tr><th scope="col">声明</th><th scope="col">取值</th><th scope="col">含义</th></tr></thead>
         <tbody>
           <tr><td><code>allowedCallers</code></td><td><code>rendererOnly</code>(默认)/ <code>agentOnly</code> / <code>rendererOrAgent</code></td><td>谁可以调用这个函数。智能体用 callRendererFunction 调用 rendererOnly 函数会被立即拒绝。</td></tr>
           <tr><td><code>requiresUserActivation</code></td><td>boolean</td><td>为 true 的函数(如 openUrl)只能在真实用户手势中执行;放在被动属性绑定或校验条件里会被渲染器阻止。</td></tr>

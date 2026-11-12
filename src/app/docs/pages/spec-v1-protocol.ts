@@ -1,21 +1,18 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-spec-v1-protocol',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">规范 v1.0 / 协议规范</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">协议规范(v1.0)</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="规范 v1.0 / 协议规范" heading="协议规范(v1.0)">
         v1.0 是当前版本。本页是协议规范的中文参考:信封、消息字段、surface 生命周期、
         组件模型、绑定与错误码。概念解释见<a routerLink="/docs/concepts">核心概念</a>,
         逐字段示例见<a routerLink="/docs/messages">消息参考</a>,原文见
         <a href="https://a2ui.org/specification/v1.0-a2ui/" target="_blank" rel="noopener">官方 Protocol Specification</a>。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="envelope">信封</h2>
@@ -29,7 +26,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h2 id="agent-messages">智能体 → 渲染器</h2>
       <table>
-        <thead><tr><th>消息</th><th>必填</th><th>可选与语义</th></tr></thead>
+        <thead><tr><th scope="col">消息</th><th scope="col">必填</th><th scope="col">可选与语义</th></tr></thead>
         <tbody>
           <tr><td><code>createSurface</code></td><td><code>surfaceId</code></td><td><code>catalogId</code>(surface 默认目录)、<code>sendDataModel</code>(默认 false)、<code>components</code>(初始树)、<code>dataModel</code>(初始模型)、<code>metadata.extensions</code>。隐式实例化规范 <code>Surface</code> 容器(<code>child: "root"</code>);v1.0 不接受 <code>theme</code>。两者同时存在时先应用数据模型。</td></tr>
           <tr><td><code>updateComponents</code></td><td><code>surfaceId</code>、<code>components</code></td><td>扁平邻接表;<code>id: "root"</code> 的组件挂到 Surface 下。surface 创建前不允许发送;缺失引用渲染为占位。</td></tr>
@@ -42,7 +39,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h2 id="renderer-messages">渲染器 → 智能体</h2>
       <table>
-        <thead><tr><th>消息</th><th>语义</th></tr></thead>
+        <thead><tr><th scope="col">消息</th><th scope="col">语义</th></tr></thead>
         <tbody>
           <tr><td><code>action</code></td><td>用户交互派发:<code>name</code>、<code>surfaceId</code>、<code>sourceComponentId</code>、<code>timestamp</code>,可选 <code>userMessage</code>(DynamicString)、<code>context</code>、<code>metadata</code>。</td></tr>
           <tr><td><code>callAgentFunction</code></td><td>渲染器发起的函数调用,以 <code>functionCallId</code> 关联响应。</td></tr>
@@ -87,7 +84,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h2 id="errors">错误码</h2>
       <table>
-        <thead><tr><th>码</th><th>含义</th></tr></thead>
+        <thead><tr><th scope="col">码</th><th scope="col">含义</th></tr></thead>
         <tbody>
           <tr><td><code>INTEGRITY_ERROR</code></td><td>surface 重复创建等完整性违规。</td></tr>
           <tr><td><code>INVALID_FUNCTION_CALL</code></td><td>未知 surface / 未注册目录 / 越权调用 / 参数 schema 不符 / 缺少 catalogId。</td></tr>

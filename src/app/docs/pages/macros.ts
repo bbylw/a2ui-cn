@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-macros',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">指南 / 使用宏</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">使用宏</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="指南 / 使用宏" heading="使用宏">
         宏在服务端把一次组件调用展开成客户端已支持的基础组件子树:模型少写 token、布局跨回合一致、
         新业务组件只需部署服务端。目前仅 Python Agent SDK 提供,其他语言在计划中。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="why">为什么用宏</h2>
@@ -43,7 +40,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h2 id="types">参数类型映射</h2>
       <table>
-        <thead><tr><th>Python 注解</th><th>模型看到的 schema</th><th>展开时传入</th></tr></thead>
+        <thead><tr><th scope="col">Python 注解</th><th scope="col">模型看到的 schema</th><th scope="col">展开时传入</th></tr></thead>
         <tbody>
           <tr><td>str / int / float / bool</td><td>string / integer / number / boolean</td><td>静态字面量,绑定会被校验拒绝</td></tr>
           <tr><td>Literal[...] / Enum</td><td>enum</td><td>静态字面量</td></tr>

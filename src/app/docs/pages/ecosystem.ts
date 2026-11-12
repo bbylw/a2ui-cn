@@ -1,18 +1,15 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-docs-ecosystem',
-  imports: [RouterLink],
+  imports: [DocsPageHeader, RouterLink],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">生态 / 社区项目</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">社区项目</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="生态 / 社区项目" heading="社区项目">
         第三方 A2UI 渲染器、智能体库与目录的名单。官方 SDK 与渲染器见<a routerLink="/docs/sdks">SDK 一览</a>,
         工具链路线见<a routerLink="/docs/roadmap">路线图</a>。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <blockquote>
@@ -21,7 +18,7 @@ import {RouterLink} from '@angular/router';
 
       <h2 id="renderers">社区渲染器</h2>
       <table>
-        <thead><tr><th>项目</th><th>平台</th><th>版本</th><th>说明</th></tr></thead>
+        <thead><tr><th scope="col">项目</th><th scope="col">平台</th><th scope="col">版本</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td><a href="https://github.com/easyops-cn/a2ui-sdk" target="_blank" rel="noopener">easyops-cn/a2ui-sdk</a></td><td>React(Web)</td><td>v0.8</td><td>Radix UI + Tailwind;带文档站。</td></tr>
           <tr><td><a href="https://github.com/lmee/A2UI-Android" target="_blank" rel="noopener">lmee/A2UI-Android</a></td><td>Android(Compose)</td><td>v0.8</td><td>Android 5.0+,20+ 组件,含无障碍支持。</td></tr>
@@ -48,7 +45,7 @@ import {RouterLink} from '@angular/router';
 
       <h2 id="agent-libs">智能体库</h2>
       <table>
-        <thead><tr><th>项目</th><th>语言</th><th>说明</th></tr></thead>
+        <thead><tr><th scope="col">项目</th><th scope="col">语言</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td><a href="https://github.com/Max-Health-Inc/prefab" target="_blank" rel="noopener">prefab</a></td><td>TypeScript</td><td>类型化组件树 → A2UI payload;校验目录;以 <code>a2ui://</code> 通过 MCP 提供。</td></tr>
           <tr><td><a href="https://github.com/satorunooshie/a2ui-go" target="_blank" rel="noopener">a2ui-go</a></td><td>Go</td><td>传输无关的 v0.9.1 原语:schema 校验、解码、action 路由。</td></tr>
@@ -58,7 +55,7 @@ import {RouterLink} from '@angular/router';
 
       <h2 id="catalogs">目录与组件库</h2>
       <table>
-        <thead><tr><th>项目</th><th>平台</th><th>版本</th><th>说明</th></tr></thead>
+        <thead><tr><th scope="col">项目</th><th scope="col">平台</th><th scope="col">版本</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td><a href="https://github.com/googlemaps/a2ui" target="_blank" rel="noopener">googlemaps/a2ui</a></td><td>Web(Lit)/Android/iOS/Python 智能体</td><td>v0.9.x(实验)</td><td>Google Maps Agentic UI 工具包:追加 <code>GoogleMap</code> 与 <code>PlaceDetailsCompact</code>;Python 侧支持 ADK 与 A2A。</td></tr>
         </tbody>
@@ -66,7 +63,7 @@ import {RouterLink} from '@angular/router';
 
       <h2 id="related">相关生成式 UI 项目</h2>
       <table>
-        <thead><tr><th>项目</th><th>平台</th><th>与 A2UI 的关系</th></tr></thead>
+        <thead><tr><th scope="col">项目</th><th scope="col">平台</th><th scope="col">与 A2UI 的关系</th></tr></thead>
         <tbody>
           <tr><td><a href="https://github.com/vercel-labs/json-render" target="_blank" rel="noopener">vercel-labs/json-render</a></td><td>React/Vue/Svelte/Solid/React Native</td><td>自有 JSON schema + Zod 目录与流式;附带 A2UI 适配器。</td></tr>
           <tr><td><a href="https://github.com/thesysdev/openui/tree/main/packages/a2ui" target="_blank" rel="noopener">thesysdev/openui</a></td><td>框架无关核心 + React 适配器</td><td>遵循 A2UI v1.0 的 surface/信封生命周期,但发送 OpenUI Lang 语句而非基础目录 JSON;与标准智能体不是即插即用。</td></tr>

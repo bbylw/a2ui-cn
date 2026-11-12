@@ -1,23 +1,20 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-docs-mcp',
-  imports: [RouterLink],
+  imports: [DocsPageHeader, RouterLink],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">指南 / MCP 集成</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">MCP 集成总览</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="指南 / MCP 集成" heading="MCP 集成总览">
         A2UI 与 Model Context Protocol 有四种集成方式,取决于两件事:
         外层宿主是你的应用还是外部 MCP 客户端;MCP 服务器返回的是 JSON、可复用的 A2UI 布局,还是沙箱化 HTML 应用。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="patterns">四种模式</h2>
       <table>
-        <thead><tr><th>模式</th><th>外层宿主</th><th>服务器输出</th><th>指南</th></tr></thead>
+        <thead><tr><th scope="col">模式</th><th scope="col">外层宿主</th><th scope="col">服务器输出</th><th scope="col">指南</th></tr></thead>
         <tbody>
           <tr>
             <td>从 A2UI 输入与按钮调用无头 MCP 工具</td>

@@ -1,3 +1,5 @@
+/* Variable fonts: Noto Sans SC ships 101 unicode-range subsets. Browsers only
+   fetch the shards a page actually uses, so the large dist font count is expected. */
 @import "@fontsource-variable/space-grotesk";
 @import "@fontsource-variable/jetbrains-mono";
 @import "@fontsource-variable/noto-sans-sc";

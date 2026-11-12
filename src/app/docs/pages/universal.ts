@@ -1,26 +1,23 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-universal',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">指南 / 通用 Web 组件</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">通用 Web 组件</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="指南 / 通用 Web 组件" heading="通用 Web 组件">
         用 A2uiLitElement 写一次自定义组件,直接注册进 Lit、React、Angular 三个目录,无需逐框架包装。
         属性契约用 Zod 声明,web_core 在把值交给你的元素之前解析好绑定、函数调用、子引用与动作。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="api">第一步:声明属性契约</h2>
       <p>ComponentApi 的 name 是 A2UI JSON 里的组件名;schema 用 DynamicStringSchema
       让字段同时接受字面量与数据绑定:</p>
       <app-code lang="ts" label="stat-card.api.ts(v1.0)" [code]="apiTs" />
-      <p>安装:<code>npm install @a2ui/web_core lit zod</code>,再加上宿主框架的渲染器包。
+      <p>安装:<code>bun add @a2ui/web_core lit zod</code>,再加上宿主框架的渲染器包。
       v0.9.1 把导入路径换成 <code>@a2ui/web_core/v0_9</code>。</p>
 
       <h2 id="element">第二步:实现元素</h2>

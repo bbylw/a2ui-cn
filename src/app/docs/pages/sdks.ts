@@ -1,18 +1,15 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-docs-sdks',
-  imports: [RouterLink],
+  imports: [DocsPageHeader, RouterLink],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">概念 / SDK 一览</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">SDK 一览</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="概念 / SDK 一览" heading="SDK 一览">
         A2UI 的 SDK 分三层:Core 实现协议与状态,Agent 在 Core 之上生成提示词与编译校验,
         Renderer 把状态画成各框架的原生控件。同一语言里三层共享 Core 的数据结构,两侧理解永远一致。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="core">Core SDK</h2>
@@ -20,7 +17,7 @@ import {RouterLink} from '@angular/router';
       (SurfaceGroupModel、SurfaceModel、ComponentModel、DataModel)、JSON Pointer 解析、
       表达式求值、MessageProcessor 与校验。</p>
       <table>
-        <thead><tr><th>语言</th><th>包</th><th>协议版本</th></tr></thead>
+        <thead><tr><th scope="col">语言</th><th scope="col">包</th><th scope="col">协议版本</th></tr></thead>
         <tbody>
           <tr><td>TypeScript</td><td><code>@a2ui/web_core</code></td><td>v0.8 / v0.9.1 / v1.0</td></tr>
           <tr><td>Python</td><td><code>a2ui-core</code></td><td>v0.8 / v0.9.1 / v1.0</td></tr>
@@ -34,7 +31,7 @@ import {RouterLink} from '@angular/router';
       <p>智能体侧库:目录裁剪(transformer)、能力协商、提示词生成、推理格式编译、
       对照 RendererState 的有状态校验。</p>
       <table>
-        <thead><tr><th>语言</th><th>包</th><th>协议版本</th></tr></thead>
+        <thead><tr><th scope="col">语言</th><th scope="col">包</th><th scope="col">协议版本</th></tr></thead>
         <tbody>
           <tr><td>TypeScript</td><td><code>@a2ui/agent</code></td><td>v0.9.1 / v1.0</td></tr>
           <tr><td>Python</td><td><code>a2ui-agent-sdk</code>,另有 <code>a2ui-adk</code>(ADK)、<code>a2ui-a2a</code>(A2A)</td><td>v0.8 / v0.9.1 / v1.0</td></tr>
@@ -47,7 +44,7 @@ import {RouterLink} from '@angular/router';
       <h2 id="renderer">Renderer SDK(框架适配器)</h2>
       <p>每个适配器内置基础目录实现,把无障碍属性映射到平台 API,并支持自定义组件与本地函数:</p>
       <table>
-        <thead><tr><th>框架</th><th>包</th><th>协议版本</th></tr></thead>
+        <thead><tr><th scope="col">框架</th><th scope="col">包</th><th scope="col">协议版本</th></tr></thead>
         <tbody>
           <tr><td>Flutter</td><td><code>a2ui_flutter</code></td><td>v0.9.1 / v1.0</td></tr>
           <tr><td>React</td><td><code>@a2ui/react</code></td><td>v0.8 / v0.9.1 / v1.0</td></tr>

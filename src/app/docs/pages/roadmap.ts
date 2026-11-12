@@ -1,18 +1,15 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-docs-roadmap',
-  imports: [RouterLink],
+  imports: [DocsPageHeader, RouterLink],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">生态 / 路线图</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">路线图</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="生态 / 路线图" heading="路线图">
         协议之外的工具链路线:把一个生成式 UI 智能体从第一个组件带到生产环境。
         五个阶段构成循环,监控学到的东西回到组件工作;A2UI CLI 的目标是覆盖全部阶段。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="loop">五阶段循环</h2>
@@ -87,7 +84,7 @@ import {RouterLink} from '@angular/router';
       <h2 id="cli">A2UI CLI</h2>
       <p>今天 <code>a2ui codegen</code> 生成类型安全的组件构建器。规划中的扩展覆盖整个循环:</p>
       <table>
-        <thead><tr><th>阶段</th><th>CLI 将提供</th></tr></thead>
+        <thead><tr><th scope="col">阶段</th><th scope="col">CLI 将提供</th></tr></thead>
         <tbody>
           <tr><td>构建</td><td>脚手架、生成、预览、发布组件与目录</td></tr>
           <tr><td>配置</td><td>生成技能;把目录接到智能体</td></tr>
@@ -102,7 +99,7 @@ import {RouterLink} from '@angular/router';
       <h2 id="versions">协议版本状态</h2>
       <p><code>specification/versions.json</code> 是版本状态的唯一事实来源:</p>
       <table>
-        <thead><tr><th>版本</th><th>状态</th></tr></thead>
+        <thead><tr><th scope="col">版本</th><th scope="col">状态</th></tr></thead>
         <tbody>
           <tr><td>v1.0</td><td>当前(Current)</td></tr>
           <tr><td>v0.9.1</td><td>上一代(Previous)</td></tr>

@@ -29,9 +29,10 @@ export function SurfaceDemo({messages, resetKey = 0, onAction}: SurfaceDemoProps
         onActionRef.current?.(action as unknown as Record<string, unknown>),
       );
       processorRef.current = processor;
+      const active = processor!;
       subsRef.current = [
-        processor.onSurfaceCreated(() => setSurfaces(Array.from(processor!.getSurfaces().values()))),
-        processor.onSurfaceDeleted(() => setSurfaces(Array.from(processor!.getSurfaces().values()))),
+        active.onSurfaceCreated(() => setSurfaces(Array.from(active.getSurfaces().values()))),
+        active.onSurfaceDeleted(() => setSurfaces(Array.from(active.getSurfaces().values()))),
       ];
       processedRef.current = 0;
       lastResetRef.current = resetKey;

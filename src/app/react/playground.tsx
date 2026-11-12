@@ -7,6 +7,7 @@ import {Switch} from './ui/switch';
 import {Slider} from './ui/slider';
 import {Separator} from './ui/separator';
 import {cn} from './lib/utils';
+import {messageType} from '../core/message-type';
 
 export interface PlaygroundScenario {
   id: string;
@@ -24,15 +25,7 @@ export interface StreamState {
 export interface PlaygroundProps {
   scenarios: PlaygroundScenario[];
   onStream: (state: StreamState) => void;
-  onAction: (action: Record<string, unknown>) => void;
   onVisibility: (visibility: {angular: boolean; react: boolean}) => void;
-}
-
-function messageType(message: Record<string, unknown>): string {
-  for (const key of ['createSurface', 'updateComponents', 'updateDataModel', 'deleteSurface', 'action']) {
-    if (key in message) return key;
-  }
-  return 'unknown';
 }
 
 const TYPE_VARIANT: Record<string, 'info' | 'default' | 'success' | 'warning' | 'danger' | 'secondary'> = {
@@ -41,9 +34,11 @@ const TYPE_VARIANT: Record<string, 'info' | 'default' | 'success' | 'warning' | 
   updateDataModel: 'success',
   deleteSurface: 'danger',
   action: 'warning',
+  callRendererFunction: 'warning',
+  callAgentFunction: 'warning',
 };
 
-export function Playground({scenarios, onStream, onAction, onVisibility}: PlaygroundProps) {
+export function Playground({scenarios, onStream, onVisibility}: PlaygroundProps) {
   const [scenarioId, setScenarioId] = useState(scenarios[0]?.id ?? 'flight');
   const [customMessages, setCustomMessages] = useState<Record<string, unknown>[] | null>(null);
   const [step, setStep] = useState(0);
@@ -60,21 +55,23 @@ export function Playground({scenarios, onStream, onAction, onVisibility}: Playgr
   const listRef = useRef<HTMLDivElement>(null);
 
   const scenario = scenarios.find(s => s.id === scenarioId) ?? scenarios[0];
-  const activeMessages = customMessages ?? scenario?.messages ?? [];
+  // Keep a stable reference: several effects depend on it, and a fresh [] on every
+  // render would retrigger them forever.
+  const activeMessages = useMemo(() => customMessages ?? scenario?.messages ?? [], [customMessages, scenario]);
   const total = activeMessages.length;
   const effectiveId = customMessages ? 'custom' : scenarioId;
 
   useEffect(() => {
     setEditorText(JSON.stringify(activeMessages, null, 2));
-  }, [scenarioId, customMessages]);
+  }, [activeMessages]);
 
   useEffect(() => {
     onStream({scenarioId: effectiveId, resetToken, messages: activeMessages.slice(0, step)});
-  }, [step, resetToken, effectiveId]);
+  }, [step, resetToken, effectiveId, activeMessages, onStream]);
 
   useEffect(() => {
     onVisibility({angular: showAngular, react: showReact});
-  }, [showAngular, showReact]);
+  }, [showAngular, showReact, onVisibility]);
 
   useEffect(() => {
     if (!playing) return;
@@ -168,8 +165,11 @@ export function Playground({scenarios, onStream, onAction, onVisibility}: Playgr
     const a = document.createElement('a');
     a.href = url;
     a.download = `a2ui-${effectiveId}.json`;
+    document.body.appendChild(a);
     a.click();
-    URL.revokeObjectURL(url);
+    a.remove();
+    // Revoke on the next tick: Chrome may still be reading the blob after click().
+    setTimeout(() => URL.revokeObjectURL(url), 0);
   };
 
   const progress = total === 0 ? 0 : Math.round((step / total) * 100);

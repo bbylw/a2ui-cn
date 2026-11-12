@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-catalogs',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">概念 / 目录</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">目录</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="概念 / 目录" heading="目录">
         目录(Catalog)是智能体与渲染器之间的白名单契约:一份带版本号的 JSON Schema,
         声明可用的组件、函数与给模型的instructions。你决定目录里有什么,智能体决定从中画什么。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="contract">目录的结构</h2>
@@ -33,10 +30,10 @@ import {CodeBlock} from '../../shared/code-block';
       <app-code lang="json" label="formatCurrency 函数 schema(v1.0)" [code]="currencySchema" />
 
       <h2 id="basic">官方基础目录</h2>
-      <p>基础目录(Basic Catalog)是可选的通用参考目录,提供 18 个组件与 14 个函数,
+      <p>基础目录(Basic Catalog)是可选的通用参考目录,提供 18 个组件与 15 个函数,
       各框架适配器都内置了它的实现:</p>
       <table>
-        <thead><tr><th>类别</th><th>组件</th></tr></thead>
+        <thead><tr><th scope="col">类别</th><th scope="col">组件</th></tr></thead>
         <tbody>
           <tr><td>布局</td><td>Row、Column、List、Card、Tabs、Modal、Divider</td></tr>
           <tr><td>内容</td><td>Text、Image、Icon、Video、AudioPlayer</td></tr>
@@ -44,8 +41,9 @@ import {CodeBlock} from '../../shared/code-block';
         </tbody>
       </table>
       <table>
-        <thead><tr><th>类别</th><th>函数</th></tr></thead>
+        <thead><tr><th scope="col">类别</th><th scope="col">函数</th></tr></thead>
         <tbody>
+          <tr><td>模板迭代</td><td><code>@index</code>(v1.0 新增)</td></tr>
           <tr><td>校验</td><td>required、regex、length、numeric、email</td></tr>
           <tr><td>格式化</td><td>formatString、formatNumber、formatCurrency、formatDate、pluralize</td></tr>
           <tr><td>逻辑与导航</td><td>and、or、not、openUrl</td></tr>

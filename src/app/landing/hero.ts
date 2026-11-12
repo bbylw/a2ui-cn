@@ -45,7 +45,7 @@ export class Hero implements AfterViewInit, OnDestroy {
     {value: '6', label: '官方渲染器'},
     {value: '3', label: 'Agent SDK 语言'},
     {value: '18', label: '基础组件'},
-    {value: '14', label: '内置函数'},
+    {value: '15', label: '内置函数'},
   ];
   protected readonly statValues = signal<number[]>(this.stats.map(() => 0));
 

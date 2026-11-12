@@ -1,20 +1,17 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-mcp-render',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">指南 / 在 MCP App 中渲染</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">在 MCP App 中渲染 A2UI</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="指南 / 在 MCP App 中渲染" heading="在 MCP App 中渲染 A2UI">
         外层宿主(Claude Desktop、Cursor、VS Code)支持 MCP Apps 但不原生支持 A2UI 时,
         把 A2UI Web 渲染器打包进 ui:// HTML 资源:宿主无需任何 A2UI 代码,就能显示交互 surface。
         这是<a routerLink="/docs/mcp-apps">嵌入 MCP Apps</a>的反方向。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="flow">端到端流程</h2>

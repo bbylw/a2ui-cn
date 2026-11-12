@@ -3,6 +3,7 @@ import {RouterLink} from '@angular/router';
 import {A2uiRendererService, SurfaceComponent} from '@a2ui/angular';
 import {ActionLogService} from '../core/action-log.service';
 import {SCENARIOS} from '../core/scenarios';
+import {formatContext} from '../core/format';
 import {ReactIsland} from '../shared/react-island';
 
 interface StreamState {
@@ -43,8 +44,10 @@ interface StreamState {
                 @if (angularError(); as err) {
                   <div role="alert" class="rounded-lg border border-red/30 bg-red-tint px-3 py-2 font-mono text-xs text-red-deep">渲染错误:{{ err }}</div>
                 }
-                @if (surfaceId(); as sid) {
-                  <a2ui-v09-surface [surfaceId]="sid" />
+                @if (angularReady()) {
+                  @if (surfaceId(); as sid) {
+                    <a2ui-v09-surface [surfaceId]="sid" />
+                  }
                 } @else if (!angularError()) {
                   <div class="grid gap-3" aria-hidden="true">
                     <div class="h-5 w-2/5 animate-pulse rounded bg-mist"></div>
@@ -95,7 +98,7 @@ interface StreamState {
                     <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold {{ entry.from === 'angular' ? 'bg-red-tint text-red-deep' : 'bg-blue-tint text-blue-deep' }}">{{ entry.from }}</span>
                     <span class="font-semibold text-ink">{{ entry.name }}</span>
                     <span class="text-ink-mute">来自 {{ entry.sourceComponentId }}</span>
-                    <span class="min-w-0 flex-1 truncate text-ink-soft">{{ '{' }}{{ contextPreview(entry.context) }}{{ '}' }}</span>
+                    <span class="min-w-0 flex-1 truncate text-ink-soft">{{ '{' }}{{ formatContext(entry.context) }}{{ '}' }}</span>
                     <span class="text-ink-mute">{{ entry.timestamp.slice(11, 19) }}</span>
                   </li>
                 }
@@ -120,8 +123,11 @@ export class PlaygroundPage implements OnDestroy {
   protected readonly angularError = signal<string | null>(null);
   protected readonly showAngular = signal(true);
   protected readonly showReact = signal(true);
-  private readonly processed = signal<Record<string, unknown>[]>([]);
+  protected readonly processed = signal<Record<string, unknown>[]>([]);
   private readonly resetToken = signal(0);
+  // createSurface (step 1) alone has no root component yet; mounting the host
+  // before updateComponents (step 2) makes @a2ui/angular log "not found" warnings.
+  protected readonly angularReady = computed(() => this.surfaceId() !== null && this.processed().length >= 2);
 
   private activeSurfaceId: string | null = null;
   private lastToken = -1;
@@ -137,7 +143,6 @@ export class PlaygroundPage implements OnDestroy {
   protected readonly consoleProps = {
     scenarios: SCENARIOS,
     onStream: (state: StreamState) => this.handleStream(state),
-    onAction: (action: Record<string, unknown>) => this.actionLog.add(action, 'react'),
     onVisibility: (visibility: {angular: boolean; react: boolean}) => {
       this.showAngular.set(visibility.angular);
       this.showReact.set(visibility.react);
@@ -150,11 +155,7 @@ export class PlaygroundPage implements OnDestroy {
     }
   }
 
-  protected contextPreview(context: Record<string, unknown>): string {
-    return Object.entries(context)
-      .map(([k, v]) => `${k}: ${JSON.stringify(v)}`)
-      .join(', ');
-  }
+  protected readonly formatContext = formatContext;
 
   private handleStream(state: StreamState): void {
     const reset = state.resetToken !== this.lastToken || state.scenarioId !== this.lastScenario;

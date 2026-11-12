@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-docs-intro',
-  imports: [RouterLink],
+  imports: [DocsPageHeader, RouterLink],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">入门 / 简介</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">A2UI 简介</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="入门 / 简介" heading="A2UI 简介">
         A2UI(Agent-to-UI)是一个开放协议,让 AI 智能体用声明式 JSON 描述界面,
         由客户端用自己的原生组件渲染。智能体回答的不再只是一段文字,而是一张可以点的卡片、
         一个可以拖的日期、一块随对话实时更新的面板。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <blockquote>

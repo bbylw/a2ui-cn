@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-get-help',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">生态 / 获取帮助</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">获取帮助</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="生态 / 获取帮助" heading="获取帮助">
         两条官方通道:给编码智能体装上官方 skill 让它陪你 co-create;
         或在 GitHub 仓库提反馈。另有一份独立第三方咨询目录,项目不背书、不排名、不认证。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="skill">让编码智能体帮你</h2>
@@ -29,7 +26,7 @@ import {CodeBlock} from '../../shared/code-block';
       <h2 id="consultancies">咨询目录</h2>
       <p>以下独立第三方提供 A2UI 咨询服务(按字母序,示例应用与栈来自官方 Get Help 页):</p>
       <table>
-        <thead><tr><th>公司</th><th>领域</th><th>示例应用</th><th>栈</th></tr></thead>
+        <thead><tr><th scope="col">公司</th><th scope="col">领域</th><th scope="col">示例应用</th><th scope="col">栈</th></tr></thead>
         <tbody>
           <tr><td>CopilotKit</td><td>开发者工具</td><td>A2UI Playground(多目录生成式 UI)</td><td>React · Next.js · Express · AG-UI</td></tr>
           <tr><td>L+R</td><td>电商</td><td>Alder(双屏对话造型师)</td><td>Flutter · GenUI · Genkit Dart</td></tr>
@@ -51,5 +48,5 @@ import {CodeBlock} from '../../shared/code-block';
   `,
 })
 export class GetHelpPage {
-  protected readonly skillCmd = `npx skills add a2ui-project/a2ui`;
+  protected readonly skillCmd = `bunx skills add a2ui-project/a2ui`;
 }

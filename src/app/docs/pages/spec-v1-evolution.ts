@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-docs-spec-v1-evolution',
-  imports: [RouterLink],
+  imports: [DocsPageHeader, RouterLink],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">规范 v1.0 / 演进指南</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">演进指南(v0.9.1 → v1.0)</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="规范 v1.0 / 演进指南" heading="演进指南(v0.9.1 → v1.0)">
         v1.0 相对 0.9 / 0.9.1 是破坏性升级:术语、保留键、消息与目录结构都有变化。
         本页给出差异全表与按角色的迁移清单。原文见
         <a href="https://a2ui.org/specification/v1.0-evolution-guide/" target="_blank" rel="noopener">官方 Evolution Guide</a>。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="policy">版本政策</h2>
@@ -27,7 +24,7 @@ import {RouterLink} from '@angular/router';
 
       <h2 id="renames">术语与文件改名</h2>
       <table>
-        <thead><tr><th>v0.9.1</th><th>v1.0</th></tr></thead>
+        <thead><tr><th scope="col">v0.9.1</th><th scope="col">v1.0</th></tr></thead>
         <tbody>
           <tr><td>client / server</td><td>renderer / agent</td></tr>
           <tr><td><code>server_to_client.json</code></td><td><code>agent_to_renderer.json</code></td></tr>
@@ -41,7 +38,7 @@ import {RouterLink} from '@angular/router';
 
       <h2 id="at">保留 @ 前缀</h2>
       <table>
-        <thead><tr><th>v0.9.1</th><th>v1.0</th></tr></thead>
+        <thead><tr><th scope="col">v0.9.1</th><th scope="col">v1.0</th></tr></thead>
         <tbody>
           <tr><td><code>accessibility</code></td><td><code>@accessibility</code></td></tr>
           <tr><td><code>checks</code></td><td><code>@checks</code></td></tr>

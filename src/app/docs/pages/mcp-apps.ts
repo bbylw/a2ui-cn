@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-mcp-apps',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">指南 / 嵌入 MCP Apps</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">在 A2UI 中嵌入 MCP Apps</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="指南 / 嵌入 MCP Apps" heading="在 A2UI 中嵌入 MCP Apps">
         McpApp 组件把第三方交互 HTML 组件(拖拽看板、3D 画布)放进 A2UI surface,
         在双层 iframe 沙箱里运行,并把它的状态与工具调用和周围的原生组件同步起来。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="sandbox">先部署沙箱文件</h2>
@@ -27,7 +24,7 @@ import {CodeBlock} from '../../shared/code-block';
       <h2 id="component">放上 McpApp 组件</h2>
       <app-code lang="json" label="surface 上的 McpApp" [code]="appJson" />
       <table>
-        <thead><tr><th>属性</th><th>必填</th><th>用途</th></tr></thead>
+        <thead><tr><th scope="col">属性</th><th scope="col">必填</th><th scope="col">用途</th></tr></thead>
         <tbody>
           <tr><td>htmlContent</td><td>是</td><td>应用的 HTML 文档;url_encoded: 前缀先解码</td></tr>
           <tr><td>title</td><td>否</td><td>iframe 无障碍标题</td></tr>

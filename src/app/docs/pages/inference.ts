@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-inference',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">概念 / 推理格式</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">推理格式</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="概念 / 推理格式" heading="推理格式">
         模型写的标记不等于线上跑的消息。推理格式是模型在 &lt;a2ui&gt; 标签里使用的紧凑写法,
         Agent SDK 把它编译成标准协议 JSON。默认格式 Express 比直接写 JSON 省约一半输入 token、六成代码 token,准确率不变。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="stages">三个阶段</h2>
@@ -54,7 +51,7 @@ import {CodeBlock} from '../../shared/code-block';
       <h2 id="benchmark">token 基准</h2>
       <p>官方在 core_v1_0 一致性任务集上的测量(Gemini flash 级模型,temperature 0):</p>
       <table>
-        <thead><tr><th>格式</th><th>输入 token</th><th>代码 token</th><th>Pass@1</th></tr></thead>
+        <thead><tr><th scope="col">格式</th><th scope="col">输入 token</th><th scope="col">代码 token</th><th scope="col">Pass@1</th></tr></thead>
         <tbody>
           <tr><td>Direct JSON</td><td>10,980</td><td>807</td><td>98.1%</td></tr>
           <tr><td>Express</td><td>6,000(−45.4%)</td><td>297(−63.2%)</td><td>98.1%</td></tr>

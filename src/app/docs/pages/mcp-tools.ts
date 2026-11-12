@@ -1,19 +1,16 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-mcp-tools',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">指南 / 调用 MCP 工具</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">从 A2UI 调用 MCP 工具</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="指南 / 调用 MCP 工具" heading="从 A2UI 调用 MCP 工具">
         @a2ui/catalog-mcp 把 A2UI v1.0 Web surface 连到 MCP 服务器:按钮与输入直接调工具,
         把 JSON 或文本结果写进 surface 数据模型,不需要再绕一轮智能体。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="setup">接线</h2>
@@ -39,7 +36,7 @@ import {CodeBlock} from '../../shared/code-block';
       <p>四个内置函数可以链式组合:callMcpTool 取数 → transformData(JMESPath)过滤重塑 →
       updateDataModel 写路径:</p>
       <table>
-        <thead><tr><th>函数</th><th>参数</th><th>行为</th></tr></thead>
+        <thead><tr><th scope="col">函数</th><th scope="col">参数</th><th scope="col">行为</th></tr></thead>
         <tbody>
           <tr><td>transformData</td><td>jmespath、data</td><td>标准 JMESPath 求值,缺失字段得 null</td></tr>
           <tr><td>updateDataModel</td><td>updates</td><td>写 &#123;path: value&#125; 对,/ 开头绝对、其余相对</td></tr>

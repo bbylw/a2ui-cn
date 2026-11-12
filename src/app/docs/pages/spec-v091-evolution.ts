@@ -1,23 +1,20 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-docs-spec-v091-evolution',
-  imports: [RouterLink],
+  imports: [DocsPageHeader, RouterLink],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">规范 v0.9.1 / 演进指南</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">演进指南(v0.9 → v0.9.1)</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="规范 v0.9.1 / 演进指南" heading="演进指南(v0.9 → v0.9.1)">
         v0.9.1 是 v0.9 的小幅修订:只有两项变更,载荷完全兼容。本页列出变更细节与迁移动作。原文见
         <a href="https://a2ui.org/specification/v0.9.1-evolution-guide/" target="_blank" rel="noopener">官方 v0.9.1 Evolution Guide</a>。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="changes">两项变更</h2>
       <table>
-        <thead><tr><th>变更</th><th>v0.9</th><th>v0.9.1</th></tr></thead>
+        <thead><tr><th scope="col">变更</th><th scope="col">v0.9</th><th scope="col">v0.9.1</th></tr></thead>
         <tbody>
           <tr>
             <td><strong>MIME 类型标准化</strong></td>

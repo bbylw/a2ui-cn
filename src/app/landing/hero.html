@@ -82,14 +82,15 @@
 
         <div class="p-4 sm:p-5">
           <div class="a2ui-frame min-h-56 rounded-xl bg-white p-4 sm:p-5">
-            @if (step() === 0) {
+            @if (step() < 2) {
               <div class="grid gap-3" aria-hidden="true">
                 <div class="h-5 w-2/5 animate-pulse rounded bg-mist"></div>
                 <div class="h-20 animate-pulse rounded-lg bg-mist"></div>
                 <div class="h-9 animate-pulse rounded-lg bg-mist"></div>
               </div>
+            } @else {
+              <a2ui-v09-surface surfaceId="flight-demo" />
             }
-            <a2ui-v09-surface surfaceId="flight-demo" />
           </div>
           <p class="mt-3 text-center font-mono text-[10px] text-ink-faint">上方界面由 @a2ui/angular 渲染器绘制 · 拖动滑块试试本地数据绑定</p>
         </div>

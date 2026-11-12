@@ -1,19 +1,17 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-built-with',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">生态 / Built with A2UI</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">Built with A2UI</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="生态 / Built with A2UI" heading="Built with A2UI">
         A2UI 不只是示例协议:Google 与业界团队已经把它放进真实产品。
         下面五个案例展示同一份协议消息如何在数据平台、跨端框架、项目管理与 AI 助手里落地。
-      </p>
-    </header>
+        案例中提及的协议版本均为各产品公开资料发布时的状态,与本站当前的 v1.0 文档无关。
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="alation">Alation AIOS · Alation</h2>
@@ -80,5 +78,5 @@ import {CodeBlock} from '../../shared/code-block';
   `,
 })
 export class BuiltWithPage {
-  protected readonly skillsCmd = 'npx skills add a2ui-project/a2ui';
+  protected readonly skillsCmd = 'bunx skills add a2ui-project/a2ui';
 }

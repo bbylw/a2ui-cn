@@ -1,20 +1,17 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-spec-v1-a2a',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">规范 v1.0 / A2A 扩展</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">A2A 扩展(v1.0)</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="规范 v1.0 / A2A 扩展" heading="A2A 扩展(v1.0)">
         A2A 是 A2UI 的官方传输绑定之一:智能体把界面作为 DataPart 流式发给渲染器。
         扩展 URI 编码协议版本,是双方沟通版本支持的规范方式。原文见
         <a href="https://a2ui.org/specification/v1.0-a2ui-extension-specification/" target="_blank" rel="noopener">官方 A2A Extension</a>。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="uri">扩展 URI 与激活</h2>
@@ -45,7 +42,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h2 id="metadata">消息元数据</h2>
       <table>
-        <thead><tr><th>键</th><th>内容</th></tr></thead>
+        <thead><tr><th scope="col">键</th><th scope="col">内容</th></tr></thead>
         <tbody>
           <tr><td><code>message.metadata["a2uiRendererCapabilities"]</code></td><td>整份按版本键控的能力对象,对照 Renderer Capabilities Schema 校验,如 <code>&#123;"1.0": &#123;"supportedCatalogIds": [...]&#125;&#125;</code>。</td></tr>
           <tr><td><code>message.metadata["a2uiRendererDataModel"]</code></td><td>开启数据模型同步后每条消息附带,对照 Renderer Data Model Schema(<code>version</code> + <code>surfaces</code>)。</td></tr>

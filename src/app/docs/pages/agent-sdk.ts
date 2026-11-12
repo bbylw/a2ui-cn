@@ -1,24 +1,21 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-agent-sdk',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">指南 / Agent 集成</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">Agent 集成</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="指南 / Agent 集成" heading="Agent 集成">
         Agent SDK 把模型接到 A2UI 协议上:从目录生成提示词与技能,把模型输出编译成协议消息,
         在服务端做有状态校验。模型选择、工具执行与对话状态仍然完全由你的应用控制。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="layers">三层 SDK</h2>
       <table>
-        <thead><tr><th>层</th><th>职责</th><th>包</th></tr></thead>
+        <thead><tr><th scope="col">层</th><th scope="col">职责</th><th scope="col">包</th></tr></thead>
         <tbody>
           <tr><td>Core SDK</td><td>协议数据结构、消息解析/序列化、目录校验、surface 状态、绑定与表达式求值。</td><td><code>@a2ui/web_core</code> · <code>a2ui-core</code> · <code>a2ui_core</code>(Dart)· Swift/Kotlin 核心</td></tr>
           <tr><td>Agent SDK</td><td>目录协商、提示词/技能生成、推理格式编译、有状态校验。</td><td><code>@a2ui/agent</code> · <code>a2ui-agent-sdk</code> · <code>a2ui_agent</code>(Dart)</td></tr>
@@ -60,7 +57,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h2 id="formats">推理格式</h2>
       <table>
-        <thead><tr><th>格式</th><th>哨兵标签</th><th>说明</th></tr></thead>
+        <thead><tr><th scope="col">格式</th><th scope="col">哨兵标签</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td>Express(默认)</td><td><code>&lt;a2ui&gt;...&lt;/a2ui&gt;</code></td><td>紧凑位置参数 DSL,嵌套组件调用 + <code>$/path</code> 数据赋值,编译成扁平 JSON。原始 wire JSON 约比它长三倍。</td></tr>
           <tr><td>Direct JSON</td><td><code>&lt;a2ui-json&gt;...&lt;/a2ui-json&gt;</code></td><td>模型直接输出标准消息 JSON,SDK 负责剥离 Markdown 围栏与增量字符串修复。</td></tr>
@@ -75,7 +72,7 @@ import {CodeBlock} from '../../shared/code-block';
       <ul>
         <li><strong>运行时技能。</strong>Python 与 TypeScript SDK 的 <code>SkillGenerator</code> 从你的目录生成 A2UI 技能:
         推理格式语法、组件与函数签名,随目录变化而变化,喂给驱动界面的模型。</li>
-        <li><strong>编码智能体技能。</strong>运行 <code>npx skills add a2ui-project/a2ui</code>,
+        <li><strong>编码智能体技能。</strong>运行 <code>bunx skills add a2ui-project/a2ui</code>,
         给你的编码助手(Claude Code、Cursor 等)装上协议规则、SDK 集成指南与目录编写工作流。</li>
       </ul>
 

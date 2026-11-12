@@ -45,5 +45,9 @@ export const routes: Routes = [
     ],
   },
   {path: 'playground', title: 'Playground', loadComponent: () => import('./docs/playground-page').then(m => m.PlaygroundPage)},
-  {path: '**', redirectTo: ''},
+  {
+    path: '**',
+    title: '页面未找到',
+    loadComponent: () => import('./not-found').then(m => m.NotFoundPage),
+  },
 ];

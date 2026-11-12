@@ -1,24 +1,21 @@
 import {Component} from '@angular/core';
+import {DocsPageHeader} from '../../shared/docs-page-header';
 import {RouterLink} from '@angular/router';
 import {CodeBlock} from '../../shared/code-block';
 
 @Component({
   selector: 'app-docs-renderers',
-  imports: [RouterLink, CodeBlock],
+  imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">指南 / 客户端集成</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">客户端集成</h1>
-      <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
+    <app-docs-page-header eyebrow="指南 / 客户端集成" heading="客户端集成">
         同一份协议消息,六个官方渲染器在各自平台渲染。
         本页给出 Angular 与 React 的完整接入代码(本站正在使用),以及自定义目录的方法。
-      </p>
-    </header>
+    </app-docs-page-header>
 
     <div class="doc-prose">
       <h2 id="official">官方渲染器</h2>
       <table>
-        <thead><tr><th>框架</th><th>包</th><th>协议版本</th></tr></thead>
+        <thead><tr><th scope="col">框架</th><th scope="col">包</th><th scope="col">协议版本</th></tr></thead>
         <tbody>
           <tr><td>React</td><td><code>@a2ui/react</code></td><td>v0.8 / v0.9.1 / v1.0</td></tr>
           <tr><td>Angular</td><td><code>@a2ui/angular</code></td><td>v0.8 / v0.9.1 / v1.0</td></tr>
