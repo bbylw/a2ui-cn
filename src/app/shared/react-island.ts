@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import type {Root} from 'react-dom/client';
 import type {ComponentType, createElement as createElementType} from 'react';
+import {resolveModuleExport} from '../core/module-export';
 
 type IslandKind = 'surface' | 'playground';
 
@@ -62,13 +63,17 @@ export class ReactIsland implements AfterViewInit, OnChanges, OnDestroy {
   private async mount(): Promise<void> {
     const token = ++this.mountToken;
     const kind = this.kind();
-    const [reactDom, react, mod] = await Promise.all([
+    const [reactDomMod, reactMod, mod] = await Promise.all([
       import('react-dom/client'),
       import('react'),
       kind === 'playground' ? import('../react/playground') : import('../react/surface-demo'),
     ]);
     // A newer mount (or destruction) supersedes this async result.
     if (this.destroyed || token !== this.mountToken) return;
+    // Dynamic imports of CommonJS packages (`react`, `react-dom/client`) export only
+    // `.default` when split into lazy ESM chunks by esbuild in production builds.
+    const reactDom = resolveModuleExport(reactDomMod, 'createRoot');
+    const react = resolveModuleExport(reactMod, 'createElement');
     this.createElement = react.createElement;
     this.component = (
       kind === 'playground'
