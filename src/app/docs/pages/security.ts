@@ -57,7 +57,7 @@ import {RouterLink} from '@angular/router';
       <h2 id="renderer">渲染器责任</h2>
       <ul>
         <li>文本按纯文本渲染，Markdown 走消毒后的渲染管线（<code>@a2ui/markdown-it</code>），不注入原始 HTML。</li>
-        <li>Image/Video 等媒体 URL 与 openUrl 目标应限制 scheme（http/https），拒绝 javascript：等危险协议。</li>
+        <li>Image/Video 等媒体 URL 与 openUrl 目标应限制 scheme（<code>http</code>/<code>https</code>），拒绝 <code>javascript:</code> 等危险协议。</li>
         <li>把协议的无障碍属性映射到宿主平台 API，别让安全护栏变成可用性护栏。</li>
         <li>对无法解析的消息返回结构化错误并记录，而不是渲染半成品。</li>
       </ul>

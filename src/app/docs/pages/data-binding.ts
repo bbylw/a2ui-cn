@@ -61,8 +61,8 @@ import {CodeBlock} from '../../shared/code-block';
         <li><strong>智能体函数参数。</strong><code>action.functionCall</code> 的 args 里放绑定，
           经 <code>callAgentFunction</code> 路由到智能体执行。</li>
         <li><strong>sendDataModel: true。</strong>创建 surface 时开启后，每次出站消息的传输 metadata
-          都附带完整数据模型，键为 <code>a2uiRendererDataModel</code>(v0.9.1 为
-          <code>a2uiClientDataModel</code>)，形如
+          都附带完整数据模型，键为 <code>a2uiRendererDataModel</code>（v0.9.1 为
+          <code>a2uiClientDataModel</code>），形如
           <code>&#123;"version": "1.0", "surfaces": &#123;"booking": &#123;...&#125;&#125;&#125;</code>。
           适合需要全量表单状态的智能体，代价是每轮都传全量。</li>
       </ul>

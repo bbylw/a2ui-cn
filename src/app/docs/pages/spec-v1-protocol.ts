@@ -47,8 +47,8 @@ import {CodeBlock} from '../../shared/code-block';
           <tr><td><code>error</code></td><td>渲染器错误；<code>functionCallId</code> 与 <code>surfaceId</code> 互斥。</td></tr>
         </tbody>
       </table>
-      <p>开启 <code>sendDataModel</code> 后，每条渲染器出站消息附带完整数据模型(按 <code>surfaceId</code> 标记，
-      schema 为 <code>renderer_data_model.json</code>)，只投递给拥有该 surface 的智能体。</p>
+      <p>开启 <code>sendDataModel</code> 后，每条渲染器出站消息附带完整数据模型（按 <code>surfaceId</code> 标记，
+      schema 为 <code>renderer_data_model.json</code>），只投递给拥有该 surface 的智能体。</p>
 
       <h2 id="lifecycle">surface 生命周期</h2>
       <ul>

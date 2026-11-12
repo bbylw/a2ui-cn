@@ -31,7 +31,7 @@ import {CodeBlock} from '../../shared/code-block';
       <app-code lang="ts" label="TypeScript：注册资源" [code]="resourceTs" />
 
       <h2 id="tool">第二步：工具返回 updateDataModel</h2>
-      <app-code lang="ts" label="registerTool:_meta.ui 关联模板，结果只带数据" [code]="toolTs" />
+      <app-code lang="ts" label="registerTool：_meta.ui 关联模板，结果只带数据" [code]="toolTs" />
       <p>Python 用 mcp 1.x 低级 Server 装饰器（list_resources/read_resource/list_tools/call_tool）
       做同样的事；注意示例需要 <code>mcp&lt;2</code>。</p>
 

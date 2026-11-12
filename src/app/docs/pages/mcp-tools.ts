@@ -38,10 +38,10 @@ import {CodeBlock} from '../../shared/code-block';
       <table>
         <thead><tr><th scope="col">函数</th><th scope="col">参数</th><th scope="col">行为</th></tr></thead>
         <tbody>
-          <tr><td>transformData</td><td>jmespath、data</td><td>标准 JMESPath 求值，缺失字段得 null</td></tr>
-          <tr><td>updateDataModel</td><td>updates</td><td>写 &#123;path: value&#125; 对，/ 开头绝对、其余相对</td></tr>
-          <tr><td>split</td><td>value、separator</td><td>按字面分隔符切字符串；"" 切成码点</td></tr>
-          <tr><td>regexCapture</td><td>value、pattern</td><td>首个匹配的捕获组；可选组未匹配得空串</td></tr>
+          <tr><td><code>transformData</code></td><td><code>jmespath</code>、<code>data</code></td><td>标准 JMESPath 求值，缺失字段得 <code>null</code></td></tr>
+          <tr><td><code>updateDataModel</code></td><td><code>updates</code></td><td>写 <code>&#123;path: value&#125;</code> 对，<code>/</code> 开头绝对、其余相对</td></tr>
+          <tr><td><code>split</code></td><td><code>value</code>、<code>separator</code></td><td>按字面分隔符切字符串；<code>""</code> 切成码点</td></tr>
+          <tr><td><code>regexCapture</code></td><td><code>value</code>、<code>pattern</code></td><td>首个匹配的捕获组；可选组未匹配得空串</td></tr>
         </tbody>
       </table>
       <app-code lang="json" label="链式调用：取数 → JMESPath → 写 /issues（节选）" [code]="chainJson" />
@@ -51,12 +51,12 @@ import {CodeBlock} from '../../shared/code-block';
       <h2 id="advanced">进阶配置</h2>
       <ul>
         <li><strong>多服务器路由。</strong>getMcpClientForTool 按工具名返回对应 Client；
-          启动时用 listTools（） 建映射。</li>
+          启动时用 <code>listTools()</code> 建映射。</li>
         <li><strong>部分注册。</strong>mcpCatalog.withEntries 只挑需要的函数实现，
           比如只要 CallMcpToolImplementation。</li>
         <li><strong>自定义解析器。</strong>用 createFunctionImplementation 在自己的目录里加
           parseCsv 之类函数，payload 里用你的 catalogId 引用。</li>
-        <li><strong>沙箱路径。</strong>configureMcpCatalog（&#123;sandbox：&#123;baseUrl&#125;&#125;）
+        <li><strong>沙箱路径。</strong><code>configureMcpCatalog(&#123;sandbox: &#123;baseUrl&#125;&#125;)</code>
           改 McpApp 沙箱文件的托管位置，见<a routerLink="/docs/mcp-apps">嵌入 MCP Apps</a>。</li>
       </ul>
       <p><strong>排障：</strong>lit / @a2ui/web_core 出现重复副本会破坏元素注册与 Catalog 检查。

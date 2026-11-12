@@ -60,11 +60,22 @@ export class DocEnhanceDirective implements OnDestroy {
       anchor.className = 'doc-anchor';
       // base href="/" would resolve a bare fragment against the site root
       anchor.href = this.router.url.split(/[?#]/)[0] + '#' + heading.id;
-      anchor.setAttribute('aria-label', '链接到本节:' + (heading.textContent ?? '').trim());
+      anchor.setAttribute('aria-label', '链接到本节：' + (heading.textContent ?? '').trim());
       anchor.textContent = '#';
+      let copiedTimer: ReturnType<typeof setTimeout> | undefined;
       anchor.addEventListener('click', e => {
         e.preventDefault();
         void this.router.navigate([], {fragment: heading.id});
+        const fullUrl = new URL(anchor.href, window.location.origin).href;
+        void navigator.clipboard?.writeText(fullUrl).then(() => {
+          clearTimeout(copiedTimer);
+          anchor.dataset['copied'] = 'true';
+          anchor.textContent = '✓';
+          copiedTimer = setTimeout(() => {
+            delete anchor.dataset['copied'];
+            anchor.textContent = '#';
+          }, 1400);
+        }).catch(() => undefined);
       });
       heading.appendChild(anchor);
     }

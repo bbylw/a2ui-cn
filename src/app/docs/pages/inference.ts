@@ -8,7 +8,7 @@ import {CodeBlock} from '../../shared/code-block';
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
     <app-docs-page-header eyebrow="概念" heading="推理格式">
-        模型写的标记不等于线上跑的消息。推理格式是模型在 &lt;a2ui&gt; 标签里使用的紧凑写法，
+        模型写的标记不等于线上跑的消息。推理格式是模型在 <code>&lt;a2ui&gt;</code> 标签里使用的紧凑写法，
         Agent SDK 把它编译成标准协议 JSON。默认格式 Express 比直接写 JSON 省约一半输入 token、六成代码 token，准确率不变。
     </app-docs-page-header>
 
@@ -54,7 +54,7 @@ import {CodeBlock} from '../../shared/code-block';
         <thead><tr><th scope="col">格式</th><th scope="col">输入 token</th><th scope="col">代码 token</th><th scope="col">Pass@1</th></tr></thead>
         <tbody>
           <tr><td>Direct JSON</td><td>10,980</td><td>807</td><td>98.1%</td></tr>
-          <tr><td>Express</td><td>6,000(−45.4%)</td><td>297(−63.2%)</td><td>98.1%</td></tr>
+          <tr><td>Express</td><td>6,000（−45.4%）</td><td>297（−63.2%）</td><td>98.1%</td></tr>
         </tbody>
       </table>
       <p>输入省的是提示词里的格式说明与示例，代码省的是模型输出；准确率与评审得分两种格式持平。

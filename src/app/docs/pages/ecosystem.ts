@@ -21,7 +21,7 @@ import {RouterLink} from '@angular/router';
         <thead><tr><th scope="col">项目</th><th scope="col">平台</th><th scope="col">版本</th><th scope="col">说明</th></tr></thead>
         <tbody>
           <tr><td><a href="https://github.com/easyops-cn/a2ui-sdk" target="_blank" rel="noopener">easyops-cn/a2ui-sdk</a></td><td>React（Web）</td><td>v0.8</td><td>Radix UI + Tailwind；带文档站。</td></tr>
-          <tr><td><a href="https://github.com/lmee/A2UI-Android" target="_blank" rel="noopener">lmee/A2UI-Android</a></td><td>Android（Compose）</td><td>v0.8</td><td>Android 5.0+,20+ 组件，含无障碍支持。</td></tr>
+          <tr><td><a href="https://github.com/lmee/A2UI-Android" target="_blank" rel="noopener">lmee/A2UI-Android</a></td><td>Android（Compose）</td><td>v0.8</td><td>Android 5.0+，20+ 组件，含无障碍支持。</td></tr>
           <tr><td><a href="https://github.com/sivamrudram-eng/a2ui-react-native" target="_blank" rel="noopener">a2ui-react-native</a></td><td>React Native</td><td>v0.8</td><td>iOS + Android 单 TypeScript 代码库。</td></tr>
           <tr><td><a href="https://www.npmjs.com/package/@zhama/a2ui" target="_blank" rel="noopener">zhama/a2ui</a></td><td>React（Web）</td><td>v0.8</td><td>npm 发布的渲染器。</td></tr>
           <tr><td><a href="https://github.com/jem-computer/A2UI-react" target="_blank" rel="noopener">jem-computer/A2UI-react</a></td><td>React（Web）</td><td>v0.8</td><td>React 渲染器实现。</td></tr>

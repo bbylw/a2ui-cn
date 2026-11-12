@@ -16,7 +16,7 @@ import {CodeBlock} from '../../shared/code-block';
       <h2 id="api">第一步：声明属性契约</h2>
       <p>ComponentApi 的 name 是 A2UI JSON 里的组件名；schema 用 DynamicStringSchema
       让字段同时接受字面量与数据绑定：</p>
-      <app-code lang="ts" label="stat-card.api.ts(v1.0)" [code]="apiTs" />
+      <app-code lang="ts" label="stat-card.api.ts（v1.0）" [code]="apiTs" />
       <p>安装：<code>bun add @a2ui/web_core lit zod</code>，再加上宿主框架的渲染器包。
       v0.9.1 把导入路径换成 <code>@a2ui/web_core/v0_9</code>。</p>
 
@@ -30,7 +30,7 @@ import {CodeBlock} from '../../shared/code-block';
       <h2 id="register">第三步：注册进目录</h2>
       <p>把 statCardComponent 与基础目录组件一起放进 Catalog，宿主渲染器挂载 surface 时自动注册自定义元素。
       Angular 的写法：</p>
-      <app-code lang="ts" label="Angular:AngularCatalog + provideA2UI" [code]="angularTs" />
+      <app-code lang="ts" label="Angular：AngularCatalog + provideA2UI" [code]="angularTs" />
       <p>React 用 <code>new Catalog&lt;ReactCatalogComponent&gt;(...)</code> +
       <code>&lt;A2uiSurface surface=&#123;surface&#125; /&gt;</code>；Lit 直接
       <code>new Catalog(...)</code> + <code>&lt;a2ui-surface&gt;</code>。
@@ -44,15 +44,15 @@ import {CodeBlock} from '../../shared/code-block';
         <li><strong>双向绑定。</strong>Dynamic* schema 自动生成
           <code>props.set&lt;Prop&gt;(next)</code> 写回器，写进绑定的 JSON Pointer。</li>
         <li><strong>校验。</strong>schema 合并 CheckableSchema 后，props.isValid 与
-          props.validationErrors 响应式可用；把 aria-invalid/aria-describedby 绑在内层输入控件上，
-          不要用 role="alert"，避免挂载时读屏器误报。</li>
+          props.validationErrors 响应式可用；把 <code>aria-invalid</code>/<code>aria-describedby</code> 绑在内层输入控件上，
+          不要用 <code>role="alert"</code>，避免挂载时读屏器误报。</li>
       </ul>
 
       <h2 id="styling">Light DOM 与主题</h2>
       <p>A2uiLitElement 默认渲染进 Light DOM：宿主的全局样式、设计系统、Tailwind 工具类直接生效。
       static styles 仍会生效——<code>:host</code> 被重写为标签名、后代规则加标签前缀防泄漏。
       宿主用 CSS 自定义属性主题化：</p>
-      <app-code lang="css" label="宿主样式（React 放 App.css,Angular 放全局 styles.css）" [code]="themeCss" />
+      <app-code lang="css" label="宿主样式（React 放 App.css，Angular 放全局 styles.css）" [code]="themeCss" />
       <p>Angular 的模拟视图封装会把组件样式隔离掉，所以自定义属性必须写在全局样式里。
       需要封装或原生 slot 时才启用 Shadow DOM：重写
       <code>createRenderRoot()</code> 返回 <code>this.attachShadow(&#123;mode: 'open'&#125;)</code>。</p>

@@ -468,9 +468,10 @@ body {
   .doc-prose .not-prose a { color: inherit; text-decoration: none; font-weight: inherit; }
   /* not-prose 区域里的段落/列表应继承卡片自身的文字颜色,而不是正文墨色 */
   .doc-prose .not-prose :is(p, ul, ol, li, dl, dt, dd, td, th) { color: inherit; }
-  .doc-prose .doc-anchor { margin-left: 0.4em; font-family: var(--font-mono); font-size: 0.8em; font-weight: 600; color: var(--color-blue-deep); text-decoration: none; opacity: 0; transition: opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1); }
+  .doc-prose .doc-anchor { margin-left: 0.4em; font-family: var(--font-mono); font-size: 0.8em; font-weight: 600; color: var(--color-blue-deep); text-decoration: none; opacity: 0; transition: opacity 0.2s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s cubic-bezier(0.22, 1, 0.36, 1); }
   .doc-prose h2:hover > .doc-anchor, .doc-prose h3:hover > .doc-anchor, .doc-prose .doc-anchor:focus-visible { opacity: 0.55; }
   .doc-prose .doc-anchor:hover { opacity: 1; }
+  .doc-prose .doc-anchor[data-copied="true"] { opacity: 1; color: var(--color-green-deep); }
 }
 
 /* 放进 base 层:工具类(如 whitespace-nowrap / overflow-wrap)仍能按需覆盖 */

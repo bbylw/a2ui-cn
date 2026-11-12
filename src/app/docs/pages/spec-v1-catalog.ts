@@ -81,7 +81,7 @@ import {CodeBlock} from '../../shared/code-block';
           <tr><td><code>formatCurrency</code></td><td><code>value</code> + <code>currency</code>（ISO 4217）+ 可选 decimals / grouping。</td></tr>
           <tr><td><code>formatDate</code></td><td><code>value</code> + <code>format</code>（Unicode TR35）；支持 yy/yyyy、M/MM/MMM/MMMM、d/dd/E/EEEE、h/hh（需 a）、H/HH、mm、ss、a。</td></tr>
           <tr><td><code>pluralize</code></td><td><code>value</code> + 必填 <code>other</code> 回退，可选 zero/one/two/few/many；按 locale 的 CLDR 复数类别。</td></tr>
-          <tr><td><code>openUrl</code></td><td><code>url</code>；void 副作用；requiresUserActivation；解析相对 URL，只允许 http/https，新标签用 noopener，noreferrer。</td></tr>
+          <tr><td><code>openUrl</code></td><td><code>url</code>；void 副作用；requiresUserActivation；解析相对 URL，只允许 http/https，新标签用 <code>noopener,noreferrer</code>。</td></tr>
           <tr><td><code>and</code> / <code>or</code></td><td><code>values</code> 布尔数组（≥2）；全真 / 任一真；鼓励短路。</td></tr>
           <tr><td><code>not</code></td><td>严格布尔取反。</td></tr>
         </tbody>

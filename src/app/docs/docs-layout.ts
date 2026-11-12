@@ -210,11 +210,13 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
             <div class="relative mt-3">
               <svg viewBox="0 0 20 20" class="pointer-events-none absolute top-1/2 left-2.5 h-3.5 w-3.5 -translate-y-1/2 text-ink-faint" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="6"/><path d="m13.5 13.5 3.5 3.5"/></svg>
               <input
+                #searchInput
                 type="search"
                 [value]="searchQuery()"
                 (input)="onSearch($event)"
+                (keydown.escape)="onSearchEscape($event)"
                 placeholder="筛选文档标题…"
-                aria-label="筛选文档标题"
+                aria-label="筛选文档标题（按 / 聚焦）"
                 class="w-full rounded-lg border border-line-warm bg-card/85 py-1.5 pr-7 pl-8 text-xs text-ink placeholder:text-ink-faint transition-colors focus:border-blue focus:bg-white focus:outline-none"
               />
               @if (searchQuery()) {
@@ -224,6 +226,11 @@ const FLAT: DocLink[] = NAV.flatMap(group => group.links);
                   aria-label="清空筛选"
                   class="absolute top-1/2 right-1.5 -translate-y-1/2 rounded px-1.5 py-0.5 font-mono text-xs text-ink-mute hover:text-ink"
                 >×</button>
+              } @else {
+                <kbd
+                  aria-hidden="true"
+                  class="pointer-events-none absolute top-1/2 right-2 -translate-y-1/2 rounded border border-line-warm bg-paper px-1.5 py-0.5 font-mono text-[10px] leading-none text-ink-faint"
+                >/</kbd>
               }
             </div>
             <div #sideNav class="quiet-scroll scroll-fade-y -ml-1 mt-3 max-h-[calc(100dvh-12.5rem)] overflow-y-auto pt-1 pr-2 pb-4 pl-1">
@@ -365,6 +372,7 @@ export class DocsLayout implements OnDestroy {
 
   private readonly sideNav = viewChild<ElementRef<HTMLElement>>('sideNav');
   private readonly contentHost = viewChild<ElementRef<HTMLElement>>('contentHost');
+  private readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
 
   protected readonly toc = signal<{ id: string; text: string; level: 2 | 3 }[]>([]);
   protected readonly activeId = signal('');
@@ -372,6 +380,18 @@ export class DocsLayout implements OnDestroy {
   private lastPath = '';
   private ticking = false;
   private contentObserver: MutationObserver | null = null;
+  private readonly onKeydown = (e: KeyboardEvent) => {
+    if (e.key !== '/' || e.ctrlKey || e.metaKey || e.altKey) return;
+    const target = e.target as HTMLElement | null;
+    if (target && (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.tagName === 'SELECT' || target.isContentEditable)) {
+      return;
+    }
+    const input = this.searchInput()?.nativeElement;
+    if (!input || input.offsetParent === null) return;
+    e.preventDefault();
+    input.focus();
+    input.select();
+  };
   private readonly onScroll = () => {
     if (this.ticking) return;
     this.ticking = true;
@@ -386,6 +406,7 @@ export class DocsLayout implements OnDestroy {
 
   constructor() {
     window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('keydown', this.onKeydown);
     setTimeout(() => {
       this.afterNav();
       this.observeContent();
@@ -396,6 +417,7 @@ export class DocsLayout implements OnDestroy {
     this.sub.unsubscribe();
     this.contentObserver?.disconnect();
     window.removeEventListener('scroll', this.onScroll);
+    window.removeEventListener('keydown', this.onKeydown);
   }
 
   private observeContent(): void {
@@ -414,6 +436,15 @@ export class DocsLayout implements OnDestroy {
 
   protected clearSearch(): void {
     this.searchQuery.set('');
+  }
+
+  protected onSearchEscape(event: Event): void {
+    if (this.searchQuery()) {
+      event.stopPropagation();
+      this.searchQuery.set('');
+      return;
+    }
+    (event.target as HTMLInputElement).blur();
   }
 
   private readonly url = toSignal(

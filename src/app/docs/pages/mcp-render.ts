@@ -32,7 +32,7 @@ import {CodeBlock} from '../../shared/code-block';
       <h2 id="app">内嵌应用：渲染器 + 动作转发</h2>
       <p>安装 <code>@a2ui/lit @a2ui/markdown-it @a2ui/web_core lit @modelcontextprotocol/ext-apps</code>。
       核心是把每个 A2UI action 转成 callServerTool，再把结果喂回处理器：</p>
-      <app-code lang="ts" label="src/main.ts(v1.0)" [code]="mainTs" />
+      <app-code lang="ts" label="src/main.ts（v1.0）" [code]="mainTs" />
       <p>需要全量表单状态时，在回调里读
       <code>processor.getSurface(action.surfaceId)?.dataModel.get('/')</code> 合并进 arguments。
       不用 ext-apps 也可以直接写 window.parent.postMessage 的 JSON-RPC 协议；
@@ -54,8 +54,8 @@ import {CodeBlock} from '../../shared/code-block';
         <li>opaque origin 下 storage/cookie 抛 SecurityError：临时状态放数据模型，持久状态放服务器。</li>
         <li>外部媒体/字体默认被 CSP 挡：在 resources/read 返回项的 _meta.ui.csp 里声明域名。</li>
         <li>主题同步：启动时与 ui/notifications/host-context-changed 时，按宿主 theme 切换
-          <code>.a2ui-light</code>/<code>.a2ui-dark</code> 根类；基础目录样式用 light-dark（） 令牌，
-          也可覆盖 --a2ui-color-primary 等变量。</li>
+          <code>.a2ui-light</code>/<code>.a2ui-dark</code> 根类；基础目录样式用 <code>light-dark()</code> 令牌，
+          也可覆盖 <code>--a2ui-color-primary</code> 等变量。</li>
         <li>返回工具结果前用 validatePayload 在服务端校验——坏消息会在沙箱里才失败，排查更贵。</li>
       </ul>
       <p>官方示例 <code>samples/community/mcp/a2ui-in-mcpapps</code> 含生成式编辑器与计数器两个微应用，
