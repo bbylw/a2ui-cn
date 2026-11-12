@@ -10,7 +10,7 @@ import {RevealDirective} from '../shared/reveal.directive';
   selector: 'app-dual-renderer',
   imports: [SurfaceComponent, ReactIsland, RevealDirective],
   template: `
-    <section class="grain relative overflow-hidden bg-ink-950 py-20 text-white lg:py-28" id="dual">
+    <section class="grain relative overflow-hidden bg-ink-950 py-16 text-white lg:py-24" id="dual">
       <div class="blueprint-dark absolute inset-0" aria-hidden="true"></div>
       <div class="absolute -left-32 top-10 size-96 rounded-full bg-blue/12 blur-3xl animate-drift" aria-hidden="true"></div>
       <div class="absolute -right-24 bottom-0 size-80 rounded-full bg-green/8 blur-3xl" aria-hidden="true"></div>
@@ -18,7 +18,7 @@ import {RevealDirective} from '../shared/reveal.directive';
       <div class="relative mx-auto max-w-7xl px-4 sm:px-6">
         <div class="flex flex-wrap items-end justify-between gap-6" appReveal>
           <div class="max-w-2xl">
-            <h2 class="text-balance font-display text-3xl font-bold tracking-tight sm:text-4xl">同一份 JSON,两套渲染器</h2>
+            <h2 class="text-balance font-display text-3xl font-bold tracking-tight sm:text-[2.5rem]">同一份 JSON,两套渲染器</h2>
             <p class="mt-4 leading-relaxed text-ink-faint">
               下面两个界面由<strong class="font-semibold text-white">同一条消息流</strong>驱动:左侧走
               <code class="rounded bg-ink-800 px-1.5 py-0.5 font-mono text-[0.85em] text-blue-glow">&#64;a2ui/angular</code>

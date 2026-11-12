@@ -5,16 +5,16 @@ import {RevealDirective} from '../shared/reveal.directive';
   selector: 'app-philosophy',
   imports: [RevealDirective],
   template: `
-    <section class="relative bg-paper py-20 lg:py-28" id="why">
+    <section class="relative bg-paper py-16 lg:py-24" id="why">
       <div class="mx-auto max-w-7xl px-4 sm:px-6">
         <div class="max-w-2xl" appReveal>
-          <h2 class="text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">为什么是 A2UI</h2>
+          <h2 class="text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-[2.5rem]">为什么是 A2UI</h2>
           <p class="mt-4 text-base leading-relaxed text-ink-soft">
             生成式 UI 的老问题:要么让模型写代码(不安全),要么返回死板的工具卡片(不灵活)。A2UI 用一份声明式协议同时解决两者。
           </p>
         </div>
 
-        <div class="mt-14 grid gap-12 lg:gap-16">
+        <div class="mt-12 grid gap-10 lg:gap-14">
           <article class="grid items-center gap-8 lg:grid-cols-2" appReveal>
             <div>
               <span class="flex size-11 items-center justify-center rounded-xl bg-blue-tint text-blue">

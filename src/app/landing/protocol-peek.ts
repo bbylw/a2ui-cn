@@ -15,10 +15,10 @@ interface MessageTab {
   selector: 'app-protocol-peek',
   imports: [CodeBlock, RouterLink, RevealDirective],
   template: `
-    <section class="bg-paper py-20 lg:py-28" id="protocol">
+    <section class="bg-paper py-16 lg:py-24" id="protocol">
       <div class="mx-auto max-w-7xl px-4 sm:px-6">
         <div class="max-w-2xl" appReveal>
-          <h2 class="text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">协议一瞥</h2>
+          <h2 class="text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-[2.5rem]">协议一瞥</h2>
           <p class="mt-4 text-base leading-relaxed text-ink-soft">
             每条消息都是一个带 <code class="rounded bg-blue-tint px-1.5 py-0.5 font-mono text-[0.85em] text-blue-deep">version</code>
             字段和单一消息键的 JSON 对象。四种核心消息管理界面的整个生命周期,v1.0 新增双向函数调用。
@@ -26,7 +26,7 @@ interface MessageTab {
         </div>
 
         <div class="mt-10 grid gap-6 lg:grid-cols-[16rem_1fr]" appReveal="120">
-          <div class="flex gap-2 overflow-x-auto lg:flex-col" role="tablist" aria-label="消息类型" (keydown)="onTabKeydown($event)">
+          <div class="lp-hscroll flex gap-2 overflow-x-auto lg:flex-col" role="tablist" aria-label="消息类型" (keydown)="onTabKeydown($event)">
             @for (tab of tabs; track tab.key) {
               <button type="button" role="tab" [attr.aria-selected]="active() === tab.key" [attr.tabindex]="active() === tab.key ? 0 : -1" (click)="active.set(tab.key)"
                       class="pressable shrink-0 rounded-xl border px-4 py-3 text-left transition-all lg:shrink"

@@ -6,17 +6,17 @@ import {RevealDirective} from '../shared/reveal.directive';
   selector: 'app-ecosystem',
   imports: [RouterLink, RevealDirective],
   template: `
-    <section class="relative bg-mist py-20 lg:py-28" id="ecosystem">
+    <section class="relative bg-mist py-16 lg:py-24" id="ecosystem">
       <div class="mx-auto max-w-7xl px-4 sm:px-6">
         <div class="max-w-2xl" appReveal>
-          <h2 class="text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">生态与采用</h2>
+          <h2 class="text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-[2.5rem]">生态与采用</h2>
           <p class="mt-4 text-base leading-relaxed text-ink-soft">
             渲染器、Agent SDK 与传输扩展全部开源。Google 发起,社区共建,
             已有团队在生产环境中使用 A2UI 构建智能体体验。
           </p>
         </div>
 
-        <div class="mt-12 grid gap-8 lg:grid-cols-[1.25fr_1fr]">
+        <div class="mt-10 grid gap-8 lg:grid-cols-[1.25fr_1fr]">
           <div class="overflow-hidden rounded-2xl border border-line-cool bg-white shadow-lift" appReveal>
             <table class="w-full text-sm">
               <caption class="sr-only">A2UI 官方包一览</caption>
@@ -76,7 +76,7 @@ import {RevealDirective} from '../shared/reveal.directive';
         </div>
       </div>
 
-      <div class="mx-auto mt-16 max-w-7xl px-4 sm:px-6" appReveal="260">
+      <div class="mx-auto mt-14 max-w-7xl px-4 sm:px-6" appReveal="260">
         <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-deep via-blue to-blue-bright px-6 py-12 text-center shadow-panel sm:px-12">
           <div class="blueprint-dark absolute inset-0 opacity-40" aria-hidden="true"></div>
           <div class="absolute -right-16 -top-16 size-64 rounded-full bg-amber/20 blur-3xl" aria-hidden="true"></div>
@@ -84,10 +84,11 @@ import {RevealDirective} from '../shared/reveal.directive';
             <span class="absolute left-[6%] top-6 hidden rounded-md border border-white/20 bg-white/10 px-2 py-1 font-mono text-[10px] text-white/70 animate-drift sm:block">createSurface</span>
             <span class="absolute right-[7%] top-10 hidden rounded-md border border-white/20 bg-white/10 px-2 py-1 font-mono text-[10px] text-white/70 animate-drift sm:block" style="animation-delay: -6s">updateComponents</span>
             <span class="absolute bottom-6 left-[12%] hidden rounded-md border border-white/20 bg-white/10 px-2 py-1 font-mono text-[10px] text-white/70 animate-drift sm:block" style="animation-delay: -10s">action</span>
+            <span class="absolute bottom-8 right-[7%] hidden rounded-md border border-white/20 bg-white/10 px-2 py-1 font-mono text-[10px] text-white/70 animate-drift sm:block" style="animation-delay: -14s">deleteSurface</span>
           </div>
           <div class="relative">
             <h2 class="font-display text-2xl font-bold text-white sm:text-3xl">把生成式 UI 带进你的应用</h2>
-            <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-white/80">
+            <p class="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-white/85">
               五分钟跑通官方全栈示例,或直接在浏览器里把玩协议消息流。
             </p>
             <div class="mt-7 flex flex-wrap justify-center gap-3">

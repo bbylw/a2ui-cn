@@ -200,6 +200,16 @@ body {
 }
 .a2ui-frame a2ui-v09-surface { display: block; }
 
+/* ---------- landing chrome ---------- */
+/* 窄屏横向滚动的标签条:右侧渐隐提示还能滑动,桌面端是纵向列表不受影响 */
+@media (max-width: 1023px) {
+  .lp-hscroll {
+    mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+    scrollbar-width: none;
+  }
+  .lp-hscroll::-webkit-scrollbar { display: none; }
+}
+
 /* ---------- docs chrome ---------- */
 .quiet-scroll { scrollbar-width: thin; scrollbar-color: var(--color-line-cool) transparent; }
 .quiet-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
