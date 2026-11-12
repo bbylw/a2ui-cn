@@ -18,19 +18,19 @@ interface StreamState {
   template: `
     <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
       <header class="mb-8 max-w-3xl">
-        <p class="font-mono text-xs text-ink-mute">实践 / Playground</p>
+        <p class="font-mono text-xs font-semibold uppercase tracking-widest text-blue-deep">实践 · Playground</p>
         <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">协议 Playground</h1>
-        <p class="mt-4 leading-relaxed text-ink-soft">
-          左侧控制台逐条发送真实的 A2UI v1.0 消息,右侧两套渲染器同时渲染:
+        <p class="mt-4 text-pretty leading-relaxed text-ink-soft">
+          左侧控制台逐条发送真实的 A2UI v1.0 消息，右侧两套渲染器同时渲染：
           <strong class="font-semibold text-ink">&#64;a2ui/angular</strong> 与
-          <strong class="font-semibold text-ink">&#64;a2ui/react</strong>,各自独立维护 surface 状态。
-          暂停、单步、跳转到任意消息,或在 JSON 编辑器里写自己的消息流。
-          点击界面里的按钮,action 会出现在下方日志中。
+          <strong class="font-semibold text-ink">&#64;a2ui/react</strong>，各自独立维护 surface 状态。
+          支持暂停、单步、跳转到任意消息，或在 JSON 编辑器里编写自己的消息流。
+          点击界面里的按钮，action 会实时出现在下方日志中。
         </p>
       </header>
 
       <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,460px)_minmax(0,1fr)]">
-        <app-react-island kind="playground" class="min-w-0" [islandProps]="consoleProps" />
+        <app-react-island kind="playground" class="min-w-0 lg:sticky lg:top-24" [islandProps]="consoleProps" />
 
         <div class="grid min-w-0 gap-6">
           @if (showAngular()) {
@@ -38,11 +38,11 @@ interface StreamState {
               <div class="flex items-center gap-2.5 border-b border-line-dark px-5 py-3">
                 <span class="inline-block size-2.5 rounded-full bg-red" aria-hidden="true"></span>
                 <h2 class="font-display text-sm font-bold text-white">Angular 渲染器</h2>
-                <span class="ml-auto font-mono text-[10px] text-ink-faint">&#64;a2ui/angular · v1.0</span>
+                <span class="ml-auto font-mono text-xs text-ink-faint">&#64;a2ui/angular · v1.0</span>
               </div>
               <div class="a2ui-frame m-4 min-h-64 rounded-xl bg-white p-4 text-ink sm:m-5 sm:p-5">
                 @if (angularError(); as err) {
-                  <div role="alert" class="rounded-lg border border-red/30 bg-red-tint px-3 py-2 font-mono text-xs text-red-deep">渲染错误:{{ err }}</div>
+                  <div role="alert" class="rounded-lg border border-red/30 bg-red-tint px-3 py-2 font-mono text-xs text-red-deep">渲染错误：{{ err }}</div>
                 }
                 @if (angularReady()) {
                   @if (surfaceId(); as sid) {
@@ -64,7 +64,7 @@ interface StreamState {
               <div class="flex items-center gap-2.5 border-b border-line-dark px-5 py-3">
                 <span class="inline-block size-2.5 rounded-full bg-blue-bright" aria-hidden="true"></span>
                 <h2 class="font-display text-sm font-bold text-white">React 渲染器</h2>
-                <span class="ml-auto font-mono text-[10px] text-ink-faint">&#64;a2ui/react · React 19</span>
+                <span class="ml-auto font-mono text-xs text-ink-faint">&#64;a2ui/react · React 19</span>
               </div>
               <div class="a2ui-frame m-4 min-h-64 rounded-xl bg-white p-4 text-ink sm:m-5 sm:p-5">
                 <app-react-island kind="surface" [islandProps]="reactPreviewProps()" />
@@ -80,26 +80,27 @@ interface StreamState {
 
           <section class="rounded-2xl border border-line-cool bg-card p-5 shadow-lift">
             <div class="flex flex-wrap items-center gap-3">
+              <span class="inline-block size-2 rounded-full bg-blue" aria-hidden="true"></span>
               <h2 class="font-mono text-xs font-semibold tracking-widest text-blue-deep uppercase">action 回传日志</h2>
-              <span class="font-mono text-[10px] text-ink-mute">renderer → agent</span>
+              <span class="font-mono text-xs text-ink-mute">renderer → agent</span>
               @if (actionLog.entries().length > 0) {
                 <button type="button" (click)="actionLog.clear()"
-                        class="ml-auto rounded-md border border-line-cool px-2.5 py-1 font-mono text-[11px] text-ink-soft transition-colors hover:border-red hover:text-red-deep">
+                        class="pressable ml-auto rounded-md border border-line-cool px-2.5 py-1 font-mono text-xs text-ink-soft transition-colors duration-300 hover:border-red hover:text-red-deep">
                   清空
                 </button>
               }
             </div>
             @if (actionLog.entries().length === 0) {
-              <p class="mt-3 text-sm text-ink-soft">还没有 action。等消息流播放出按钮后,点击任意一侧界面上的按钮试试。</p>
+              <p class="mt-3 text-sm text-ink-soft">还没有收到 action。等消息流播放出按钮后，点击任意一侧界面上的按钮试试。</p>
             } @else {
               <ul class="mt-3 grid gap-2">
                 @for (entry of actionLog.entries().slice(0, 6); track entry.id) {
-                  <li class="flex flex-wrap items-center gap-2 rounded-lg border border-line-cool bg-mist/50 px-3 py-2 font-mono text-[11px]">
-                    <span class="rounded px-1.5 py-0.5 text-[10px] font-semibold {{ entry.from === 'angular' ? 'bg-red-tint text-red-deep' : 'bg-blue-tint text-blue-deep' }}">{{ entry.from }}</span>
+                  <li class="flex flex-wrap items-center gap-2 rounded-lg border border-line-cool bg-mist/50 px-3 py-2 font-mono text-xs">
+                    <span class="rounded px-2 py-0.5 font-semibold {{ entry.from === 'angular' ? 'bg-red-tint text-red-deep' : 'bg-blue-tint text-blue-deep' }}">{{ entry.from }}</span>
                     <span class="font-semibold text-ink">{{ entry.name }}</span>
                     <span class="text-ink-mute">来自 {{ entry.sourceComponentId }}</span>
                     <span class="min-w-0 flex-1 truncate text-ink-soft">{{ '{' }}{{ formatContext(entry.context) }}{{ '}' }}</span>
-                    <span class="text-ink-mute">{{ entry.timestamp.slice(11, 19) }}</span>
+                    <span class="tabular-nums text-ink-mute">{{ entry.timestamp.slice(11, 19) }}</span>
                   </li>
                 }
               </ul>
@@ -107,8 +108,8 @@ interface StreamState {
           </section>
 
           <p class="text-xs leading-relaxed text-ink-mute">
-            消息与组件 schema 均符合 v1.0 基础目录。想系统了解这些消息,阅读
-            <a routerLink="/docs/messages" class="font-medium text-blue-deep underline decoration-blue-deep/35 underline-offset-3 hover:decoration-blue-deep">消息参考</a>。
+            消息与组件 Schema 均符合 v1.0 基础目录。想系统了解这些消息，可阅读
+            <a routerLink="/docs/messages" class="font-semibold text-blue-deep underline decoration-blue-deep/35 underline-offset-4 transition-colors duration-300 hover:decoration-blue-deep">消息参考</a>。
           </p>
         </div>
       </div>

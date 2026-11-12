@@ -1,5 +1,5 @@
-import {Component, OnDestroy, inject, signal} from '@angular/core';
-import {NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import { Component, OnDestroy, computed, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +12,20 @@ export class App implements OnDestroy {
   protected readonly year = new Date().getFullYear();
   protected readonly scrolled = signal(false);
   protected readonly scrollPct = signal(0);
+  protected readonly scrollRatio = computed(() => this.scrollPct() / 100);
+  protected readonly supportsScrollTimeline =
+    typeof CSS !== 'undefined' && typeof CSS.supports === 'function' && CSS.supports('animation-timeline', 'scroll()');
 
   private readonly router = inject(Router);
+  protected readonly currentPath = signal(this.router.url.split(/[?#]/)[0]);
+  protected readonly isSpecRoute = computed(() => {
+    const p = this.currentPath();
+    return p === '/docs/messages' || p.startsWith('/docs/spec-');
+  });
+  protected readonly isDocsRoute = computed(() => {
+    const p = this.currentPath();
+    return p.startsWith('/docs') && !this.isSpecRoute();
+  });
 
   private readonly onScroll = () => {
     const doc = document.documentElement;
@@ -29,12 +41,13 @@ export class App implements OnDestroy {
   private readonly routerSub = this.router.events.subscribe(e => {
     if (e instanceof NavigationEnd) {
       this.menuOpen.set(false);
+      this.currentPath.set(this.router.url.split(/[?#]/)[0]);
       setTimeout(this.onScroll);
     }
   });
 
   constructor() {
-    window.addEventListener('scroll', this.onScroll, {passive: true});
+    window.addEventListener('scroll', this.onScroll, { passive: true });
     window.addEventListener('keydown', this.onKeydown);
     this.onScroll();
   }
@@ -55,7 +68,7 @@ export class App implements OnDestroy {
 
   protected toTop(): void {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'});
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
   }
 
   protected skipToMain(event: Event): void {

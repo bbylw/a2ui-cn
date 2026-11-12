@@ -26,13 +26,13 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     this.observer = new IntersectionObserver(
       entries => {
         for (const entry of entries) {
-          if (entry.isIntersecting) {
+          if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight * 0.96) {
             node.classList.add('is-visible');
             this.observer?.unobserve(node);
           }
         }
       },
-      {threshold: 0.12, rootMargin: '0px 0px -8% 0px'},
+      {threshold: 0.06, rootMargin: '0px 0px -4% 0px'},
     );
     this.observer.observe(node);
   }

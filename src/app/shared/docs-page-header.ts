@@ -15,13 +15,13 @@ import {RouterLink} from '@angular/router';
   template: `
     <header class="mb-8 border-b border-line-warm pb-7">
       <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
-        <nav class="flex items-center gap-2 font-mono text-[10.5px] font-medium tracking-[0.14em] text-ink-mute" aria-label="面包屑">
-          <span class="inline-block h-1.5 w-1.5 rounded-[1px] bg-blue" aria-hidden="true"></span>
-          <a routerLink="/docs" class="transition-colors hover:text-blue-deep">文档</a>
+        <nav class="flex items-center gap-2 font-mono text-xs font-medium tracking-wider text-ink-mute" aria-label="面包屑">
+          <span class="inline-block h-1.5 w-1.5 rounded-xs bg-blue" aria-hidden="true"></span>
+          <a routerLink="/docs" class="transition-colors duration-300 hover:text-blue-deep">文档</a>
           <span class="text-line-cool" aria-hidden="true">/</span>
           <span class="text-ink-soft">{{ eyebrow() }}</span>
         </nav>
-        <p class="flex items-center gap-2 font-mono text-[10.5px] text-ink-mute">
+        <p class="flex items-center gap-2 font-mono text-xs tabular-nums text-ink-mute">
           @if (stats(); as s) {
             <span>{{ s.sections }} 节</span>
             <span class="h-3 w-px bg-line-warm" aria-hidden="true"></span>
@@ -29,8 +29,8 @@ import {RouterLink} from '@angular/router';
           }
         </p>
       </div>
-      <h1 class="mt-3 font-display text-[2rem] font-bold leading-[1.15] tracking-[-0.02em] text-ink sm:text-[2.35rem]">{{ heading() }}</h1>
-      <p class="mt-4 max-w-[42rem] text-[16.5px] leading-[1.72] text-ink-soft"><ng-content /></p>
+      <h1 class="mt-3 text-balance font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">{{ heading() }}</h1>
+      <p class="mt-4 max-w-[42rem] text-pretty text-base leading-relaxed text-ink-soft"><ng-content /></p>
     </header>
   `,
 })

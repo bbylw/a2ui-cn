@@ -1,41 +1,50 @@
 <section class="aurora relative overflow-hidden">
   <div class="blueprint absolute inset-0" aria-hidden="true"></div>
-  <div class="relative mx-auto grid max-w-7xl gap-12 px-4 pb-14 pt-14 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:gap-10 lg:pb-16 lg:pt-16">
+  <div class="relative mx-auto grid max-w-7xl gap-12 px-4 pb-14 pt-12 sm:px-6 lg:grid-cols-[1.02fr_0.98fr] lg:items-center lg:gap-10 lg:pb-16 lg:pt-16">
     <div class="hero-enter">
-      <p class="inline-flex items-center gap-2 rounded-full border border-green/30 bg-green-tint px-3 py-1 text-xs font-semibold text-[#1e6b34]">
+      <p class="inline-flex items-center gap-2 rounded-md border border-green/30 bg-green-tint px-3 py-1 text-xs font-semibold text-[#1e6b34]">
         <span class="inline-block size-2 rounded-full bg-green animate-live" aria-hidden="true"></span>
         v1.0 协议已稳定 · 2026-11-11 发布
       </p>
-      <h1 class="mt-6 font-display text-4xl font-bold leading-[1.15] tracking-tight text-ink sm:text-5xl lg:text-[3.4rem]">
-        <span class="line-mask"><span class="line-inner">智能体描述界面,</span></span>
-        <span class="line-mask"><span class="line-inner text-blue">应用原生渲染。</span></span>
+      <h1 class="mt-6 max-w-[42rem] text-balance font-display text-4xl font-bold tracking-tight text-ink sm:text-5xl lg:text-6xl">
+        <span class="line-mask"><span class="line-inner">智能体描述界面，</span></span>
+        <span class="line-mask"><span class="line-inner bg-gradient-to-r from-blue-deep via-blue to-blue-bright bg-clip-text text-transparent">应用原生渲染。</span></span>
       </h1>
-      <p class="mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg">
-        A2UI(Agent-to-User Interface)是 Google 发起的开源生成式 UI 协议。智能体输出声明式
-        JSON 消息流,客户端用 React、Angular、Flutter 等框架的<strong class="font-semibold text-ink">原生组件</strong>渲染,不执行任何不可信代码。
+      <p class="mt-6 max-w-xl text-pretty text-base leading-relaxed text-ink-soft sm:text-lg">
+        A2UI（Agent-to-User Interface）是 Google 发起的开源生成式 UI 协议。智能体输出声明式
+        JSON 消息流，客户端用 React、Angular、Flutter 等框架的<strong class="font-semibold text-ink">原生组件</strong>渲染，不执行任何不可信代码。
       </p>
       <div class="mt-8 flex flex-wrap items-center gap-3">
         <a routerLink="/docs/quickstart"
-           class="pressable inline-flex h-11 items-center rounded-lg bg-blue px-6 text-sm font-semibold text-white shadow-glow-blue transition-all hover:bg-blue-deep hover:-translate-y-0.5">
-          快速开始
+           class="pressable inline-flex h-11 items-center gap-2 rounded-lg bg-blue px-6 text-base font-semibold text-white shadow-glow-blue transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-deep">
+          <span>快速开始</span>
+          <svg viewBox="0 0 20 20" class="size-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 10h10M11 6l4 4-4 4"/></svg>
         </a>
         <a routerLink="/playground"
-           class="pressable inline-flex h-11 items-center rounded-lg border border-ink/15 bg-white px-6 text-sm font-semibold text-ink transition-all hover:border-blue/50 hover:text-blue-deep hover:-translate-y-0.5">
+           class="pressable inline-flex h-11 items-center rounded-lg border border-ink/15 bg-white px-6 text-base font-semibold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:border-blue/50 hover:text-blue-deep">
           打开 Playground
         </a>
       </div>
       <button type="button" (click)="copyInstall()"
-              class="group pressable mt-5 inline-flex max-w-full items-center gap-3 rounded-lg border border-line-dark bg-ink-950 px-4 py-2.5 font-mono text-[13px] text-[#d7e2f4] transition-all hover:border-blue-bright/60"
+              class="group pressable mt-5 inline-flex max-w-full items-center gap-3 rounded-lg border border-line-dark bg-ink-950 px-4 py-2.5 font-mono text-xs text-[#d7e2f4] transition-all duration-300 hover:border-blue-bright/60 sm:text-sm"
               title="复制安装命令">
         <span class="text-blue-glow">$</span>
         <span class="truncate">{{ installCmd }}</span>
-        <span class="shrink-0 text-[11px] text-ink-faint transition-colors group-hover:text-blue-glow">{{ copied() ? '已复制 ✓' : '复制' }}</span>
+        <span class="inline-flex shrink-0 items-center gap-1 rounded border border-white/10 bg-white/5 px-2 py-0.5 text-xs text-ink-faint transition-colors duration-300 group-hover:border-blue-bright/40 group-hover:text-blue-glow">
+          @if (copied()) {
+            <svg viewBox="0 0 16 16" class="size-3.5 text-green" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8.5l3.5 3.5L13 5"/></svg>
+            <span class="text-[#7ee2a8]">已复制</span>
+          } @else {
+            <svg viewBox="0 0 16 16" class="size-3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="8" height="8" rx="1.5"/><path d="M3 11V3.5A.5.5 0 0 1 3.5 3H11"/></svg>
+            <span>复制</span>
+          }
+        </span>
       </button>
       <div class="mt-8">
-        <p class="text-xs font-medium text-ink-mute">一次生成,处处渲染</p>
+        <p class="text-xs font-semibold tracking-wide text-ink-mute">一次生成，处处渲染</p>
         <ul class="mt-3 flex flex-wrap gap-2">
           @for (r of renderers; track r.name) {
-            <li class="inline-flex items-center gap-1.5 rounded-full border border-line-warm bg-white/70 px-3 py-1 text-xs font-medium text-ink-soft">
+            <li class="inline-flex items-center gap-1.5 rounded-md border border-line-warm bg-white/80 px-2.5 py-1 text-xs font-medium text-ink-soft">
               <span class="inline-block size-1.5 rounded-full {{ r.dot }}" aria-hidden="true"></span>{{ r.name }}
             </li>
           }
@@ -44,66 +53,88 @@
     </div>
 
     <div class="relative min-w-0">
-      <div class="absolute -right-12 -top-14 size-72 rounded-full bg-blue/10 blur-3xl animate-drift" aria-hidden="true"></div>
-      <div class="absolute -inset-3 rounded-3xl bg-blue/8 blur-2xl" aria-hidden="true"></div>
       <div class="relative overflow-hidden rounded-2xl border border-line-dark bg-ink-900 shadow-panel">
         <div class="flex items-center gap-3 border-b border-line-dark px-4 py-3">
-          <span class="inline-flex items-center gap-2 font-mono text-[11px] font-semibold tracking-wide text-blue-glow">
+          <span class="inline-flex items-center gap-2 font-mono text-xs font-semibold tracking-wide text-blue-glow">
             <span class="inline-block size-2 rounded-full bg-green animate-live" aria-hidden="true"></span>
             LIVE · agent → renderer
           </span>
-          <span class="hidden font-mono text-[10px] text-ink-faint sm:inline">flight-demo · v1.0</span>
-          <div class="ml-auto flex gap-1.5">
+          <span class="hidden font-mono text-xs text-ink-faint sm:inline">flight-demo · v1.0</span>
+          <span class="ml-auto font-mono text-xs tabular-nums text-ink-faint">{{ step() }}/{{ scenario.messages.length }}</span>
+          <div class="flex gap-1.5">
             <button type="button" (click)="togglePlay()"
-                    class="pressable rounded-md border border-line-dark px-2.5 py-1 font-mono text-[11px] text-ink-faint transition-colors hover:border-blue-bright hover:text-white">
+                    class="pressable inline-flex items-center gap-1 rounded-md border border-line-dark bg-ink-800/70 px-2.5 py-1 font-mono text-xs text-ink-faint transition-colors duration-300 hover:border-blue-bright hover:text-white">
               {{ playing() ? '暂停' : '播放' }}
             </button>
             <button type="button" (click)="replay()"
-                    class="pressable rounded-md border border-line-dark px-2.5 py-1 font-mono text-[11px] text-ink-faint transition-colors hover:border-blue-bright hover:text-white">
+                    class="pressable inline-flex items-center gap-1 rounded-md border border-line-dark bg-ink-800/70 px-2.5 py-1 font-mono text-xs text-ink-faint transition-colors duration-300 hover:border-blue-bright hover:text-white">
               重播
             </button>
           </div>
         </div>
 
-        <div #logBox class="dark-scroll h-44 overflow-y-auto border-b border-line-dark bg-ink-950/70 px-4 py-3" aria-live="polite" [attr.aria-label]="'协议消息流,已发送 ' + step() + ' 条'">
+        <div #logBox class="dark-scroll h-44 overflow-y-auto border-b border-line-dark bg-ink-950/80 px-4 py-3" aria-live="polite" [attr.aria-label]="'协议消息流，已发送 ' + step() + ' 条'">
           @if (step() === 0) {
             <p class="font-mono text-xs text-ink-faint">
               等待消息流<span class="animate-caret text-blue-glow">▍</span>
             </p>
           }
           @for (entry of log(); track entry.index) {
-            <div class="mb-1.5 flex items-start gap-2 font-mono text-[11px] leading-relaxed">
-              <span class="mt-px shrink-0 text-ink-faint">{{ entry.index < 10 ? '0' + entry.index : entry.index }}</span>
-              <span class="shrink-0 rounded border px-1.5 py-px text-[10px] {{ entry.color }}">{{ entry.type }}</span>
-              <span class="min-w-0 truncate text-white/45">{{ entry.json }}</span>
+            <div class="mb-1.5 flex items-start gap-2 font-mono text-xs leading-relaxed">
+              <span class="mt-px shrink-0 tabular-nums text-ink-faint">{{ entry.index < 10 ? '0' + entry.index : entry.index }}</span>
+              <span class="shrink-0 rounded border px-1.5 py-px text-xs {{ entry.color }}">{{ entry.type }}</span>
+              <span class="min-w-0 truncate text-white/50">{{ entry.json }}</span>
             </div>
           }
         </div>
 
         <div class="p-4 sm:p-5">
-          <div class="a2ui-frame min-h-56 rounded-xl bg-white p-4 sm:p-5">
+          <!-- Fixed min-h-[22rem] prevents page-wide layout shifts (CLS) as steps 1..5 stream in -->
+          <div class="a2ui-frame min-h-[22rem] rounded-xl bg-white p-4 sm:p-5">
             @if (step() < 2) {
-              <div class="grid gap-3" aria-hidden="true">
-                <div class="h-5 w-2/5 animate-pulse rounded bg-mist"></div>
-                <div class="h-20 animate-pulse rounded-lg bg-mist"></div>
-                <div class="h-9 animate-pulse rounded-lg bg-mist"></div>
+              <div class="grid gap-3.5" aria-hidden="true">
+                <div class="h-6 w-36 animate-pulse rounded-md bg-mist"></div>
+                <div class="grid gap-3 rounded-xl border border-line-cool/70 p-4">
+                  <div class="flex items-center justify-between">
+                    <div class="grid gap-1.5">
+                      <div class="h-4 w-28 animate-pulse rounded bg-mist"></div>
+                      <div class="h-3 w-36 animate-pulse rounded bg-mist/80"></div>
+                    </div>
+                    <div class="h-5 w-12 animate-pulse rounded bg-mist"></div>
+                  </div>
+                  <div class="h-px bg-line-cool/60"></div>
+                  <div class="flex items-center justify-between">
+                    <div class="grid gap-1.5">
+                      <div class="h-4 w-28 animate-pulse rounded bg-mist"></div>
+                      <div class="h-3 w-36 animate-pulse rounded bg-mist/80"></div>
+                    </div>
+                    <div class="h-5 w-12 animate-pulse rounded bg-mist"></div>
+                  </div>
+                </div>
+                <div class="grid gap-3 rounded-xl border border-line-cool/70 p-4">
+                  <div class="h-3.5 w-16 animate-pulse rounded bg-mist"></div>
+                  <div class="h-4 w-full animate-pulse rounded-full bg-mist"></div>
+                  <div class="h-4 w-full animate-pulse rounded-full bg-mist"></div>
+                </div>
+                <div class="h-9 w-24 animate-pulse rounded-lg bg-blue/20"></div>
               </div>
             } @else {
               <a2ui-v09-surface surfaceId="flight-demo" />
             }
           </div>
-          <p class="mt-3 text-center font-mono text-[10px] text-ink-faint">上方界面由 @a2ui/angular 渲染器绘制 · 拖动滑块试试本地数据绑定</p>
+          <p class="mt-3 text-center font-mono text-xs text-ink-faint">上方界面由 &#64;a2ui/angular 渲染器绘制 · 拖动滑块试试本地数据绑定</p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="relative border-y border-line-warm bg-white/60" appReveal="fade">
+  <div class="relative border-y border-line-warm bg-white/75 backdrop-blur-xs" appReveal="fade">
     <dl #statsBox class="mx-auto grid max-w-7xl grid-cols-2 divide-line-warm border-line-warm px-4 sm:px-6 [&>div]:border-line-warm md:grid-cols-4 md:divide-x [&>div:nth-child(2n)]:border-l [&>div:nth-child(n+3)]:border-t md:[&>div:nth-child(n+3)]:border-t-0">
       @for (s of stats; track s.label; let i = $index) {
-        <div class="flex flex-col items-center gap-1 px-4 py-5 transition-colors hover:bg-blue-tint/40">
-          <dt class="order-2 text-xs font-medium text-ink-mute">{{ s.label }}</dt>
-          <dd class="order-1 font-display text-3xl font-bold text-blue tabular-nums">{{ statValues()[i] }}</dd>
+        <div class="flex flex-col items-center gap-1 px-4 py-6 text-center transition-colors duration-300 hover:bg-blue-tint/35">
+          <dt class="order-2 text-sm font-semibold text-ink">{{ s.label }}</dt>
+          <dd class="order-1 font-display text-3xl font-bold tabular-nums text-blue sm:text-4xl">{{ statValues()[i] }}</dd>
+          <dd class="order-3 font-mono text-xs text-ink-mute">{{ s.detail }}</dd>
         </div>
       }
     </dl>

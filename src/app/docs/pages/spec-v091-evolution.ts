@@ -7,7 +7,7 @@ import {RouterLink} from '@angular/router';
   imports: [DocsPageHeader, RouterLink],
   template: `
     <app-docs-page-header eyebrow="规范 v0.9.1" heading="演进指南(v0.9 → v0.9.1)">
-        v0.9.1 是 v0.9 的小幅修订:只有两项变更,载荷完全兼容。本页列出变更细节与迁移动作。原文见
+        v0.9.1 是 v0.9 的小幅修订：只有两项变更，载荷完全兼容。本页列出变更细节与迁移动作。原文见
         <a href="https://a2ui.org/specification/v0.9.1-evolution-guide/" target="_blank" rel="noopener">官方 v0.9.1 Evolution Guide</a>。
     </app-docs-page-header>
 
@@ -24,7 +24,7 @@ import {RouterLink} from '@angular/router';
           <tr>
             <td><strong>surfaceId 唯一性放宽</strong></td>
             <td>surfaceId 必须在渲染器整个生命周期内全局唯一</td>
-            <td>只需在<strong>当前活跃</strong> surface 中唯一;不先删除就对已存在的 surfaceId 发 createSurface 仍是错误</td>
+            <td>只需在<strong>当前活跃</strong> surface 中唯一；不先删除就对已存在的 surfaceId 发 createSurface 仍是错误</td>
           </tr>
         </tbody>
       </table>
@@ -34,26 +34,26 @@ import {RouterLink} from '@angular/router';
         <li><strong>MIME:</strong>v0.9 扩展规范的早期草案版本使用旧值 <code>application/json+a2ui</code>;
         v0.9.1 把全部规范文档与扩展元数据示例更新为 <code>application/a2ui+json</code>。</li>
         <li><strong>surfaceId:</strong><code>a2ui_protocol.md</code> 中的 surfaceId 定义删除了
-        「必须在渲染器生命周期内全局唯一」的要求,唯一性范围收窄到活跃 surface;
+        「必须在渲染器生命周期内全局唯一」的要求，唯一性范围收窄到活跃 surface;
         重复创建(未先 deleteSurface)依旧报错。</li>
       </ul>
 
       <h2 id="migrate">迁移</h2>
       <blockquote>
         <p>v0.9.1 与 v0.9 载荷<strong>完全兼容</strong>:schema 的版本字段同时接受 <code>"v0.9"</code> 与
-        <code>"v0.9.1"</code>,客户端与服务器可以无破坏升级。</p>
+        <code>"v0.9.1"</code>，客户端与服务器可以无破坏升级。</p>
       </blockquote>
       <ol>
         <li>把代码里硬编码的 <code>application/json+a2ui</code> 全部替换为 <code>application/a2ui+json</code>——这是唯一必须做的动作。</li>
         <li>版本字符串按需更新为 <code>"v0.9.1"</code>(继续发 <code>"v0.9"</code> 也合法)。</li>
-        <li>若实现依赖「生命周期内全局唯一」管理 surfaceId,可放宽为活跃集唯一;保留原逻辑也不违反新规范。</li>
+        <li>若实现依赖「生命周期内全局唯一」管理 surfaceId，可放宽为活跃集唯一；保留原逻辑也不违反新规范。</li>
       </ol>
 
       <h2 id="versions">其他版本跨度</h2>
       <ul>
         <li><strong>v0.8 → v0.9:</strong>见仓库中的 v0.9 Evolution Guide
         (<a href="https://github.com/a2ui-project/a2ui/blob/main/specification/v0_9/docs/evolution_guide.md" target="_blank" rel="noopener"><code>specification/v0_9/docs/evolution_guide.md</code></a>)。</li>
-        <li><strong>v0.9.1 → v1.0:</strong>术语、绑定语法、函数调用与目录都有破坏性变化,按
+        <li><strong>v0.9.1 → v1.0:</strong>术语、绑定语法、函数调用与目录都有破坏性变化，按
         <a routerLink="/docs/spec-v1-evolution">v1.0 演进指南</a>分角色迁移。</li>
       </ul>
       <p>协议版本状态总览(v1.0 Current / v0.9.1 与 v0.9 Previous / v0.8 Deprecated)见<a routerLink="/docs/roadmap">路线图</a>。</p>

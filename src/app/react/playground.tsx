@@ -28,9 +28,9 @@ export interface PlaygroundProps {
   onVisibility: (visibility: {angular: boolean; react: boolean}) => void;
 }
 
-const TYPE_VARIANT: Record<string, 'info' | 'default' | 'success' | 'warning' | 'danger' | 'secondary'> = {
+const TYPE_VARIANT: Record<string, 'info' | 'default' | 'outline' | 'success' | 'warning' | 'danger' | 'secondary'> = {
   createSurface: 'info',
-  updateComponents: 'default',
+  updateComponents: 'outline',
   updateDataModel: 'success',
   deleteSurface: 'danger',
   action: 'warning',
@@ -145,7 +145,7 @@ export function Playground({scenarios, onStream, onVisibility}: PlaygroundProps)
       restart(parsed as Record<string, unknown>[]);
       setTab('stream');
     } catch (err) {
-      setEditorError(`JSON 解析失败:${err instanceof Error ? err.message : String(err)}`);
+      setEditorError(`JSON 解析失败：${err instanceof Error ? err.message : String(err)}`);
     }
   };
 
@@ -155,7 +155,7 @@ export function Playground({scenarios, onStream, onVisibility}: PlaygroundProps)
       setCopied(true);
       setTimeout(() => setCopied(false), 1500);
     } catch {
-      setEditorError('复制失败,请手动选择文本复制。');
+      setEditorError('复制失败，请手动选择文本复制。');
     }
   };
 
@@ -185,7 +185,7 @@ export function Playground({scenarios, onStream, onVisibility}: PlaygroundProps)
   }, [activeMessages, step]);
 
   return (
-    <div className="flex h-full flex-col gap-4 rounded-xl border border-line-cool bg-white p-4 shadow-sm sm:p-5">
+    <div className="flex h-full flex-col gap-4 rounded-2xl border border-line-cool bg-white p-5 shadow-lift">
       <div className="flex flex-wrap items-center gap-2">
         <h3 className="font-display text-base font-bold text-ink">消息控制台</h3>
         <Badge variant="info">{activeScenarioName}</Badge>
@@ -193,13 +193,16 @@ export function Playground({scenarios, onStream, onVisibility}: PlaygroundProps)
           <span className={cn('inline-block size-1.5 rounded-full', playing ? 'bg-green animate-live' : 'bg-ink-faint')} />
           {playing ? '播放中' : step >= total ? '已完成' : '已暂停'}
         </Badge>
-        <span className="ml-auto font-mono text-xs text-ink-mute">
-          {step}/{total} 条 — {progress}%
+        <span className="ml-auto font-mono text-xs tabular-nums text-ink-mute">
+          {step}/{total} 条 · {progress}%
         </span>
       </div>
 
       <div className="h-1.5 overflow-hidden rounded-full bg-mist">
-        <div className="h-full rounded-full bg-blue transition-all duration-300" style={{width: `${progress}%`}} />
+        <div
+          className="h-full w-full origin-left rounded-full bg-blue transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          style={{transform: `scaleX(${progress / 100})`}}
+        />
       </div>
 
       <div className="flex flex-wrap gap-2" role="group" aria-label="示例场景">
@@ -230,7 +233,7 @@ export function Playground({scenarios, onStream, onVisibility}: PlaygroundProps)
           <RotateCcw />
         </Button>
         <div className="ml-1 flex min-w-40 flex-1 items-center gap-3">
-          <span className="whitespace-nowrap font-mono text-[11px] text-ink-mute">间隔 {speed}ms</span>
+          <span className="whitespace-nowrap font-mono text-xs tabular-nums text-ink-mute">间隔 {speed}ms</span>
           <Slider
             min={150}
             max={1500}
@@ -256,9 +259,9 @@ export function Playground({scenarios, onStream, onVisibility}: PlaygroundProps)
           <Switch checked={showReact} onCheckedChange={setShowReact} aria-label="显示 React 预览" />
           React 预览
         </label>
-        <div className="ml-auto flex gap-1.5">
+        <div className="ml-auto flex flex-wrap gap-1.5">
           {Object.entries(typeCounts).map(([type, count]) => (
-            <Badge key={type} variant={TYPE_VARIANT[type] ?? 'secondary'} className="font-mono text-[10px]">
+            <Badge key={type} variant={TYPE_VARIANT[type] ?? 'secondary'} className="font-mono tabular-nums">
               {type} ×{count}
             </Badge>
           ))}
@@ -276,7 +279,7 @@ export function Playground({scenarios, onStream, onVisibility}: PlaygroundProps)
         </TabsList>
 
         <TabsContent value="stream" className="min-h-0 flex-1">
-          <div ref={listRef} className="dark-scroll grid max-h-105 min-h-48 gap-1.5 overflow-y-auto rounded-lg border border-line-cool bg-mist/60 p-2">
+          <div ref={listRef} className="quiet-scroll grid max-h-105 min-h-48 gap-1.5 overflow-y-auto rounded-xl border border-line-cool bg-mist/60 p-2">
             {activeMessages.map((message, index) => {
               const type = messageType(message);
               const processed = index < step;
@@ -289,19 +292,21 @@ export function Playground({scenarios, onStream, onVisibility}: PlaygroundProps)
                   onClick={() => jumpTo(index + 1)}
                   title={`跳转到第 ${index + 1} 条消息`}
                   className={cn(
-                    'grid cursor-pointer grid-cols-[auto_auto_1fr] items-center gap-2 rounded-md border-l-2 px-2.5 py-1.5 text-left transition-all',
-                    processed ? 'border-blue bg-white opacity-100' : 'border-transparent opacity-55 hover:opacity-80',
-                    isNext && 'border-amber bg-amber-tint/60 opacity-100',
+                    'grid cursor-pointer grid-cols-[auto_auto_1fr] items-center gap-2 rounded-lg border px-2.5 py-1.5 text-left transition-all duration-300',
+                    processed
+                      ? 'border-blue/30 bg-white opacity-100 shadow-2xs'
+                      : 'border-transparent opacity-55 hover:border-line-cool hover:bg-white/60 hover:opacity-85',
+                    isNext && 'border-amber/60 bg-amber-tint/70 opacity-100',
                   )}
                 >
-                  <span className="font-mono text-[10px] text-ink-mute">{String(index + 1).padStart(2, '0')}</span>
-                  <Badge variant={TYPE_VARIANT[type] ?? 'secondary'} className="font-mono text-[10px]">{type}</Badge>
-                  <span className="truncate font-mono text-[11px] text-ink-soft">{JSON.stringify(message)}</span>
+                  <span className="font-mono text-xs tabular-nums text-ink-mute">{String(index + 1).padStart(2, '0')}</span>
+                  <Badge variant={TYPE_VARIANT[type] ?? 'secondary'} className="font-mono">{type}</Badge>
+                  <span className="truncate font-mono text-xs text-ink-soft">{JSON.stringify(message)}</span>
                 </button>
               );
             })}
           </div>
-          <p className="mt-2 text-[11px] text-ink-mute">点击任意消息可跳转到该步骤;跳转会在两个渲染器中重新放流。</p>
+          <p className="mt-2 text-xs text-ink-mute">点击任意消息可跳转到该步骤；跳转会在两个渲染器中重新放流。</p>
         </TabsContent>
 
         <TabsContent value="editor" className="min-h-0 flex-1">

@@ -42,10 +42,10 @@ export class Hero implements AfterViewInit, OnDestroy {
     {name: 'Compose', dot: 'bg-green'},
   ];
   protected readonly stats = [
-    {value: '6', label: '官方渲染器'},
-    {value: '3', label: 'Agent SDK 语言'},
-    {value: '18', label: '基础组件'},
-    {value: '15', label: '内置函数'},
+    {value: '6', label: '官方渲染器', detail: 'React · Angular · Lit · Flutter · SwiftUI · Compose'},
+    {value: '3', label: 'Agent SDK 语言', detail: 'TypeScript · Python · Dart'},
+    {value: '18', label: '基础目录组件', detail: '排版 · 容器 · 表单 · 导航 · 媒体'},
+    {value: '15', label: '标准内置函数', detail: '校验 · 格式化 · 数学 · 逻辑'},
   ];
   protected readonly statValues = signal<number[]>(this.stats.map(() => 0));
 

@@ -10,7 +10,7 @@ export interface Scenario {
 const flight: Scenario = {
   id: 'flight',
   name: '航班预订',
-  description: '智能体查询航班后,流式构建预订界面;乘客人数本地绑定,确认时回传 action。',
+  description: '智能体查询航班后，流式构建预订界面；乘客人数本地绑定，确认时回传 action。',
   messages: [
     {
       version: '1.0',
@@ -100,7 +100,7 @@ const flight: Scenario = {
 const restaurant: Scenario = {
   id: 'restaurant',
   name: '餐厅订位',
-  description: '表单控件全部绑定本地数据模型,提交时一次性解析上下文回传智能体。',
+  description: '表单控件全部绑定本地数据模型，提交时一次性解析上下文回传智能体。',
   messages: [
     {
       version: '1.0',
@@ -113,7 +113,7 @@ const restaurant: Scenario = {
         components: [
           {id: 'root', component: 'Column', children: ['head', 'name_field', 'time_field', 'party_picker', 'highchair', 'submit']},
           {id: 'head', component: 'Text', text: '预订今晚的餐位', weight: 700},
-          {id: 'name_field', component: 'TextField', label: '预订人姓名', placeholder: '例如:王小明', variant: 'shortText', value: {'@path': '/name'}},
+          {id: 'name_field', component: 'TextField', label: '预订人姓名', placeholder: '例如：林致远', variant: 'shortText', value: {'@path': '/name'}},
           {id: 'time_field', component: 'DateTimeInput', label: '到店时间', enableDate: true, enableTime: true, value: {'@path': '/time'}},
         ],
       },
@@ -182,7 +182,7 @@ const restaurant: Scenario = {
 const dashboard: Scenario = {
   id: 'dashboard',
   name: '增长看板',
-  description: 'Tabs 组织多组指标,数据模型增量更新,绑定文本原地刷新。',
+  description: 'Tabs 组织多组指标，数据模型增量更新，绑定文本原地刷新。',
   messages: [
     {
       version: '1.0',
