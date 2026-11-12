@@ -9,6 +9,7 @@ import {NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet} from 
 })
 export class App implements OnDestroy {
   protected readonly menuOpen = signal(false);
+  protected readonly year = new Date().getFullYear();
   protected readonly scrolled = signal(false);
   protected readonly scrollPct = signal(0);
 
@@ -50,6 +51,11 @@ export class App implements OnDestroy {
 
   protected closeMenu(): void {
     this.menuOpen.set(false);
+  }
+
+  protected toTop(): void {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'});
   }
 
   protected skipToMain(event: Event): void {
