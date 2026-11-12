@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-spec-v1-protocol',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="规范 v1.0 / 协议规范" heading="协议规范(v1.0)">
+    <app-docs-page-header eyebrow="规范 v1.0" heading="协议规范(v1.0)">
         v1.0 是当前版本。本页是协议规范的中文参考:信封、消息字段、surface 生命周期、
         组件模型、绑定与错误码。概念解释见<a routerLink="/docs/concepts">核心概念</a>,
         逐字段示例见<a routerLink="/docs/messages">消息参考</a>,原文见

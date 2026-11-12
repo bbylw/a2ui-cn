@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-universal',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="指南 / 通用 Web 组件" heading="通用 Web 组件">
+    <app-docs-page-header eyebrow="指南" heading="通用 Web 组件">
         用 A2uiLitElement 写一次自定义组件,直接注册进 Lit、React、Angular 三个目录,无需逐框架包装。
         属性契约用 Zod 声明,web_core 在把值交给你的元素之前解析好绑定、函数调用、子引用与动作。
     </app-docs-page-header>

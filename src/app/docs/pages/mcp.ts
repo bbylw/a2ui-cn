@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   selector: 'app-docs-mcp',
   imports: [DocsPageHeader, RouterLink],
   template: `
-    <app-docs-page-header eyebrow="指南 / MCP 集成" heading="MCP 集成总览">
+    <app-docs-page-header eyebrow="指南" heading="MCP 集成总览">
         A2UI 与 Model Context Protocol 有四种集成方式,取决于两件事:
         外层宿主是你的应用还是外部 MCP 客户端;MCP 服务器返回的是 JSON、可复用的 A2UI 布局,还是沙箱化 HTML 应用。
     </app-docs-page-header>

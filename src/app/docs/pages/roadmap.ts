@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   selector: 'app-docs-roadmap',
   imports: [DocsPageHeader, RouterLink],
   template: `
-    <app-docs-page-header eyebrow="生态 / 路线图" heading="路线图">
+    <app-docs-page-header eyebrow="生态" heading="路线图">
         协议之外的工具链路线:把一个生成式 UI 智能体从第一个组件带到生产环境。
         五个阶段构成循环,监控学到的东西回到组件工作;A2UI CLI 的目标是覆盖全部阶段。
     </app-docs-page-header>

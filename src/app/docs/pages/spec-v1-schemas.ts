@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-spec-v1-schemas',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="规范 v1.0 / JSON Schema" heading="JSON Schema(v1.0)">
+    <app-docs-page-header eyebrow="规范 v1.0" heading="JSON Schema(v1.0)">
         v1.0 由 11 份规范 JSON Schema 定义,源码位于仓库 <code>specification/v1_0/json/</code>,
         <code>$id</code> 统一为 <code>https://a2ui.org/specification/v1_0/&lt;文件名&gt;</code>,
         使用 JSON Schema draft 2020-12。原文见

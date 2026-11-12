@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   selector: 'app-docs-sdks',
   imports: [DocsPageHeader, RouterLink],
   template: `
-    <app-docs-page-header eyebrow="概念 / SDK 一览" heading="SDK 一览">
+    <app-docs-page-header eyebrow="概念" heading="SDK 一览">
         A2UI 的 SDK 分三层:Core 实现协议与状态,Agent 在 Core 之上生成提示词与编译校验,
         Renderer 把状态画成各框架的原生控件。同一语言里三层共享 Core 的数据结构,两侧理解永远一致。
     </app-docs-page-header>

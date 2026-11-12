@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-catalogs',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="概念 / 目录" heading="目录">
+    <app-docs-page-header eyebrow="概念" heading="目录">
         目录(Catalog)是智能体与渲染器之间的白名单契约:一份带版本号的 JSON Schema,
         声明可用的组件、函数与给模型的instructions。你决定目录里有什么,智能体决定从中画什么。
     </app-docs-page-header>

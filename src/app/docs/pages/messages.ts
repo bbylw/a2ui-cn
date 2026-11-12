@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-messages',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="概念 / 消息参考" heading="消息参考">
+    <app-docs-page-header eyebrow="概念" heading="消息参考">
         A2UI 的全部通信都是异步 JSON 消息:智能体到渲染器六种,渲染器到智能体三种。
         本页覆盖 v1.0 的每个消息类型、字段与示例。
     </app-docs-page-header>

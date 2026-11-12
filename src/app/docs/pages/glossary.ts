@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   selector: 'app-docs-glossary',
   imports: [DocsPageHeader, RouterLink],
   template: `
-    <app-docs-page-header eyebrow="概念 / 术语表" heading="术语表">
+    <app-docs-page-header eyebrow="概念" heading="术语表">
         协议、SDK 与生成式 UI 模式里出现的全部名词,按字母排序。
         深入解释见<a routerLink="/docs/concepts">核心概念</a>及其子页。
     </app-docs-page-header>

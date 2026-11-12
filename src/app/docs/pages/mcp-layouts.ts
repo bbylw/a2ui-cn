@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-mcp-layouts',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="指南 / 提供 A2UI 布局" heading="从 MCP 服务器提供 A2UI 布局">
+    <app-docs-page-header eyebrow="指南" heading="从 MCP 服务器提供 A2UI 布局">
         布局只发一次,数据每次发:服务器把静态组件树发布为 a2ui:// 资源,
         tools/call 只返回 updateDataModel。客户端按 URI 缓存模板,工具运行时刷新 surface 状态。
     </app-docs-page-header>

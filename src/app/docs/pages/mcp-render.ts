@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-mcp-render',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="指南 / 在 MCP App 中渲染" heading="在 MCP App 中渲染 A2UI">
+    <app-docs-page-header eyebrow="指南" heading="在 MCP App 中渲染 A2UI">
         外层宿主(Claude Desktop、Cursor、VS Code)支持 MCP Apps 但不原生支持 A2UI 时,
         把 A2UI Web 渲染器打包进 ui:// HTML 资源:宿主无需任何 A2UI 代码,就能显示交互 surface。
         这是<a routerLink="/docs/mcp-apps">嵌入 MCP Apps</a>的反方向。

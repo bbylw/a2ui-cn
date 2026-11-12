@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-define-catalog',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="指南 / 定义目录" heading="定义目录">
+    <app-docs-page-header eyebrow="指南" heading="定义目录">
         自定义目录让智能体用上你的业务组件。流程是三步:写 JSON Schema 契约、智能体侧加载、渲染侧注册实现。
         两侧读同一份定义,CI 里再做一次对齐测试,契约就不会漂移。
     </app-docs-page-header>

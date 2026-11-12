@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-data-binding',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="概念 / 数据模型与绑定" heading="数据模型与绑定">
+    <app-docs-page-header eyebrow="概念" heading="数据模型与绑定">
         每个 surface 带一个隔离的 JSON 数据模型。组件结构只声明一次,运行时数据靠绑定流动:
         数据变化时只有绑定到该路径的组件刷新,输入框的编辑先写本地、再按需同步给智能体。
     </app-docs-page-header>

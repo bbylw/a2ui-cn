@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   selector: 'app-docs-ecosystem',
   imports: [DocsPageHeader, RouterLink],
   template: `
-    <app-docs-page-header eyebrow="生态 / 社区项目" heading="社区项目">
+    <app-docs-page-header eyebrow="生态" heading="社区项目">
         第三方 A2UI 渲染器、智能体库与目录的名单。官方 SDK 与渲染器见<a routerLink="/docs/sdks">SDK 一览</a>,
         工具链路线见<a routerLink="/docs/roadmap">路线图</a>。
     </app-docs-page-header>

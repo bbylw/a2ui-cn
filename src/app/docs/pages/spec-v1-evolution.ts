@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   selector: 'app-docs-spec-v1-evolution',
   imports: [DocsPageHeader, RouterLink],
   template: `
-    <app-docs-page-header eyebrow="规范 v1.0 / 演进指南" heading="演进指南(v0.9.1 → v1.0)">
+    <app-docs-page-header eyebrow="规范 v1.0" heading="演进指南(v0.9.1 → v1.0)">
         v1.0 相对 0.9 / 0.9.1 是破坏性升级:术语、保留键、消息与目录结构都有变化。
         本页给出差异全表与按角色的迁移清单。原文见
         <a href="https://a2ui.org/specification/v1.0-evolution-guide/" target="_blank" rel="noopener">官方 Evolution Guide</a>。

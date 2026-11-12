@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-mcp-tools',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="指南 / 调用 MCP 工具" heading="从 A2UI 调用 MCP 工具">
+    <app-docs-page-header eyebrow="指南" heading="从 A2UI 调用 MCP 工具">
         @a2ui/catalog-mcp 把 A2UI v1.0 Web surface 连到 MCP 服务器:按钮与输入直接调工具,
         把 JSON 或文本结果写进 surface 数据模型,不需要再绕一轮智能体。
     </app-docs-page-header>

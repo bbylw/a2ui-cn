@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-concepts',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="概念 / 核心概念" heading="核心概念">
+    <app-docs-page-header eyebrow="概念" heading="核心概念">
         概念组的总览:架构、Surface 与组件树。读完这一页,你就有了阅读其余概念页与消息参考所需的心智模型;
         目录、数据绑定、动作、推理格式等各有专页深入。
     </app-docs-page-header>

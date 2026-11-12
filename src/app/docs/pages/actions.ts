@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-actions',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="概念 / 动作、事件与函数" heading="动作、事件与函数">
+    <app-docs-page-header eyebrow="概念" heading="动作、事件与函数">
         交互组件的 action 属性是一个二选一:event 把用户操作发回智能体、开启新一轮对话;
         functionCall 直接执行目录里的函数,不打扰智能体。函数还能出现在属性绑定、校验规则与远程调用里。
     </app-docs-page-header>

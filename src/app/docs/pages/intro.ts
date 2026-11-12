@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   selector: 'app-docs-intro',
   imports: [DocsPageHeader, RouterLink],
   template: `
-    <app-docs-page-header eyebrow="入门 / 简介" heading="A2UI 简介">
+    <app-docs-page-header eyebrow="入门" heading="A2UI 简介">
         A2UI(Agent-to-UI)是一个开放协议,让 AI 智能体用声明式 JSON 描述界面,
         由客户端用自己的原生组件渲染。智能体回答的不再只是一段文字,而是一张可以点的卡片、
         一个可以拖的日期、一块随对话实时更新的面板。

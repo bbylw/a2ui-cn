@@ -207,45 +207,192 @@ body {
 .quiet-scroll::-webkit-scrollbar-thumb { background: var(--color-line-cool); border: none; border-radius: 4px; }
 .quiet-scroll::-webkit-scrollbar-thumb:hover { background: var(--color-blue-glow); }
 
-.chip-row { scrollbar-width: none; mask-image: linear-gradient(to right, transparent, #000 14px, #000 calc(100% - 14px), transparent); }
-.chip-row::-webkit-scrollbar { display: none; }
+/* 滚动容器底边渐隐,提示还有内容;顶部保持硬边,避免滚动态出现半透明残行 */
+.scroll-fade-y { mask-image: linear-gradient(to bottom, #000 0, #000 calc(100% - 18px), transparent 100%); }
 
 .doc-enter { animation: doc-enter 0.32s cubic-bezier(0.22, 1, 0.36, 1); }
 @keyframes doc-enter { from { opacity: 0; transform: translateY(8px); } }
 
-/* ---------- docs prose ---------- */
-.doc-prose { font-size: 0.9375rem; line-height: 1.85; color: var(--color-ink); }
-.doc-prose > * + * { margin-top: 1.1rem; }
-.doc-prose h2 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; margin-top: 2.75rem; padding-top: 1.5rem; border-top: 1px solid var(--color-line-warm); }
-.doc-prose h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
-.doc-prose h3 { font-family: var(--font-display); font-size: 1.125rem; font-weight: 700; margin-top: 2rem; }
-.doc-prose p { color: #2c3c5c; }
-.doc-prose a { color: var(--color-blue-deep); text-decoration: underline; text-decoration-color: rgb(21 87 176 / 0.35); text-underline-offset: 3px; transition: text-decoration-color 0.15s; }
-.doc-prose a:hover { text-decoration-color: var(--color-blue-deep); }
-.doc-prose ul, .doc-prose ol { padding-left: 1.4rem; display: grid; gap: 0.45rem; color: #2c3c5c; }
-.doc-prose ul { list-style: disc; }
-.doc-prose ol { list-style: decimal; }
-.doc-prose li::marker { color: var(--color-blue-deep); font-weight: 600; }
-.doc-prose strong { color: var(--color-ink); font-weight: 700; }
-code { overflow-wrap: anywhere; }
-.doc-prose :not(pre) > code { font-family: var(--font-mono); font-size: 0.82em; background: var(--color-blue-tint); color: var(--color-blue-deep); padding: 0.15em 0.4em; border-radius: 5px; border: 1px solid rgb(26 115 232 / 0.14); overflow-wrap: anywhere; }
-.doc-prose table { width: 100%; border-collapse: collapse; font-size: 0.875rem; display: block; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--color-line-cool) transparent; }
-.doc-prose table::-webkit-scrollbar { height: 6px; }
-.doc-prose table::-webkit-scrollbar-track { background: transparent; }
-.doc-prose table::-webkit-scrollbar-thumb { background: var(--color-line-cool); border-radius: 4px; }
-.doc-prose tbody tr { transition: background-color 0.12s; }
-.doc-prose tbody tr:hover { background: rgb(232 240 254 / 0.5); }
-.doc-prose th { text-align: left; font-weight: 700; background: var(--color-mist); color: var(--color-ink); white-space: nowrap; }
-/* min-width 兜底列宽:长代码在列内断行,首列不被压到逐字断行 */
-.doc-prose th, .doc-prose td { border: 1px solid var(--color-line-cool); padding: 0.55rem 0.8rem; vertical-align: top; min-width: 8rem; }
-.doc-prose th:last-child, .doc-prose td:last-child { min-width: 12rem; }
-.doc-prose td { color: #2c3c5c; overflow-wrap: anywhere; }
-.doc-prose blockquote { border-left: 3px solid var(--color-amber); background: var(--color-amber-tint); padding: 0.8rem 1.1rem; border-radius: 0 10px 10px 0; color: #5c4a12; }
-.doc-prose blockquote p { color: inherit; }
-.doc-prose .not-prose a { color: inherit; text-decoration: none; }
-.doc-prose .doc-anchor { margin-left: 0.45em; font-family: var(--font-mono); font-size: 0.85em; font-weight: 600; color: var(--color-blue-deep); text-decoration: none; opacity: 0; transition: opacity 0.15s; }
-.doc-prose h2:hover > .doc-anchor, .doc-prose h3:hover > .doc-anchor, .doc-prose .doc-anchor:focus-visible { opacity: 0.65; }
-.doc-prose .doc-anchor:hover { opacity: 1; text-decoration: underline; text-underline-offset: 3px; }
+@keyframes menu-in { from { opacity: 0; transform: translateY(-4px); } }
+.doc-menu { animation: menu-in 0.18s cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* 侧栏链接:左轨与选中态显式写成类,避免 border-color 工具类相互覆盖 */
+.doc-nav-group { border-left: 1px solid var(--color-line-warm); }
+.doc-nav-link {
+  display: block;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  border-radius: 0 6px 6px 0;
+  padding: 0.32rem 0.55rem 0.32rem 0.8rem;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--color-ink-soft);
+  transition: color 0.15s, background-color 0.15s, border-color 0.15s;
+}
+.doc-nav-link:hover { color: var(--color-ink); border-left-color: var(--color-line-cool); background: rgb(13 27 46 / 0.035); }
+.doc-nav-link.is-active { color: var(--color-blue-deep); border-left-color: var(--color-blue); background: var(--color-blue-tint); font-weight: 600; }
+
+.doc-toc-group { border-left: 1px solid var(--color-line-warm); }
+.doc-toc-link {
+  display: block;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  padding: 0.26rem 0.4rem 0.26rem 0.75rem;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--color-ink-mute);
+  transition: color 0.15s, border-color 0.15s;
+}
+.doc-toc-link:hover { color: var(--color-ink); border-left-color: var(--color-line-cool); }
+.doc-toc-link.is-active { color: var(--color-blue-deep); border-left-color: var(--color-blue); font-weight: 600; }
+
+.doc-menu-link {
+  display: block;
+  border-radius: 6px;
+  padding: 0.5rem 0.55rem;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--color-ink-soft);
+  transition: color 0.15s, background-color 0.15s;
+}
+.doc-menu-link:hover { color: var(--color-ink); background: rgb(13 27 46 / 0.04); }
+.doc-menu-link.is-active { color: var(--color-blue-deep); background: var(--color-blue-tint); font-weight: 600; }
+
+/* ---------- docs prose ----------
+   放进 components 层,页面模板里的 mt-* / gap-* 工具类才能按住版式细节做局部覆盖。 */
+@layer components {
+  .doc-prose { font-size: 0.9375rem; line-height: 1.82; color: var(--color-ink); }
+  .doc-prose > * + * { margin-top: 1.05rem; }
+  .doc-prose h2 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    margin-top: 3rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--color-line-warm);
+    scroll-margin-top: 6.5rem;
+  }
+  .doc-prose h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+  .doc-prose h3 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.45;
+    letter-spacing: -0.008em;
+    margin-top: 2rem;
+    scroll-margin-top: 6.5rem;
+  }
+  .doc-prose > h2 + *, .doc-prose > h3 + * { margin-top: 0.9rem; }
+  .doc-prose > h2 + h3 { margin-top: 1.45rem; }
+  .doc-prose p { color: #2c3c5c; }
+  .doc-prose a {
+    color: var(--color-blue-deep);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: rgb(21 87 176 / 0.32);
+    text-underline-offset: 3px;
+    transition: text-decoration-color 0.15s;
+  }
+  .doc-prose a:hover { text-decoration-color: var(--color-blue-deep); }
+  .doc-prose ul, .doc-prose ol { padding-left: 1.3rem; display: grid; gap: 0.42rem; color: #2c3c5c; }
+  .doc-prose ul { list-style: disc; }
+  .doc-prose ol { list-style: decimal; }
+  .doc-prose li { padding-left: 0.25rem; }
+  .doc-prose li::marker { color: var(--color-blue-deep); font-weight: 600; }
+  .doc-prose li > ul, .doc-prose li > ol { margin-top: 0.42rem; }
+  .doc-prose strong { color: var(--color-ink); font-weight: 700; }
+  .doc-prose :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.83em;
+    background: #f1f5fb;
+    color: #1b4f9c;
+    padding: 0.08em 0.34em 0.12em;
+    border-radius: 4px;
+    border: 1px solid rgb(26 115 232 / 0.1);
+    overflow-wrap: anywhere;
+  }
+  /* 横向细线表格:去掉竖网格,首列文字与正文左缘对齐 */
+  .doc-prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    border-top: 1.5px solid var(--color-ink);
+    border-bottom: 1px solid var(--color-line-cool);
+  }
+  .doc-table-scroll { overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--color-line-cool) transparent; }
+  .doc-table-scroll::-webkit-scrollbar { height: 6px; }
+  .doc-table-scroll::-webkit-scrollbar-track { background: transparent; }
+  .doc-table-scroll::-webkit-scrollbar-thumb { background: var(--color-line-cool); border-radius: 4px; }
+  .doc-prose th, .doc-prose td {
+    border: 0;
+    border-bottom: 1px solid var(--color-line-warm);
+    padding: 0.52rem 0.9rem;
+    text-align: left;
+    vertical-align: top;
+    min-width: 6rem;
+  }
+  .doc-prose tr > :first-child { padding-left: 0; }
+  .doc-prose tr > :last-child { padding-right: 0; }
+  .doc-prose tbody tr:last-child > * { border-bottom: 0; }
+  .doc-prose thead th {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    color: var(--color-ink-soft);
+    white-space: nowrap;
+    border-bottom-color: var(--color-line-warm);
+  }
+  /* 术语表这类以 th 作行首的表格 */
+  .doc-prose tbody th[scope="row"] {
+    background: #ece6d8;
+    border-right: 1px solid var(--color-line-warm);
+    font-weight: 700;
+    white-space: normal;
+    min-width: 8.5rem;
+  }
+  .doc-prose tbody tr { transition: background-color 0.12s; }
+  .doc-prose tbody tr:hover { background: rgb(232 240 254 / 0.45); }
+  .doc-prose td { color: #2c3c5c; overflow-wrap: anywhere; }
+  /* 窄屏:三列以上的表给足最小宽度交给外层容器横向滚动,避免列被压到逐字换行 */
+  @media (max-width: 767px) {
+    .doc-table-scroll:has(table tr > :nth-child(3)) > table { min-width: 38rem; }
+  }
+  .doc-prose blockquote {
+    border-left: 2px solid var(--color-amber);
+    background: linear-gradient(90deg, #fdf6e3, #fdfaf0);
+    box-shadow: inset 0 0 0 1px rgb(249 171 0 / 0.16);
+    padding: 0.85rem 1.05rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 0.9rem;
+    color: #5f4a10;
+  }
+  .doc-prose blockquote p { color: inherit; }
+  .doc-prose hr { border: 0; border-top: 1px solid var(--color-line-warm); margin: 2rem 0; }
+  .doc-prose .not-prose a { color: inherit; text-decoration: none; }
+  /* not-prose 区域里的段落/列表应继承卡片自身的文字颜色,而不是正文墨色 */
+  .doc-prose .not-prose :is(p, ul, ol, li, dl, dt, dd, td, th) { color: inherit; }
+  .doc-prose .doc-anchor { margin-left: 0.4em; font-family: var(--font-mono); font-size: 0.8em; font-weight: 600; color: var(--color-blue-deep); text-decoration: none; opacity: 0; transition: opacity 0.15s; }
+  .doc-prose h2:hover > .doc-anchor, .doc-prose h3:hover > .doc-anchor, .doc-prose .doc-anchor:focus-visible { opacity: 0.55; }
+  .doc-prose .doc-anchor:hover { opacity: 1; }
+}
+
+/* 放进 base 层:工具类(如 whitespace-nowrap / overflow-wrap)仍能按需覆盖 */
+@layer base {
+  code { overflow-wrap: anywhere; }
+}
+
+@media print {
+  header.fixed, footer, aside, .doc-menu, nav[aria-label="上一节 / 下一节"] { display: none !important; }
+  body { background: #fff; }
+  .doc-prose { font-size: 10.5pt; line-height: 1.7; }
+  .doc-prose h2 { break-after: avoid; }
+  .doc-prose table, .doc-prose blockquote, .code-panel { break-inside: avoid; }
+  .doc-table-scroll { overflow: visible !important; }
+  .code-panel pre { max-height: none !important; overflow: visible !important; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

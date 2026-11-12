@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-spec-v091-a2a',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="规范 v0.9.1 / A2A 扩展" heading="A2A 扩展规范(v0.9.1)">
+    <app-docs-page-header eyebrow="规范 v0.9.1" heading="A2A 扩展规范(v0.9.1)">
         把 A2UI v0.9.1 接入 A2A 智能体协议:扩展 URI、Agent Card 声明、DataPart 编码与客户端元数据。
         原文见<a href="https://a2ui.org/specification/v0.9.1-a2ui-extension-specification/" target="_blank" rel="noopener">官方 v0.9.1 A2A Extension Specification</a>。
     </app-docs-page-header>

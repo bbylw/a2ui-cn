@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-mcp-apps',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="指南 / 嵌入 MCP Apps" heading="在 A2UI 中嵌入 MCP Apps">
+    <app-docs-page-header eyebrow="指南" heading="在 A2UI 中嵌入 MCP Apps">
         McpApp 组件把第三方交互 HTML 组件(拖拽看板、3D 画布)放进 A2UI surface,
         在双层 iframe 沙箱里运行,并把它的状态与工具调用和周围的原生组件同步起来。
     </app-docs-page-header>

@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   selector: 'app-docs-spec-v091-evolution',
   imports: [DocsPageHeader, RouterLink],
   template: `
-    <app-docs-page-header eyebrow="规范 v0.9.1 / 演进指南" heading="演进指南(v0.9 → v0.9.1)">
+    <app-docs-page-header eyebrow="规范 v0.9.1" heading="演进指南(v0.9 → v0.9.1)">
         v0.9.1 是 v0.9 的小幅修订:只有两项变更,载荷完全兼容。本页列出变更细节与迁移动作。原文见
         <a href="https://a2ui.org/specification/v0.9.1-evolution-guide/" target="_blank" rel="noopener">官方 v0.9.1 Evolution Guide</a>。
     </app-docs-page-header>

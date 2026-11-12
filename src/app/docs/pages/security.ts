@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   selector: 'app-docs-security',
   imports: [DocsPageHeader, RouterLink],
   template: `
-    <app-docs-page-header eyebrow="概念 / 安全模型" heading="安全模型">
+    <app-docs-page-header eyebrow="概念" heading="安全模型">
         生成式 UI 把模型输出直接变成用户看到的界面,提示注入因此可能变成界面注入。
         A2UI 的回答是:模型永远不写代码,只写白名单内的声明式描述。
     </app-docs-page-header>

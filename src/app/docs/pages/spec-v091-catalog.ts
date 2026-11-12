@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   selector: 'app-docs-spec-v091-catalog',
   imports: [DocsPageHeader, RouterLink],
   template: `
-    <app-docs-page-header eyebrow="规范 v0.9.1 / 基础目录指南" heading="基础目录实现指南(v0.9.1)">
+    <app-docs-page-header eyebrow="规范 v0.9.1" heading="基础目录实现指南(v0.9.1)">
         v0.9.1 基础目录:18 个组件、14 个渲染器侧函数,以及间距、配色与无障碍的实现约定。
         目录 <code>$id</code> 保留 <code>https://a2ui.org/specification/v0_9/catalogs/basic/catalog.json</code>,
         源码位于 <code>specification/v0_9_1/catalogs/basic/catalog.json</code>。原文见

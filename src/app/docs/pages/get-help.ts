@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-get-help',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="生态 / 获取帮助" heading="获取帮助">
+    <app-docs-page-header eyebrow="生态" heading="获取帮助">
         两条官方通道:给编码智能体装上官方 skill 让它陪你 co-create;
         或在 GitHub 仓库提反馈。另有一份独立第三方咨询目录,项目不背书、不排名、不认证。
     </app-docs-page-header>

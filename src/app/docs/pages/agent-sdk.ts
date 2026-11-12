@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-agent-sdk',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="指南 / Agent 集成" heading="Agent 集成">
+    <app-docs-page-header eyebrow="指南" heading="Agent 集成">
         Agent SDK 把模型接到 A2UI 协议上:从目录生成提示词与技能,把模型输出编译成协议消息,
         在服务端做有状态校验。模型选择、工具执行与对话状态仍然完全由你的应用控制。
     </app-docs-page-header>

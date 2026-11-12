@@ -22,7 +22,7 @@
          class="rounded-lg px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:bg-paper-deep hover:text-ink">概览</a>
       <a routerLink="/docs" routerLinkActive="!text-blue-deep bg-blue-tint" (click)="closeMenu()"
          class="rounded-lg px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:bg-paper-deep hover:text-ink">文档</a>
-      <a routerLink="/docs/messages" routerLinkActive="!text-blue-deep bg-blue-tint" (click)="closeMenu()"
+      <a routerLink="/docs/messages" (click)="closeMenu()"
          class="rounded-lg px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:bg-paper-deep hover:text-ink">协议规范</a>
       <a routerLink="/playground" routerLinkActive="!text-blue-deep bg-blue-tint" (click)="closeMenu()"
          class="rounded-lg px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:bg-paper-deep hover:text-ink">Playground</a>
@@ -50,7 +50,7 @@
       <div class="grid gap-1">
         <a routerLink="/" routerLinkActive="!text-blue-deep bg-blue-tint" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">概览</a>
         <a routerLink="/docs" routerLinkActive="!text-blue-deep bg-blue-tint" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">文档</a>
-        <a routerLink="/docs/messages" routerLinkActive="!text-blue-deep bg-blue-tint" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">协议规范</a>
+        <a routerLink="/docs/messages" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">协议规范</a>
         <a routerLink="/playground" routerLinkActive="!text-blue-deep bg-blue-tint" (click)="closeMenu()" class="rounded-lg px-3 py-2.5 text-sm font-medium text-ink hover:bg-paper-deep">Playground</a>
         <a href="https://github.com/a2ui-project/a2ui" target="_blank" rel="noopener" class="rounded-lg px-3 py-2.5 text-sm font-medium text-blue-deep hover:bg-blue-tint">GitHub 仓库</a>
       </div>

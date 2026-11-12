@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-quickstart',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="入门 / 快速开始" heading="快速开始">
+    <app-docs-page-header eyebrow="入门" heading="快速开始">
         两条路径:不装任何东西,用在线工具立刻体验;或者三条命令,在本地跑起官方的
         Travel A2UI 示例:一个 Python 智能体服务器,同时服务 React Web 端与 Flutter 移动端。
     </app-docs-page-header>
@@ -30,39 +30,78 @@ import {CodeBlock} from '../../shared/code-block';
 
       <h2 id="architecture">A2UI 在这个应用里的位置</h2>
       <p>A2UI 既是<strong>智能体的 SDK</strong>,也是<strong>应用的渲染器</strong>。Travel A2UI 的结构如下:</p>
-      <div class="not-prose mt-6 grid gap-4 lg:grid-cols-[1fr_auto_1fr] lg:items-stretch">
-        <div class="rounded-2xl bg-ink-900 p-6 text-white shadow-panel">
-          <div class="font-mono text-[10px] uppercase tracking-[0.14em] text-blue-glow">Server · 你的智能体</div>
-          <div class="mt-4 grid gap-3 text-[13px] leading-relaxed">
-            <div class="rounded-lg border border-white/10 bg-white/5 p-3">
-              <div class="font-semibold text-white">SDK 配置</div>
-              <div class="mt-1 text-white/70"><code class="font-mono text-[12px] break-all text-blue-glow">catalogs/a2ui-travel/catalog.json</code> 组件与函数目录 · <code class="font-mono text-[12px] break-all text-blue-glow">data/tools.json</code> 业务工具(航班查询/预订)</div>
+      <div class="not-prose mt-6 overflow-hidden rounded-xl border border-line-cool bg-card shadow-lift">
+        <div class="bg-ink-900 px-5 py-4 text-white">
+          <div class="flex items-center gap-2 font-mono text-[10px] tracking-[0.14em] text-blue-glow">
+            <span class="h-1.5 w-1.5 rounded-full bg-blue-bright" aria-hidden="true"></span>
+            SERVER · 你的智能体
+          </div>
+          <div class="mt-3 divide-y divide-white/10 border-t border-white/10 text-[12.5px] leading-relaxed">
+            <div class="py-3">
+              <p class="text-[13px] font-semibold text-white">SDK 配置</p>
+              <p class="mt-1 text-white/60">
+                <code class="whitespace-nowrap rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px]">catalogs/a2ui-travel/catalog.json</code>
+                组件与函数目录
+                <span class="mx-1 text-white/25">·</span>
+                <code class="whitespace-nowrap rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px]">data/tools.json</code>
+                业务工具(航班查询/预订)
+              </p>
             </div>
-            <div class="rounded-lg border border-blue/40 bg-blue/10 p-3">
-              <div class="font-semibold text-blue-glow">A2UI Agent SDK</div>
-              <div class="mt-1 text-white/70">技能生成器 <code class="font-mono text-[12px] break-all text-blue-glow">scripts/build_skills.py → skills/</code>:目录 → 技能与语法规则 · 编译器/校验器 <code class="font-mono text-[12px] break-all text-blue-glow">apps/server/src/travel_a2ui/brain/catalog.py</code>:模型输出 → wire 消息</div>
+            <div class="py-3">
+              <p class="text-[13px] font-semibold text-blue-glow">A2UI Agent SDK</p>
+              <div class="mt-1 grid gap-1 text-white/60">
+                <p>
+                  技能生成器
+                  <code class="whitespace-nowrap rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px]">scripts/build_skills.py → skills/</code>
+                  :目录 → 技能与语法规则
+                </p>
+                <p>
+                  编译器/校验器
+                  <code class="rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px] sm:whitespace-nowrap sm:[overflow-wrap:normal]">apps/<wbr>server/<wbr>src/<wbr>travel_a2ui/<wbr>brain/<wbr>catalog.py</code>
+                  :模型输出 → wire 消息
+                </p>
+              </div>
             </div>
-            <div class="rounded-lg border border-white/10 bg-white/5 p-3">
-              <div class="font-semibold text-white">你的智能体代码 + LLM 运行时(SDK 之外)</div>
-              <div class="mt-1 text-white/70"><code class="font-mono text-[12px] break-all text-blue-glow">apps/server/src/travel_a2ui/brain/</code> 调用工具与模型,把模型的 UI 输出交给编译器</div>
+            <div class="py-3">
+              <p class="text-[13px] font-semibold text-white">你的智能体代码 + LLM 运行时(SDK 之外)</p>
+              <p class="mt-1 text-white/60">
+                <code class="rounded bg-white/[0.08] px-1.5 py-0.5 font-mono text-[11px] text-blue-glow sm:text-[11.5px] sm:whitespace-nowrap sm:[overflow-wrap:normal]">apps/<wbr>server/<wbr>src/<wbr>travel_a2ui/<wbr>brain/</code>
+                调用工具与模型,把模型的 UI 输出交给编译器
+              </p>
             </div>
           </div>
         </div>
-        <div class="flex items-center justify-center gap-2 font-mono text-[11px] text-ink-mute lg:flex-col" aria-hidden="true">
-          <span class="text-blue-deep">↓ updateComponents / updateDataModel</span>
-          <span class="text-amber-deep">↑ action</span>
-          <span>(SSE)</span>
+
+        <div class="grid divide-y divide-line-warm border-y border-line-warm bg-paper/70 font-mono text-[11px] text-ink-soft sm:grid-cols-2 sm:divide-x sm:divide-y-0" aria-hidden="true">
+          <p class="flex items-baseline gap-1.5 px-5 py-2.5">
+            <span class="text-blue-deep">↓</span>
+            <span>updateComponents / updateDataModel</span>
+          </p>
+          <p class="flex items-baseline gap-1.5 px-5 py-2.5">
+            <span class="text-amber-deep">↑</span>
+            <span>action <span class="text-ink-faint">(SSE)</span></span>
+          </p>
         </div>
-        <div class="rounded-2xl border border-line-cool bg-white p-6 shadow-lift">
-          <div class="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-mute">Client · 你的应用</div>
-          <div class="mt-4 grid gap-3 text-[13px] leading-relaxed">
-            <div class="rounded-lg border border-line-cool bg-mist p-3">
-              <div class="font-semibold text-ink">你的应用</div>
-              <div class="mt-1 text-ink-soft">屏幕、导航、聊天;surface 之外都归你(<code class="font-mono text-[12px]">apps/web · apps/flutter</code>)</div>
+
+        <div class="px-5 py-4">
+          <div class="flex items-center gap-2 font-mono text-[10px] tracking-[0.14em] text-ink-mute">
+            <span class="h-1.5 w-1.5 rounded-full bg-green" aria-hidden="true"></span>
+            CLIENT · 你的应用
+          </div>
+          <div class="mt-3 divide-y divide-line-warm border-t border-line-warm text-[12.5px] leading-relaxed">
+            <div class="py-3">
+              <p class="text-[13px] font-semibold text-ink">你的应用</p>
+              <p class="mt-1 text-ink-soft">
+                屏幕、导航、聊天;surface 之外都归你
+                <code class="whitespace-nowrap rounded bg-mist px-1.5 py-0.5 font-mono text-[11px] text-ink sm:text-[11.5px]">apps/web · apps/flutter</code>
+              </p>
             </div>
-            <div class="rounded-lg border border-green/40 bg-green-tint p-3">
-              <div class="font-semibold text-green-deep">A2UI 渲染器</div>
-              <div class="mt-1 text-ink-soft">原生控件画 surface;绑定值本地更新;点击发回 action(<code class="font-mono text-[12px]">renderers/react · renderers/flutter</code>)</div>
+            <div class="py-3">
+              <p class="text-[13px] font-semibold text-green-deep">A2UI 渲染器</p>
+              <p class="mt-1 text-ink-soft">
+                原生控件画 surface;绑定值本地更新;点击发回 action
+                <code class="whitespace-nowrap rounded bg-green-tint px-1.5 py-0.5 font-mono text-[11px] text-green-deep sm:text-[11.5px]">renderers/react · renderers/flutter</code>
+              </p>
             </div>
           </div>
         </div>

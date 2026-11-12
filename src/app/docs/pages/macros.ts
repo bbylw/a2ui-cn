@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-macros',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="指南 / 使用宏" heading="使用宏">
+    <app-docs-page-header eyebrow="指南" heading="使用宏">
         宏在服务端把一次组件调用展开成客户端已支持的基础组件子树:模型少写 token、布局跨回合一致、
         新业务组件只需部署服务端。目前仅 Python Agent SDK 提供,其他语言在计划中。
     </app-docs-page-header>

@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-built-with',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="生态 / Built with A2UI" heading="Built with A2UI">
+    <app-docs-page-header eyebrow="生态" heading="Built with A2UI">
         A2UI 不只是示例协议:Google 与业界团队已经把它放进真实产品。
         下面五个案例展示同一份协议消息如何在数据平台、跨端框架、项目管理与 AI 助手里落地。
         案例中提及的协议版本均为各产品公开资料发布时的状态,与本站当前的 v1.0 文档无关。

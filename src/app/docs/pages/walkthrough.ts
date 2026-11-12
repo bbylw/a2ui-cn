@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-walkthrough',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="入门 / 分步详解" heading="分步详解">
+    <app-docs-page-header eyebrow="入门" heading="分步详解">
         边跑边读。先按<a routerLink="/docs/quickstart">快速开始</a>把 Travel A2UI 跑起来,
         然后对照屏幕上的每一块界面,理解 A2UI 的五层链路:边界、目录、技能、推理格式与渲染器。
     </app-docs-page-header>

@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-spec-v1-a2a',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="规范 v1.0 / A2A 扩展" heading="A2A 扩展(v1.0)">
+    <app-docs-page-header eyebrow="规范 v1.0" heading="A2A 扩展(v1.0)">
         A2A 是 A2UI 的官方传输绑定之一:智能体把界面作为 DataPart 流式发给渲染器。
         扩展 URI 编码协议版本,是双方沟通版本支持的规范方式。原文见
         <a href="https://a2ui.org/specification/v1.0-a2ui-extension-specification/" target="_blank" rel="noopener">官方 A2A Extension</a>。

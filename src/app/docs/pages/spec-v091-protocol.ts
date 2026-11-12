@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-spec-v091-protocol',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="规范 v0.9.1 / 协议规范" heading="协议规范(v0.9.1)">
+    <app-docs-page-header eyebrow="规范 v0.9.1" heading="协议规范(v0.9.1)">
         v0.9.1 是上一代版本(状态 Closed),取代 v0.9 并只做小幅 schema 修订;新项目应面向 v1.0。
         本页记录 v0.9.1 的信封、绑定语法与消息字段,并标出与 v1.0 的差异。原文见
         <a href="https://a2ui.org/specification/v0.9.1-a2ui/" target="_blank" rel="noopener">官方 v0.9.1 Protocol Specification</a>。

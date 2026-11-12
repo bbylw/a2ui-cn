@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-spec-v091-schemas',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="规范 v0.9.1 / JSON Schema" heading="JSON Schema(v0.9.1)">
+    <app-docs-page-header eyebrow="规范 v0.9.1" heading="JSON Schema(v0.9.1)">
         v0.9.1 由 10 份规范 JSON Schema 定义 wire 消息、共享类型、数据模型与能力协商,源码位于仓库
         <code>specification/v0_9_1/json/</code>。为兼容旧实现,<code>$id</code> 保留
         <code>https://a2ui.org/specification/v0_9/&lt;文件名&gt;</code>(是 <code>v0_9</code> 而非 <code>v0_9_1</code>),

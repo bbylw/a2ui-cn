@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-spec-v1-catalog',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="规范 v1.0 / 基础目录指南" heading="基础目录实现指南(v1.0)">
+    <app-docs-page-header eyebrow="规范 v1.0" heading="基础目录实现指南(v1.0)">
         基础目录是一份可选、可重新样式化的参考目录:18 个组件、15 个渲染器侧函数,
         以及间距、配色与无障碍的实现约定。自定义目录的写法见<a routerLink="/docs/define-catalog">定义目录</a>,原文见
         <a href="https://a2ui.org/specification/v1.0-basic-catalog-implementation-guide/" target="_blank" rel="noopener">官方 Basic Catalog Guide</a>。

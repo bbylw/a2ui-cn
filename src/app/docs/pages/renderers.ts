@@ -7,7 +7,7 @@ import {CodeBlock} from '../../shared/code-block';
   selector: 'app-docs-renderers',
   imports: [DocsPageHeader, RouterLink, CodeBlock],
   template: `
-    <app-docs-page-header eyebrow="指南 / 客户端集成" heading="客户端集成">
+    <app-docs-page-header eyebrow="指南" heading="客户端集成">
         同一份协议消息,六个官方渲染器在各自平台渲染。
         本页给出 Angular 与 React 的完整接入代码(本站正在使用),以及自定义目录的方法。
     </app-docs-page-header>
