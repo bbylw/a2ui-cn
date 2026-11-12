@@ -31,6 +31,47 @@ import {CodeBlock} from '../../shared/code-block';
       一个 Python 服务器承载智能体与 API,在 <code>/</code> 提供 React 应用、在 <code>/flutter/</code> 提供 Flutter 应用。
       两个客户端都不懂旅行,它们只会画目录里的组件;目录里有什么由你决定,画什么由智能体决定。</p>
 
+      <h2 id="architecture">A2UI 在这个应用里的位置</h2>
+      <p>A2UI 既是<strong>智能体的 SDK</strong>,也是<strong>应用的渲染器</strong>。Travel A2UI 的结构如下:</p>
+      <div class="not-prose mt-6 grid gap-4 lg:grid-cols-[1fr_auto_1fr] lg:items-stretch">
+        <div class="rounded-2xl bg-ink-900 p-6 text-white shadow-panel">
+          <div class="font-mono text-[10px] uppercase tracking-[0.14em] text-blue-glow">Server · 你的智能体</div>
+          <div class="mt-4 grid gap-3 text-[13px] leading-relaxed">
+            <div class="rounded-lg border border-white/10 bg-white/5 p-3">
+              <div class="font-semibold text-white">SDK 配置</div>
+              <div class="mt-1 text-white/70"><code class="font-mono text-[12px] break-all text-blue-glow">catalogs/a2ui-travel/catalog.json</code> 组件与函数目录 · <code class="font-mono text-[12px] break-all text-blue-glow">data/tools.json</code> 业务工具(航班查询/预订)</div>
+            </div>
+            <div class="rounded-lg border border-blue/40 bg-blue/10 p-3">
+              <div class="font-semibold text-blue-glow">A2UI Agent SDK</div>
+              <div class="mt-1 text-white/70">技能生成器 <code class="font-mono text-[12px] break-all text-blue-glow">scripts/build_skills.py → skills/</code>:目录 → 技能与语法规则 · 编译器/校验器 <code class="font-mono text-[12px] break-all text-blue-glow">apps/server/src/travel_a2ui/brain/catalog.py</code>:模型输出 → wire 消息</div>
+            </div>
+            <div class="rounded-lg border border-white/10 bg-white/5 p-3">
+              <div class="font-semibold text-white">你的智能体代码 + LLM 运行时(SDK 之外)</div>
+              <div class="mt-1 text-white/70"><code class="font-mono text-[12px] break-all text-blue-glow">apps/server/src/travel_a2ui/brain/</code> 调用工具与模型,把模型的 UI 输出交给编译器</div>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center justify-center gap-2 font-mono text-[11px] text-ink-mute lg:flex-col" aria-hidden="true">
+          <span class="text-blue-deep">↓ updateComponents / updateDataModel</span>
+          <span class="text-amber-deep">↑ action</span>
+          <span>(SSE)</span>
+        </div>
+        <div class="rounded-2xl border border-line-cool bg-white p-6 shadow-lift">
+          <div class="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-mute">Client · 你的应用</div>
+          <div class="mt-4 grid gap-3 text-[13px] leading-relaxed">
+            <div class="rounded-lg border border-line-cool bg-mist p-3">
+              <div class="font-semibold text-ink">你的应用</div>
+              <div class="mt-1 text-ink-soft">屏幕、导航、聊天;surface 之外都归你(<code class="font-mono text-[12px]">apps/web · apps/flutter</code>)</div>
+            </div>
+            <div class="rounded-lg border border-green/40 bg-green-tint p-3">
+              <div class="font-semibold text-green-deep">A2UI 渲染器</div>
+              <div class="mt-1 text-ink-soft">原生控件画 surface;绑定值本地更新;点击发回 action(<code class="font-mono text-[12px]">renderers/react · renderers/flutter</code>)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p>想边跑边读这五层链路,打开<a routerLink="/docs/walkthrough">分步详解</a>,对照屏幕上的每一块界面逐层理解。</p>
+
       <h3 id="requirements">环境要求</h3>
       <table>
         <thead><tr><th>依赖</th><th>版本</th><th>用途</th></tr></thead>
@@ -64,12 +105,14 @@ import {CodeBlock} from '../../shared/code-block';
       <p>想部署到公网,仓库里的 <code>./scripts/deploy.sh</code> 会把同一个服务器部署到 Google Cloud Run。</p>
 
       <h2 id="coding-agent">让编码智能体替你完成</h2>
-      <p>官方把快速开始写成了可以直接粘贴给编码智能体的提示词,任选其一:</p>
+      <p>官方把快速开始写成了可以直接粘贴给编码智能体的提示词(<a href="https://a2ui.org/quickstart/agent.md" target="_blank" rel="noopener">查看原文</a>),
+      粘进 Antigravity、Claude Code、Codex、Cursor 或任何能读网页的编码智能体即可。它会跑三条命令,然后开着应用给你讲解 A2UI 如何工作。任选其一:</p>
       <app-code lang="bash" label="Web + 移动端(Python + React + Flutter)" [code]="promptBoth" />
       <app-code lang="bash" label="仅 Web(Python + React)" [code]="promptWeb" />
       <app-code lang="bash" label="仅移动端(Python + Flutter)" [code]="promptMobile" />
 
       <h2 id="learn">跑起来之后,你会学到什么</h2>
+      <p>下面五点对应<a routerLink="/docs/walkthrough">分步详解</a>的五个章节,跑起来后对照屏幕阅读:</p>
       <ol>
         <li><strong>屏幕上哪些是 A2UI。</strong>surface、其中的组件、它们展示的数据,与普通应用代码的边界。</li>
         <li><strong>目录(Catalog)。</strong>智能体可用的组件与客户端函数,以及它为什么是安全护栏。</li>
@@ -80,7 +123,7 @@ import {CodeBlock} from '../../shared/code-block';
 
       <blockquote>
         <p>Travel A2UI 是学习用的示例,不是生产模板。理解链路之后,用
-        <a routerLink="/docs/renderers">渲染器</a>与<a routerLink="/docs/agent-sdk">Agent SDK</a> 文档把 A2UI 接进你自己的应用。</p>
+        <a routerLink="/docs/renderers">客户端集成</a>与<a routerLink="/docs/agent-sdk">Agent 集成</a> 文档把 A2UI 接进你自己的应用。</p>
       </blockquote>
     </div>
   `,

@@ -6,7 +6,7 @@ import {RouterLink} from '@angular/router';
   imports: [RouterLink],
   template: `
     <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">理解 A2UI / 安全模型</p>
+      <p class="font-mono text-xs text-ink-mute">概念 / 安全模型</p>
       <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">安全模型</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
         生成式 UI 把模型输出直接变成用户看到的界面,提示注入因此可能变成界面注入。
@@ -71,7 +71,7 @@ import {RouterLink} from '@angular/router';
         <li>敏感函数声明 <code>requiresUserActivation: true</code>,远程可调函数显式声明 <code>allowedCallers</code>。</li>
         <li>服务端开启有状态校验,让坏消息在到达客户端前反馈给模型自纠。</li>
         <li>传输层做认证与 TLS;按会话隔离 MessageProcessor。</li>
-        <li>记录 action 与错误消息,作为审计与监控信号(见<a routerLink="/docs/ecosystem">路线图</a>的监控阶段)。</li>
+        <li>记录 action 与错误消息,作为审计与监控信号(见<a routerLink="/docs/roadmap">路线图</a>的监控阶段)。</li>
         <li>发现协议或 SDK 漏洞,走 <a href="https://g.co/vulnz" target="_blank" rel="noopener">Google 漏洞报告渠道</a>,不要开公开 issue。</li>
       </ol>
     </div>

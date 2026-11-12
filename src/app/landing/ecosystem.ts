@@ -70,7 +70,7 @@ import {RevealDirective} from '../shared/reveal.directive';
                   </li>
                 }
               </ul>
-              <a routerLink="/docs/ecosystem" class="mt-4 inline-block text-sm font-semibold text-blue-deep underline decoration-blue-deep/30 underline-offset-4 hover:decoration-blue-deep">社区渲染器与完整路线图</a>
+              <a routerLink="/docs/ecosystem" class="mt-4 inline-block text-sm font-semibold text-blue-deep underline decoration-blue-deep/30 underline-offset-4 hover:decoration-blue-deep">社区项目完整名单</a>
             </div>
           </div>
         </div>

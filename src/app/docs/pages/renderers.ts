@@ -7,8 +7,8 @@ import {CodeBlock} from '../../shared/code-block';
   imports: [RouterLink, CodeBlock],
   template: `
     <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">构建 / 渲染器</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">渲染器</h1>
+      <p class="font-mono text-xs text-ink-mute">指南 / 客户端集成</p>
+      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">客户端集成</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
         同一份协议消息,六个官方渲染器在各自平台渲染。
         本页给出 Angular 与 React 的完整接入代码(本站正在使用),以及自定义目录的方法。
@@ -90,7 +90,7 @@ import {CodeBlock} from '../../shared/code-block';
       <h2 id="community">社区渲染器</h2>
       <p>社区还维护了 Vue、Svelte、Lynx、React Native、Compose Multiplatform、终端(Ink/Bubble Tea)、
       HarmonyOS、Three.js 等渲染器,以及 Google Maps 等领域目录。完整名单、版本支持与提交方式见
-      <a routerLink="/docs/ecosystem">生态与路线图</a>。</p>
+      <a routerLink="/docs/ecosystem">社区项目</a>。</p>
     </div>
   `,
 })

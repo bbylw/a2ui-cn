@@ -58,7 +58,7 @@ import {RouterLink} from '@angular/router';
 
       <h2 id="adopters">谁在使用</h2>
       <p>A2UI 由 Google 发起,与社区共同维护。Gemini 的生成式界面、Atlassian、Alation、ByteDance 等团队已在产品中使用或集成,
-      AG-UI 与 CopilotKit 生态把它作为智能体到前端的界面通道。完整名单与社区渲染器见<a routerLink="/docs/ecosystem">生态与路线图</a>。</p>
+      AG-UI 与 CopilotKit 生态把它作为智能体到前端的界面通道。产品案例见<a routerLink="/docs/built-with">Built with A2UI</a>,完整名单与社区渲染器见<a routerLink="/docs/ecosystem">社区项目</a>。</p>
 
       <h2 id="next">下一步</h2>
       <div class="not-prose mt-6 grid gap-3 sm:grid-cols-3">

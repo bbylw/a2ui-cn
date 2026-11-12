@@ -7,8 +7,8 @@ import {CodeBlock} from '../../shared/code-block';
   imports: [RouterLink, CodeBlock],
   template: `
     <header class="mb-10">
-      <p class="font-mono text-xs text-ink-mute">构建 / Agent SDK</p>
-      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">Agent SDK</h1>
+      <p class="font-mono text-xs text-ink-mute">指南 / Agent 集成</p>
+      <h1 class="mt-2 font-display text-3xl font-bold tracking-tight text-ink sm:text-4xl">Agent 集成</h1>
       <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-soft">
         Agent SDK 把模型接到 A2UI 协议上:从目录生成提示词与技能,把模型输出编译成协议消息,
         在服务端做有状态校验。模型选择、工具执行与对话状态仍然完全由你的应用控制。
@@ -22,7 +22,7 @@ import {CodeBlock} from '../../shared/code-block';
         <tbody>
           <tr><td>Core SDK</td><td>协议数据结构、消息解析/序列化、目录校验、surface 状态、绑定与表达式求值。</td><td><code>@a2ui/web_core</code> · <code>a2ui-core</code> · <code>a2ui_core</code>(Dart)· Swift/Kotlin 核心</td></tr>
           <tr><td>Agent SDK</td><td>目录协商、提示词/技能生成、推理格式编译、有状态校验。</td><td><code>@a2ui/agent</code> · <code>a2ui-agent-sdk</code> · <code>a2ui_agent</code>(Dart)</td></tr>
-          <tr><td>Renderer SDK</td><td>把 surface 状态挂载到 UI 框架,执行本地函数,派发 action。</td><td>见<a routerLink="/docs/renderers">渲染器</a></td></tr>
+          <tr><td>Renderer SDK</td><td>把 surface 状态挂载到 UI 框架,执行本地函数,派发 action。</td><td>见<a routerLink="/docs/renderers">客户端集成</a></td></tr>
         </tbody>
       </table>
       <p>Agent 与 Renderer SDK 都构建在同语言的 Core SDK 之上:服务端校验与客户端解析共享一份实现。
@@ -80,7 +80,7 @@ import {CodeBlock} from '../../shared/code-block';
       </ul>
 
       <h2 id="next">下一步</h2>
-      <p>客户端接入见<a routerLink="/docs/renderers">渲染器</a>;消息字段见<a routerLink="/docs/messages">消息参考</a>;
+      <p>客户端接入见<a routerLink="/docs/renderers">客户端集成</a>;消息字段见<a routerLink="/docs/messages">消息参考</a>;
       官方完整指南在 <a href="https://a2ui.org/guides/agent-integration/" target="_blank" rel="noopener">a2ui.org/guides/agent-integration</a>。</p>
     </div>
   `,

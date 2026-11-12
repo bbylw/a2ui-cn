@@ -198,6 +198,19 @@ body {
 }
 .a2ui-frame a2ui-v09-surface { display: block; }
 
+/* ---------- docs chrome ---------- */
+.quiet-scroll { scrollbar-width: thin; scrollbar-color: var(--color-line-cool) transparent; }
+.quiet-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
+.quiet-scroll::-webkit-scrollbar-track { background: transparent; }
+.quiet-scroll::-webkit-scrollbar-thumb { background: var(--color-line-cool); border: none; border-radius: 4px; }
+.quiet-scroll::-webkit-scrollbar-thumb:hover { background: var(--color-blue-glow); }
+
+.chip-row { scrollbar-width: none; mask-image: linear-gradient(to right, transparent, #000 14px, #000 calc(100% - 14px), transparent); }
+.chip-row::-webkit-scrollbar { display: none; }
+
+.doc-enter { animation: doc-enter 0.32s cubic-bezier(0.22, 1, 0.36, 1); }
+@keyframes doc-enter { from { opacity: 0; transform: translateY(8px); } }
+
 /* ---------- docs prose ---------- */
 .doc-prose { font-size: 0.9375rem; line-height: 1.85; color: var(--color-ink); }
 .doc-prose > * + * { margin-top: 1.1rem; }
@@ -212,11 +225,19 @@ body {
 .doc-prose ol { list-style: decimal; }
 .doc-prose li::marker { color: var(--color-blue-deep); font-weight: 600; }
 .doc-prose strong { color: var(--color-ink); font-weight: 700; }
+code { overflow-wrap: anywhere; }
 .doc-prose :not(pre) > code { font-family: var(--font-mono); font-size: 0.82em; background: var(--color-blue-tint); color: var(--color-blue-deep); padding: 0.15em 0.4em; border-radius: 5px; border: 1px solid rgb(26 115 232 / 0.14); overflow-wrap: anywhere; }
-.doc-prose table { width: 100%; border-collapse: collapse; font-size: 0.875rem; display: block; overflow-x: auto; }
+.doc-prose table { width: 100%; border-collapse: collapse; font-size: 0.875rem; display: block; overflow-x: auto; scrollbar-width: thin; scrollbar-color: var(--color-line-cool) transparent; }
+.doc-prose table::-webkit-scrollbar { height: 6px; }
+.doc-prose table::-webkit-scrollbar-track { background: transparent; }
+.doc-prose table::-webkit-scrollbar-thumb { background: var(--color-line-cool); border-radius: 4px; }
+.doc-prose tbody tr { transition: background-color 0.12s; }
+.doc-prose tbody tr:hover { background: rgb(232 240 254 / 0.5); }
 .doc-prose th { text-align: left; font-weight: 700; background: var(--color-mist); color: var(--color-ink); white-space: nowrap; }
-.doc-prose th, .doc-prose td { border: 1px solid var(--color-line-cool); padding: 0.55rem 0.8rem; vertical-align: top; }
-.doc-prose td { color: #2c3c5c; }
+/* min-width 兜底列宽:长代码在列内断行,首列不被压到逐字断行 */
+.doc-prose th, .doc-prose td { border: 1px solid var(--color-line-cool); padding: 0.55rem 0.8rem; vertical-align: top; min-width: 8rem; }
+.doc-prose th:last-child, .doc-prose td:last-child { min-width: 12rem; }
+.doc-prose td { color: #2c3c5c; overflow-wrap: anywhere; }
 .doc-prose blockquote { border-left: 3px solid var(--color-amber); background: var(--color-amber-tint); padding: 0.8rem 1.1rem; border-radius: 0 10px 10px 0; color: #5c4a12; }
 .doc-prose blockquote p { color: inherit; }
 .doc-prose .not-prose a { color: inherit; text-decoration: none; }
