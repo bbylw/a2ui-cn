@@ -44,7 +44,9 @@ __screenshots__/
 Thumbs.db
 
 # WorkBuddy workspace memory / agent state (local only)
+/.workbuddy/
 /.workbuddy-ai/
 
 # Browser automation snapshots (local verification artifacts)
 /.playwright-cli/
+/.ui-shots/
